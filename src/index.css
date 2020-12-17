@@ -1,5 +1,21 @@
-body {
+@import url('https://fonts.googleapis.com/css2?family=Sedgwick+Ave+Display&family=Share&display=swap');
+
+* {
+  box-sizing: border-box;
   margin: 0;
+}
+
+:root {
+  --violet: #4D63D4;
+  --yellow: #F2D851;
+  --orange: #F4821A;
+  --light-green: #F8FFF6;
+
+
+}
+
+body {
+  background-color: var(--light-green);
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
@@ -10,4 +26,154 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+.wrapper {
+  background: url(img/bg.png);
+  background-repeat: no-repeat;
+  background-size: 100vw;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+}
+
+.content {
+  margin: auto;
+  margin-top: 300px;
+  width: 50%;
+  height: 35%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+h1 {
+  margin: 0;
+  font-family: 'Sedgwick Ave Display', cursive;
+  font-weight: 400;
+  font-size: 144px;
+  line-height: 180px;
+  color: var(--violet);
+}
+
+
+.description {
+  font-family: 'Share', cursive;
+  font-weight: 400;
+  font-size: 36px;
+  line-height: 41px;
+  color: var(--violet);
+}
+
+.findnow_button {
+  margin-top: 40px;
+  padding: 5px 60px;
+  border-radius: 30px;
+  border: none;
+  outline: none;
+  background-color: var(--violet);
+  color: var(--light-green);
+  font-family: 'Share', cursive;
+  font-weight: 400;
+  font-size: 36px;
+  cursor: pointer;
+  opacity: 0.8;
+  transition: 0.2s;
+}
+
+.findnow_button:hover {
+  opacity: 1;
+}
+
+.btn-div{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+} 
+
+
+.search-div {
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.search-div p {
+  color: var(--violet);
+  margin-bottom: 40px;
+}
+
+.service {
+  font-size: 36px;
+  padding: 20px 40px;
+  text-align: center;
+  background-color: rgba(77, 99, 212, 0.1);
+  border: 1px solid var(--violet);
+  border-radius: 50px;
+  font-family: 'Share', cursive;
+  color: var(--violet);
+  opacity: .8;
+  transition: .2s;
+}
+
+.service:hover {
+  transform: translateY(3px);
+}
+
+.services_dw {
+  margin-bottom: 40px;
+}
+
+.link_to_list {
+  text-decoration: none;
+}
+
+/* .search {
+  font-size: 22px;
+  padding-top: 20px;
+  padding-bottom: 16px;
+  padding-left: 50px;
+  padding-right: 400px;
+  background-color: rgba(77, 99, 212, 0.1);
+  border: 1px solid var(--violet);
+  border-radius: 30px;
+  outline: none;
+  cursor: text;
+} */
+
+/* .arrow_forth {
+  cursor: pointer;
+  transition: 0.2s;
+  margin-left: 15px;
+}
+
+.arrow_forth:hover {
+  transform: translateX(3px);
+} */
+
+
+/* ::placeholder {
+  color: var(--violet);
+  font-family: 'Share', cursive;
+  font-weight: 400;
+  font-size: 22px;
+  opacity: 0.7;
+  overflow: visible;
+} */
+
+
+.hamburger_menu {
+  float: right;
+  margin-top: 60px;
+  margin-right: 100px;
+  transition: 0.2s;
+}
+
+.hamburger_menu:hover {
+  cursor: pointer;
+  transform: translateY(3px);
 }
