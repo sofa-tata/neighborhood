@@ -166,7 +166,7 @@ h1 {
 } */
 
 
-.hamburger_menu {
+/* .hamburger_menu {
   float: right;
   margin-top: 60px;
   margin-right: 100px;
@@ -176,4 +176,33 @@ h1 {
 .hamburger_menu:hover {
   cursor: pointer;
   transform: translateY(3px);
+} */
+
+
+.bm-burger-button {
+  width: 84px;
+  height: 50px;
+  float: right;
+  margin-top: 60px;
+  margin-right: 100px;
+  transition: 0.2s;
+}
+
+.bm-burger-button:hover {
+  cursor: pointer;
+  transform: translateY(3px);
+}
+
+/* .bm-cross-button {
+  width: 84px;
+  height: 50px;
+  float: right;
+  margin-top: 60px;
+  margin-right: 100px;
+  transition: 0.2s;
+} */
+
+
+.bm-overlay {
+  background-color: rgba(0, 0, 0, 1);
 }
