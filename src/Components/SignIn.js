@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import '../signin.css';
 // import { Link } from 'react-router-dom';
-import {auth} from "../firebase";
+import { auth } from "../firebase";
 
 
 const SignIn = () => {
