@@ -1,31 +1,16 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import OverlayMenu from '../Components/OverlayMenu';
+import { slide as Menu} from 'react-burger-menu';
 
 class Home extends React.Component {
     constructor(props) {
         super(props) 
         this.state = {
             isFindNowButtonClicked: false,
-            isOverlayMenuOpen: false,
-            searchTerm: ""
-        }
-        this.toggleMenu = this.toggleMenu.bind(this);
-    }
-    toggleMenu = () => {
-        this.setState({isOverlayMenuOpen: !this.state.isOverlayMenuOpen});
-        console.log(this.state.isOverlayMenuOpen)
-    }
-    // onChangeSearch=(event)=>{
-    //     this.setState({searchTerm: event.currentTarget.value})
-    // }
-
-    getMenuDisplay = () => {
-        if (!this.state.isOverlayMenuOpen) {
-            return <OverlayMenu />
+            menuOpen: false
         }
     }
-
+  
     getMainPageDisplay = () => {
 
         if (!this.state.isFindNowButtonClicked) {
@@ -40,33 +25,40 @@ class Home extends React.Component {
         } else {
             return (
             <div className="search-div">
-
-                {/* <input type="text" placeholder="Type in the service you are looking for" value={this.state.searchTerm} className="search"
-                onChange={this.onChangeSearch}
-                /> */}
                 <p>Which one do you need?</p>
                 <div className="services">
                 <Link to="/dogwalkerspage" className="link_to_list"><div className="service services_dw">Dog Walker</div></Link>
                 <Link to="/dogwalkerspage" className="link_to_list"><div className="service services_bs">Babysitter</div></Link>
-                {/* <Link to="/dogwalkerspage"><div>Manicurists</div><img src="images/arrow.png" alt="Arrow" className="arrow_forth" /></Link> */}
                 </div>
             </div>
             )
         }
     }
 
+    toggleMenu () {
+        this.setState(state => ({menuOpen: !state.menuOpen}))
+      }
+
     render() {
         
 
         return (
                 <div className="wrapper">
-                    <img src="images/hamburger_menu.png" alt="menu" className="hamburger_menu" onClick={this.toggleMenu}/>
+                    {/* <img src="images/hamburger_menu.png" alt="menu" className="hamburger_menu" onClick={() => this.toggleMenu}/> */}
+                    <Menu 
+                    right 
+                    customBurgerIcon={ <img src="images/hamburger_menu.png" alt="Menu" /> } 
+                    customCrossIcon={ <img src="images/cross_btn.png" alt="Close" /> }
+                    >
+                        <a id="home" className="menu-item" href="/">Home</a>
+                        <a id="about" className="menu-item" href="/signIn">Sign In</a>
+                        <a id="contact" className="menu-item" href="/signUp">Sign Up</a>
+                    </Menu>
+                    
                     <div className="content">
                             <h1>neighborhood</h1>
                             <div>{this.getMainPageDisplay()}</div>
-                    </div>
-                    {this.getMenuDisplay}     
-                            
+                    </div>                 
             </div>
         );
     }

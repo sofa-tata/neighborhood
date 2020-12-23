@@ -8,7 +8,6 @@ import SignUp from './SignUp';
 import PleaseSignIn from './AskForSignIn';
 import ProfilePage from './ProfilePage';
 import PasswordReset from './PasswordReset';
-import OverlayMenu from './OverlayMenu';
 
 
 
@@ -25,8 +24,6 @@ class MainPage extends React.Component {
                     <Route path="/pleaseSignIn" component={PleaseSignIn} />
                     <Route path="/profilePage" component={ProfilePage} />
                     <Route path="/passwordReset" component={PasswordReset} />
-                    <Route path="/menu" component={OverlayMenu} />
-
                 </Switch>
             </Router>
         );
