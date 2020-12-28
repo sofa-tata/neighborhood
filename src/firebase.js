@@ -51,6 +51,40 @@ export const generateUserDocument = async (user, additionalData) => {
   };
 
 
+  export const generateDogWalkerDocument = async (dogwalker) => {
+    if (!dogwalker) return;
+    let uid ="1"// uuidv4()
+    const userRef = firestore.doc(`dogwalkers/${uid}`);
+    const snapshot = await userRef.get();
+    if (!snapshot.exists) {
+      const { name, price, rating, distance } = dogwalker;
+
+      try {
+        await userRef.set({
+          name,
+          price,
+          rating,
+          distance
+        });
+      } catch (error) {
+        console.error("Error creating user document", error);
+      }
+    }
+    return getDogWalkerDocument(uid);
+  };
+  const getDogWalkerDocument = async uid => {
+    if (!uid) return null;
+    try {
+      const userDocument = await firestore.doc(`dogwalkers/${uid}`).get();
+      return {
+        uid,
+        ...userDocument.data()
+      };
+    } catch (error) {
+      console.error("Error fetching user", error);
+    }
+  };
+
 
 export const auth = firebase.auth();
 export const firestore = firebase.firestore();
