@@ -8,7 +8,7 @@ const PasswordReset = () => {
     const [email, setEmail] = useState("");
     const [emailHasBeenSent, setEmailHasBeenSent] = useState(false);
     const [error, setError] = useState(null);
-
+//create class without hooks but with state
 
     const onChangeHandler = event => {
        const { name, value } = event.currentTarget;
@@ -27,6 +27,7 @@ const PasswordReset = () => {
         })
         .catch(() => {
             setError("Error resetting password!");
+            console.log('test')
         })
     }
 
@@ -50,7 +51,7 @@ const PasswordReset = () => {
                         onChange={onChangeHandler}
                         className="reset_input"
                     />
-                    <button className="reset_btn">Send me a reset link</button>
+                    <button className="reset_btn" onClick={() => {sendResetEmail()}}>Send me a reset link</button>
                 </form>
                 <Link to="/signIn" className="reset_back">Back to Sign In page</Link>                    
             </div>

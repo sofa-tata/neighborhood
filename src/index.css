@@ -185,7 +185,9 @@ h1 {
   float: right;
   margin-top: 60px;
   margin-right: 100px;
+  outline: none;
   transition: 0.2s;
+  position: relative;
 }
 
 .bm-burger-button:hover {
@@ -193,16 +195,47 @@ h1 {
   transform: translateY(3px);
 }
 
+
+#react-burger-cross-button {
+  padding-top: 100px;
+  float: right;
+  margin-top: 60px;
+  margin-right: 100px;
+  position: relative;
+  background-color: red;
+}
+
 /* .bm-cross-button {
-  width: 84px;
+  width: 100px;
   height: 50px;
   float: right;
   margin-top: 60px;
   margin-right: 100px;
-  transition: 0.2s;
+  position: relative;
 } */
+
+.bm-cross {
+  background-color: red;
+}
 
 
 .bm-overlay {
-  background-color: rgba(0, 0, 0, 1);
+  background-color: rgba(0, 0, 0, .8);
+}
+
+.menu-item {
+  font-family: 'Share', cursive;
+  text-decoration: none;
+  color: var(--light-green);
+  font-size: 48px;
+  font-weight: 400;
+  outline: none;
+  margin-bottom: 70px;
+}
+
+
+.bm-menu {
+  background: var(--violet);
+  padding: 9em 4em 0;
+
 }

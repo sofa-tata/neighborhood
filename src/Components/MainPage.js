@@ -7,7 +7,8 @@ import SignIn from './SignIn';
 import SignUp from './SignUp';
 import PleaseSignIn from './AskForSignIn';
 import ProfilePage from './ProfilePage';
-import PasswordReset from './PasswordReset';
+import PasswordResetClass from './PasswordResetClass';
+import SignUpForDW from './SignUpForDW';
 
 
 
@@ -20,10 +21,11 @@ class MainPage extends React.Component {
                     <Route path="/dogwalkerspage" component={DogWalkersPage} />
                     <Route path="/chat" component={Chat} />
                     <Route path="/signUp" component={SignUp} />
+                    <Route path="/signUpForDogWalker" component={SignUpForDW} />
                     <Route path="/signIn" component={SignIn} />
                     <Route path="/pleaseSignIn" component={PleaseSignIn} />
                     <Route path="/profilePage" component={ProfilePage} />
-                    <Route path="/passwordReset" component={PasswordReset} />
+                    <Route path="/passwordReset" component={PasswordResetClass} />
                 </Switch>
             </Router>
         );

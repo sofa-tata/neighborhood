@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { slide as Menu} from 'react-burger-menu';
+import {  generateDogWalkerDocument } from '../firebase';
 
 class Home extends React.Component {
     constructor(props) {
@@ -11,6 +12,21 @@ class Home extends React.Component {
         }
     }
   
+    componentDidMount = () => {
+        //generate 1 dog walker
+
+        let dogWalker =  { 
+            id: 0,
+            name: "Gevin Belson",
+            price: "from $5",
+            rating: 3,
+            distance: '0.3km'
+         }
+         
+         generateDogWalkerDocument(dogWalker)
+
+    }
+
     getMainPageDisplay = () => {
 
         if (!this.state.isFindNowButtonClicked) {
@@ -36,23 +52,37 @@ class Home extends React.Component {
     }
 
     toggleMenu () {
-        this.setState(state => ({menuOpen: !state.menuOpen}))
-      }
+        console.log("1. toggleMenu -this.state.menuOpen: ",this.state.menuOpen)
+        this.setState({menuOpen: !this.state.menuOpen},()=>{
 
+            console.log("2. toggleMenu -this.state.menuOpen: ",this.state.menuOpen)
+        })
+      }
+      handleOnClose=()=>{
+          console.log("handleOnClose")
+        this.setState({
+            menuOpen:false
+        })
+      }
     render() {
-        
+        console.log("this.state.menuOpen:",this.state.menuOpen)
 
         return (
                 <div className="wrapper">
                     {/* <img src="images/hamburger_menu.png" alt="menu" className="hamburger_menu" onClick={() => this.toggleMenu}/> */}
                     <Menu 
                     right 
+                    width = { '30%' }
                     customBurgerIcon={ <img src="images/hamburger_menu.png" alt="Menu" /> } 
                     customCrossIcon={ <img src="images/cross_btn.png" alt="Close" /> }
+                    className="react_menu"
+                    isOpen={ this.state.menuOpen }
+                    // onClose={ this.handleOnClose }
+                    customOnKeyDown={this.toggleMenu}
                     >
-                        <a id="home" className="menu-item" href="/">Home</a>
-                        <a id="about" className="menu-item" href="/signIn">Sign In</a>
-                        <a id="contact" className="menu-item" href="/signUp">Sign Up</a>
+                        <a id="home" className="menu-item home-item" href="/">HOME</a>
+                        <a id="about" className="menu-item" href="/signIn">SIGN IN</a>
+                        <a id="contact" className="menu-item" href="/signUp">SIGN UP</a>
                     </Menu>
                     
                     <div className="content">
