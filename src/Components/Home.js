@@ -13,17 +13,10 @@ class Home extends React.Component {
     }
   
     componentDidMount = () => {
-        //generate 1 dog walker
+        // this.setState({ isFindNowButtonClicked: true });
 
-        let dogWalker =  { 
-            id: 0,
-            name: "Gevin Belson",
-            price: "from $5",
-            rating: 3,
-            distance: '0.3km'
-         }
-         
-         generateDogWalkerDocument(dogWalker)
+        //generate 1 dog walker
+        
 
     }
 
@@ -51,14 +44,13 @@ class Home extends React.Component {
         }
     }
 
-    toggleMenu () {
-        console.log("1. toggleMenu -this.state.menuOpen: ",this.state.menuOpen)
-        this.setState({menuOpen: !this.state.menuOpen},()=>{
-
+    toggleMenu = () => {
+        console.log("1. toggleMenu -this.state.menuOpen: ", this.state.menuOpen)
+        this.setState({menuOpen: !this.state.menuOpen}, () => {
             console.log("2. toggleMenu -this.state.menuOpen: ",this.state.menuOpen)
         })
       }
-      handleOnClose=()=>{
+    handleOnClose = () => {
           console.log("handleOnClose")
         this.setState({
             menuOpen:false
@@ -69,7 +61,6 @@ class Home extends React.Component {
 
         return (
                 <div className="wrapper">
-                    {/* <img src="images/hamburger_menu.png" alt="menu" className="hamburger_menu" onClick={() => this.toggleMenu}/> */}
                     <Menu 
                     right 
                     width = { '30%' }
@@ -82,7 +73,7 @@ class Home extends React.Component {
                     >
                         <a id="home" className="menu-item home-item" href="/">HOME</a>
                         <a id="about" className="menu-item" href="/signIn">SIGN IN</a>
-                        <a id="contact" className="menu-item" href="/signUp">SIGN UP</a>
+                        <a id="contact" className="menu-item" href="/chooseUserType">SIGN UP</a>
                     </Menu>
                     
                     <div className="content">

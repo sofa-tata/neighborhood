@@ -1,0 +1,113 @@
+import React from 'react';
+import '../signup.css';
+import {auth, generateUserDocument} from "../firebase";
+import { slide as Menu} from 'react-burger-menu';
+
+
+class SignUpClass extends React.Component {
+
+    constructor() {
+        super()
+        this.state = {
+            email: "",
+            password: "",
+            displayName: "",
+            error: null
+        }
+    }
+
+    createUserWithEmailAndPasswordHandler = async (event, email, password) => {
+        event.preventDefault();
+        try {
+            const {user} = await auth.createUserWithEmailAndPassword(email, password);
+            generateUserDocument(user, this.state.displayName);
+        }
+        catch(error) {
+            this.setState({error: 'Error Signing up with email and password'});
+        }
+
+        // make it with then and catch
+
+        // this.setState({email: ""});
+        // this.setState({password: ""});
+        // this.setState({displayName: ""});
+
+        window.location.href = '/profilePage'
+    }
+
+    onChangeHandler = (event) => {
+        const { name, value } = event.currentTarget;
+        if (name === "userEmail") {
+            this.setState({email: value})
+        } else if (name === "userPassword") {
+            this.setState({password: value})
+        } else if (name === "displayName") {
+            this.setState({displayName: value})
+        }
+    }
+
+    clickCell= () => {
+        window.location.href = "/signIn"
+    }
+
+    render() {
+
+        return (
+            <div className="signup_wrapper">
+                <Menu 
+                    right 
+                    width = { '30%' }
+                    customBurgerIcon={ <img src="images/hamburger_menu.png" alt="Menu" /> } 
+                    customCrossIcon={ <img src="images/cross_btn.png" alt="Close" /> }
+                    className="react_menu"
+                    isOpen={ this.state.menuOpen }
+                    // onClose={ this.handleOnClose }
+                    customOnKeyDown={this.toggleMenu}
+                    >
+                        <a id="home" className="menu-item home-item" href="/">HOME</a>
+                        <a id="about" className="menu-item" href="/signIn">SIGN IN</a>
+                        <a id="contact" className="menu-item" href="/chooseUserType">SIGN UP</a>
+                    </Menu>
+                {/* <img src="images/hamburger_menu.png" alt="Menu" className="signup_hamburger_menu"/> */}
+                <div className="signup_content">
+
+                <input type="text"
+                    name="displayName" 
+                    value={this.state.displayName} 
+                    id="displayName" 
+                    placeholder="Name" 
+                    className="signup_input name" 
+                    onChange = {(event) => this.onChangeHandler(event)} />
+
+                    <input type="email"
+                    name="userEmail" 
+                    value={this.state.email} 
+                    id="userEmail" 
+                    placeholder="Email" 
+                    className="signup_input email" 
+                    onChange = {(event) => this.onChangeHandler(event)} />
+
+                    <input type="password"
+                    name="userPassword"
+                    value={this.state.password}
+                    id="userPassword"
+                    placeholder="Password" 
+                    className="signup_input password"
+                    onChange = {(event) => this.onChangeHandler(event)} />
+
+
+                    <button className="signup_button" onClick={event => {
+                    this.createUserWithEmailAndPasswordHandler(event, this.state.email, this.state.password);
+                    }}>Sign Up</button>
+                    {/* <p>OR</p>
+                    <button className="signup_button google_icon">Sign in with Google</button> */}
+                    <div className="newacc_div">
+                        <p onClick={() => this.clickCell()}>Sign in to an existing account</p>
+                    </div>
+                </div>
+            </div>
+        )
+    }
+}
+
+export default SignUpClass;

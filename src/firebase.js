@@ -1,6 +1,7 @@
 import firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/firestore";
+import { v4 as uuidv4 } from 'uuid';
 
 
 var firebaseConfig = {
@@ -53,7 +54,7 @@ export const generateUserDocument = async (user, additionalData) => {
 
   export const generateDogWalkerDocument = async (dogwalker) => {
     if (!dogwalker) return;
-    let uid ="1"// uuidv4()
+    let uid = uuidv4();
     const userRef = firestore.doc(`dogwalkers/${uid}`);
     const snapshot = await userRef.get();
     if (!snapshot.exists) {
@@ -84,6 +85,16 @@ export const generateUserDocument = async (user, additionalData) => {
       console.error("Error fetching user", error);
     }
   };
+
+  // export const getAllDogWalkers = () => {
+  //   firestore.ref("dogwalkers").on("value", snapshot => {
+  //     let allDogwalkers = [];
+  //     snapshot.forEach(snap => {
+  //       allDogwalkers.push(snap.val());
+  //     });
+  //     this.setState({ dogwalkers: allDogwalkers });
+  //   });  
+  // }
 
 
 export const auth = firebase.auth();

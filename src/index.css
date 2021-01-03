@@ -28,6 +28,10 @@ code {
     monospace;
 }
 
+button {
+  outline: none;
+}
+
 .wrapper {
   background: url(img/bg.png);
   background-repeat: no-repeat;
@@ -165,19 +169,7 @@ h1 {
   overflow: visible;
 } */
 
-
-/* .hamburger_menu {
-  float: right;
-  margin-top: 60px;
-  margin-right: 100px;
-  transition: 0.2s;
-}
-
-.hamburger_menu:hover {
-  cursor: pointer;
-  transform: translateY(3px);
-} */
-
+/* SLIDER MENU */
 
 .bm-burger-button {
   width: 84px;
@@ -185,7 +177,6 @@ h1 {
   float: right;
   margin-top: 60px;
   margin-right: 100px;
-  outline: none;
   transition: 0.2s;
   position: relative;
 }
@@ -195,32 +186,21 @@ h1 {
   transform: translateY(3px);
 }
 
+.bm-cross-button {
+  position: relative;
+  margin-top: 60px;
+  margin-right: 100px;
+  transition: .2s;
+}
 
-#react-burger-cross-button {
+.bm-cross-button:hover {
+  transform: translateY(3px);
+}
+
+ #react-burger-cross-button {
   padding-top: 100px;
-  float: right;
   margin-top: 60px;
   margin-right: 100px;
-  position: relative;
-  background-color: red;
-}
-
-/* .bm-cross-button {
-  width: 100px;
-  height: 50px;
-  float: right;
-  margin-top: 60px;
-  margin-right: 100px;
-  position: relative;
-} */
-
-.bm-cross {
-  background-color: red;
-}
-
-
-.bm-overlay {
-  background-color: rgba(0, 0, 0, .8);
 }
 
 .menu-item {
@@ -231,8 +211,13 @@ h1 {
   font-weight: 400;
   outline: none;
   margin-bottom: 70px;
+  transition: .2s;
 }
 
+.menu-item:hover {
+  transform: translateY(3px);
+  color: var(--yellow);
+}
 
 .bm-menu {
   background: var(--violet);

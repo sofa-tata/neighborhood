@@ -1,7 +1,7 @@
 import React from 'react';
 import '../profilepage.css';
 
-class ProfilePage extends React.Component {
+class ProfilePageForDW extends React.Component {
 
     clickCell=() =>{
         window.location.href = "/signIn"
@@ -14,6 +14,7 @@ class ProfilePage extends React.Component {
                 <div className="pp_content">
                     <img src="images/profile_160px.png" alt="Profile" className="pp_profile_img" />
                     <h3 className="pp_name">Sofiia</h3>
+                    <h5 className="provider-of">(dog walker)</h5>
                     <h4 className="pp_email">sophie.tatarinova@gmail.com</h4>
                 </div>
             </div>
@@ -22,4 +23,4 @@ class ProfilePage extends React.Component {
 
 }
 
-export default ProfilePage;
+export default ProfilePageForDW;
