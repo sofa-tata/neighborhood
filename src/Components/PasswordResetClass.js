@@ -1,7 +1,9 @@
 import React from 'react';
 import '../passwordreset.css';
 import { Link } from 'react-router-dom';
-import { auth } from '../firebase';
+// import Firebase from '../firebase';
+import { withFirebase } from '../firebase';
+import { compose } from 'recompose';
 
 
 class PasswordResetClass extends React.Component {
@@ -21,22 +23,40 @@ class PasswordResetClass extends React.Component {
        }
     }
 
-    sendResetEmail = event => {
-        // event.preventDefault();
-        auth
-        .sendPasswordResetEmail(this.state.email)
-        .then(() => {
-            // event.preventDefault();
-            // this.setState({ emailHasBeenSent: true });
-            // setTimeout(() => this.setState({ emailHasBeenSent: false }), 5000);
-            console.log("ök")
-        })
-        .catch(() => {
-            // event.preventDefault();
-            // this.setState({ error: "Error resetting password!"});
-            console.log('error: ')
-        })
-        // event.preventDefault();
+    sendResetEmail = async () => {
+        let sucess = false
+        let error = await  this.props.firebase .doPasswordReset(this.state.email)
+        console.log('error', error)
+
+        if (error === null) {
+            this.setState({ emailHasBeenSent: true })
+        } else {
+            this.setState({ error: error, emailHasBeenSent: false});
+        }
+
+            
+
+        // this.props.firebase
+        // .doPasswordReset(this.state.email)
+        // .then(() => {
+        //     // event.preventDefault();
+        //     console.log(this.state.emailHasBeenSent)
+        //     // setTimeout(() => this.setState({ emailHasBeenSent: false }), 5000);
+        //     sucess = true
+        //     console.log(this.state.emailHasBeenSent)
+        // })
+        // .catch((error) => {
+        //     // event.preventDefault();
+        //     sucess = false
+        //     this.setState({ error: "Error resetting password!"});
+        //     console.log('error: ', error.message)
+        // })
+        // if(sucess === true){
+        //     this.setState({ emailHasBeenSent: true });
+        // }else{
+            
+        //     this.setState({ emailHasBeenSent: false });
+        // }
     }
     render() {
 
@@ -46,11 +66,13 @@ class PasswordResetClass extends React.Component {
                     <h3>Reset your password:</h3>
                     <div className="reset_form">
                     {/* <form action="" className="reset_form"> */}
-                        {this.state.emailHasBeenSent && (
-                            <div>An email has been sent to you!</div>
-                        )}
+                        {this.state.emailHasBeenSent === true ?
+                            <div style={{color: '#4D63D4', fontSize: '30px'}}>An email has been sent to you! :)</div>
+                            :
+                            null
+                        }
                         {this.state.error !== null && (
-                            <div>{this.state.error}</div>
+                            <div style={{color: 'red', fontSize: '30px'}}>{this.state.error}</div>
                         )}
                         <input
                             type="email"
@@ -61,7 +83,7 @@ class PasswordResetClass extends React.Component {
                             onChange={this.onChangeHandler}
                             className="reset_input"
                         />
-                        <button className="reset_btn" onClick={() => {this.sendResetEmail()}}>Send me a reset link</button>
+                        <button className="reset_btn" onClick={this.sendResetEmail}>Send me a reset link</button>
                     {/* </form> */}
                     </div>
                     <Link to="/signIn" className="reset_back">Back to Sign In page</Link>                    
@@ -72,4 +94,5 @@ class PasswordResetClass extends React.Component {
 }
 
 
-export default PasswordResetClass;
+// export default PasswordResetClass;
+export default compose(withFirebase)(PasswordResetClass);

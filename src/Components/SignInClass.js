@@ -1,7 +1,10 @@
 import React from 'react';
 import '../signin.css';
-import { auth } from "../firebase";
+// import Firebase from "../firebase";
+import { withFirebase } from '../firebase';
 import { slide as Menu} from 'react-burger-menu';
+import sessionstorage from 'sessionstorage';
+import { compose } from 'recompose';
 
 
 class SignInClass extends React.Component {
@@ -16,8 +19,15 @@ class SignInClass extends React.Component {
 
     signInWithEmailAndPasswordHandler = (event, email, password) => {
         event.preventDefault();
-        auth.signInWithEmailAndPassword(this.state.email, this.state.password).then(() => {
-            window.location.href = "/profilePage"
+        sessionstorage.setItem("user", this.state.email)
+        this.props.firebase.doSignInWithEmailAndPassword(this.state.email, this.state.password).then((user) => {
+            console.log('user', user)
+            if (user.service === null) {
+                window.location.href = "/profilePage"
+            } else {
+                window.location.href = "/profilePageForDW"
+            }
+            
           }).catch(error => {
             this.setState({error: "Error signing in with password and email!"});
             console.error("Error signing in with password and email", error);
@@ -91,4 +101,5 @@ class SignInClass extends React.Component {
     }
 }
 
-export default SignInClass;
+// export default SignInClass;
+export default compose(withFirebase)(SignInClass);

@@ -28,8 +28,8 @@ code {
     monospace;
 }
 
-.dw_wrapper {
-  background: url(img/dw_bg.png);
+.bs_wrapper {
+  background: url(img/bs_bg.png);
   background-repeat: no-repeat;
   background-size: 100vw;
   width: 100vw;
@@ -37,7 +37,7 @@ code {
   position: fixed;
 }
 
-.dw_content {
+.bs_content {
   margin: auto;
   width: 50%;
   height: 80%;
@@ -59,7 +59,7 @@ h2 {
   color: var(--violet);
 }
 
-.dw_list {
+.bs_list {
   padding: 0;
   list-style-type: none;
   width: 130%;
@@ -68,7 +68,7 @@ h2 {
   border-bottom: none;
 }
 
-.dw_item {
+.bs_item {
   border-bottom: 1px solid var(--violet);
   background-color: rgba(248, 255, 246, 0.7);
   display: flex;
@@ -79,12 +79,12 @@ h2 {
   text-decoration: none;
 }
 
-.dw_item:hover {
+.bs_item:hover {
   cursor: pointer;
   background: rgba(233, 236, 255, 0.7);
 }
 
-.dw_name {
+.bs_name {
   flex: 1;
   margin-left: 30px;
   color: var(--orange);
@@ -94,7 +94,7 @@ h2 {
   line-height: 1.7;
 }
 
-.dw_price {
+.bs_price {
   flex: 1;
   color: var(--orange);
   font-family: 'Share', cursive;
@@ -102,7 +102,7 @@ h2 {
   font-size: 18px;
 }
 
-.dw_distance {
+.bs_distance {
   flex: 1;
   color: var(--violet);
   font-family: 'Share', cursive;
@@ -141,14 +141,14 @@ h2 {
   border-radius: 10px;
 } */
 
-.dw_hamburger_menu {
+.bs_hamburger_menu {
   float: right;
   margin-top: 60px;
   margin-right: 100px;
   transition: 0.2s;
 }
 
-.dw_hamburger_menu:hover {
+.bs_hamburger_menu:hover {
   cursor: pointer;
   transform: translateY(3px);
 }

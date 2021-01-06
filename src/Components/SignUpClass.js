@@ -1,7 +1,9 @@
 import React from 'react';
 import '../signup.css';
-import {auth, generateUserDocument} from "../firebase";
+// import Firebase from "../firebase";
 import { slide as Menu} from 'react-burger-menu';
+import { withFirebase } from '../firebase';
+import { compose } from 'recompose';
 
 
 class SignUpClass extends React.Component {
@@ -12,27 +14,48 @@ class SignUpClass extends React.Component {
             email: "",
             password: "",
             displayName: "",
+            location: null,
             error: null
         }
     }
 
+    // TRYING THEN AND CATCH:
+
+    // createUserWithEmailAndPasswordHandler = async (event, email, password) => {
+    //     event.preventDefault();
+    //     const {user} = await auth.createUserWithEmailAndPassword(email, password)
+    //     generateUserDocument(user, this.state.displayName)
+    //     .then(() => window.location.href = '/profilePage')
+    //     .catch(error => {
+    //         this.setState({error: 'Error Signing up with email and password'})
+    //     })        
+    // }
+
     createUserWithEmailAndPasswordHandler = async (event, email, password) => {
+        console.log('createUserWithEmailAndPasswordHandler')
         event.preventDefault();
         try {
-            const {user} = await auth.createUserWithEmailAndPassword(email, password);
-            generateUserDocument(user, this.state.displayName);
+            const {user} = await this.props.firebase.doCreateUserWithEmailAndPassword(email, password);
+            let u = {
+                uid: user.uid,
+                displayName: this.state.displayName,
+                email: this.state.email,
+                service: null,
+                price:null
+            }
+            this.props.firebase.generateUserDocument(u);
         }
         catch(error) {
             this.setState({error: 'Error Signing up with email and password'});
         }
 
-        // make it with then and catch
+        
 
         // this.setState({email: ""});
         // this.setState({password: ""});
         // this.setState({displayName: ""});
 
-        window.location.href = '/profilePage'
+        // window.location.href = '/profilePage'
     }
 
     onChangeHandler = (event) => {
@@ -101,7 +124,7 @@ class SignUpClass extends React.Component {
                     }}>Sign Up</button>
                     {/* <p>OR</p>
                     <button className="signup_button google_icon">Sign in with Google</button> */}
-                    <div className="newacc_div">
+                    <div className="exist-acc-div">
                         <p onClick={() => this.clickCell()}>Sign in to an existing account</p>
                     </div>
                 </div>
@@ -110,4 +133,5 @@ class SignUpClass extends React.Component {
     }
 }
 
-export default SignUpClass;
+// export default SignUpClass;
+export default compose(withFirebase)(SignUpClass);

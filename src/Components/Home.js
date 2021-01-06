@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { slide as Menu} from 'react-burger-menu';
-import {  generateDogWalkerDocument } from '../firebase';
+// import {  generateDogWalkerDocument, generateBabysitterDocument } from '../firebase';
 
 class Home extends React.Component {
     constructor(props) {
@@ -16,8 +16,16 @@ class Home extends React.Component {
         // this.setState({ isFindNowButtonClicked: true });
 
         //generate 1 dog walker
-        
 
+        // const babysitter = {
+        //     name: "Alice",
+        //     email: "alice@mail.com",
+        //     service: "babysitter",
+        //     price: 7,
+        //     rating: 3,
+        // }
+
+        // generateBabysitterDocument(babysitter)
     }
 
     getMainPageDisplay = () => {
@@ -37,7 +45,7 @@ class Home extends React.Component {
                 <p>Which one do you need?</p>
                 <div className="services">
                 <Link to="/dogwalkerspage" className="link_to_list"><div className="service services_dw">Dog Walker</div></Link>
-                <Link to="/dogwalkerspage" className="link_to_list"><div className="service services_bs">Babysitter</div></Link>
+                <Link to="/babysitterspage" className="link_to_list"><div className="service services_bs">Babysitter</div></Link>
                 </div>
             </div>
             )

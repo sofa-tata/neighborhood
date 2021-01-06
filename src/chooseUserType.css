@@ -28,13 +28,17 @@ code {
     monospace;
 }
 
+.choose_container {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+}
+
 .choose_wrapper {
     display: flex;
     justify-content: center;
     margin-top: 3%;
 } 
-
-
 
 .seller_btn {
     background: radial-gradient(78.42% 62.07% at 66.9% 33.79%, rgba(242, 216, 81, 0.5) 7.57%, #F2D851 100%);
@@ -92,4 +96,19 @@ code {
   margin-top: 2%;
   font-size: 18px;
   opacity: .7;
+}
+
+.bm-burger-button {
+  width: 84px;
+  height: 50px;
+  float: right;
+  margin-top: 60px;
+  margin-right: 100px;
+  transition: 0.2s;
+  position: relative;
+}
+
+.bm-burger-button:hover {
+  cursor: pointer;
+  transform: translateY(3px);
 }

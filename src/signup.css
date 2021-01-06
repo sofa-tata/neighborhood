@@ -43,7 +43,7 @@ code {
   background-color: var(--violet);
   border-radius: 30px;
   width: 33%;
-  height: 70%;
+  height: 60%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -51,7 +51,11 @@ code {
 }
 
 .signup_input {
-    padding: 5% 60% 4% 10%;
+    padding: 4% 0% 3% 10%;
+    font-family: 'Share', cursive;
+    color: var(--violet);
+    font-size: 36px;
+    width: 90%;
     background-color: var(--light-green);
     border: none;
     border-radius: 50px;
@@ -119,11 +123,11 @@ p {
   margin-bottom: 90px;
 }
 
-.newacc_div p {
+.exist-acc-div p {
     opacity: .7;
     text-decoration: underline;
     cursor: pointer;
-
+    color: var(--light-green);
 }
 
 .signup_hamburger_menu {

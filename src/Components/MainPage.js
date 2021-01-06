@@ -11,6 +11,7 @@ import SignUpForDW from './SignUpForDW';
 import ChooseUserType from './ChooseUserType';
 import SignUpClass from './SignUpClass';
 import ProfilePageForDW from './ProfilePageForDW';
+import BabysittersPage from './BabysittersPage';
 
 
 
@@ -30,6 +31,7 @@ class MainPage extends React.Component {
                     <Route path="/profilePageForDW" component={ProfilePageForDW} />
                     <Route path="/passwordReset" component={PasswordResetClass} />
                     <Route path="/chooseUserType" component={ChooseUserType} />
+                    <Route path="/babysitterspage" component={BabysittersPage} />
                 </Switch>
             </Router>
         );
