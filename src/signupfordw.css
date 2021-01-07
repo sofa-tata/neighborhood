@@ -28,7 +28,7 @@ code {
   monospace;
 }
 
-.signup_wrapper {
+.signupDW_wrapper {
     background: url(img/bg.png);
     background-repeat: no-repeat;
     background-size: 100vw;
@@ -37,31 +37,32 @@ code {
     position: fixed;
 }
 
-.signup_content {
+.signupDW_content {
   margin: auto;
-  margin-top: 6%;
-  background-color: var(--violet);
+  margin-top: 5%;
+  background-color: rgba(0, 0, 0, 0.01);
+  box-shadow: 4px 1px 4px 3px rgba(0, 0, 0, 0.25);
   border-radius: 30px;
   width: 33%;
-  height: 60%;
+  height: 73%;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
 }
 
-.signup_input {
+.signupDW_input {
     padding: 4% 0% 3% 10%;
     font-family: 'Share', cursive;
     color: var(--violet);
     font-size: 36px;
-    width: 90%;
     background-color: var(--light-green);
-    border: none;
+    border: 1px solid var(--violet);
     border-radius: 50px;
     outline: none;
     cursor: text;
     margin-bottom: 40px;
+    width: 90%;
   }
   
 ::placeholder {
@@ -73,7 +74,7 @@ code {
     overflow: visible;
 }
 
-.password {
+.DWpassword {
     background-image: url('img/show.png');
     background-position: 92% 50%;
     background-repeat: no-repeat;
@@ -87,14 +88,14 @@ p {
     font-weight: 400;
 }
 
-.forgot_password {
+.DWforgot_password {
     text-decoration: underline;
     font-size: 24px;
     opacity: .7;
     cursor: pointer;
 }
 
-.signup_button {
+.signupDW_button {
     margin-top: 40px;
     margin-bottom: 30px;
     padding: 5px 60px;
@@ -111,7 +112,7 @@ p {
     transition: 0.2s;
 }
   
-.signup_button:focus {
+.signupDW_button:focus {
     box-shadow: none;
 }
 
@@ -123,14 +124,14 @@ p {
   margin-bottom: 90px;
 }
 
-.exist-acc-div p {
+.exist-acc-divDW p {
     opacity: .7;
+    color: var(--violet);
     text-decoration: underline;
     cursor: pointer;
-    color: var(--light-green);
 }
 
-.signup_hamburger_menu {
+/* .signup_hamburger_menu {
     float: right;
     margin-top: 60px;
     margin-right: 100px;
@@ -140,4 +141,95 @@ p {
 .signup_hamburger_menu:hover {
     cursor: pointer;
     transform: translateY(3px);
+} */
+
+.label-div {
+  display: flex;
+  justify-content: space-between;
+  color: var(--light-green);
+  font-family: 'Share', cursive;
+  font-size: 22px;
+  font-weight: 400;
+  width: 35%;
+}
+
+.label-dw {
+    display: flex;
+    justify-content: space-between;
+    color: var(--violet);
+    align-items: center;
+    cursor: pointer;
+    opacity: 0.8;
+    width: 50%;
+}
+
+/* .label-dw:hover {
+    cursor: pointer;
+    opacity: 1;
+} */
+
+.label-bs {
+    display: flex;
+    justify-content: space-between;
+    color: var(--violet);
+    align-items: center;
+    cursor: pointer;
+    opacity: 0.8;
+    width: 41%;
+}
+
+/* .label-bs:hover {
+    cursor: pointer;
+    opacity: 1;
+} */
+
+.choose-the-service-p {
+    font-size: 28px;
+    font-weight: 400;
+    margin-bottom: 2%;
+    margin-top: 2%;
+    color: var(--violet);
+}
+
+
+.choose-the-price-p {
+    font-size: 28px;
+    font-weight: 400;
+    margin-bottom: 2%;
+    margin-top: 4%;
+    color: var(--orange);
+}
+
+/* .price-slider {
+  -webkit-appearance: none;
+  width: 50%;
+  height: 20px;
+  border-radius: 10px;
+  background: var(--light-green);
+  outline: none;
+  opacity: .7;
+  -webkit-transition: .2s;
+  transition: .2s;
+}
+
+.price-slider:hover {
+  opacity: 1;
+}
+
+.price-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 35px;
+  border-radius: 50%;
+  background: var(--orange);
+  cursor: pointer;
+} */
+
+.price-slider {
+  width: 50%;
+}
+
+.your-price {
+  color: var(--violet);
 }

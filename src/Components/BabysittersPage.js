@@ -1,33 +1,30 @@
 import React from 'react';
-// import dogWalkersList from '../DogWalkersList';
-import '../dogwalkers.css';
-// import { Link } from 'react-router-dom';
+import '../babysitters.css';
 import { slide as Menu} from 'react-burger-menu';
-// import Firebase from '../firebase';
 import { withFirebase } from '../firebase';
 import { compose } from 'recompose';
 
 
 
 
-class DogWalkersPage extends React.Component {
+class BabysittersPage extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
             pageNumber: 0,
             pageColor: "",
-            dogWalkers: []
+            babysitters: []
         }
     }
 
     componentDidMount = () => {
-        this.getAllDogWalkers1();
+        this.getAllBabysitters1();
     }
 
-    getAllDogWalkers1 = async() => {
-        const arr = await this.props.firebase.getAllDogWalkers()
+    getAllBabysitters1 = async() => {
+        const arr = await this.props.firebase.getAllBabysitters()
         console.log("arr2",arr);
-        this.setState({ dogWalkers: arr})
+        this.setState({ babysitters: arr})
     }
         // this.props.firebase.getAllDogWalkers()
         // const arr = []
@@ -51,28 +48,28 @@ class DogWalkersPage extends React.Component {
     // clickCell=(id) =>{
     //     window.location.href = "/chat/id:"+id
     // }
-    getDogWalkersList = () => {
-        const dogWalkersRating = (walker) => {
-            if (walker.rating === 3) {
+    getBabysittersList = () => {
+        const babysittersRating = (babysitter) => {
+            if (babysitter.rating === 3) {
                 return <img src="images/3stars.png" alt="3 stars" />
-            } else if (walker.rating === 2) {
+            } else if (babysitter.rating === 2) {
                 return <img src="images/2stars.png" alt="2 stars" />
-            } else if (walker.rating === 1) {
+            } else if (babysitter.rating === 1) {
                 return <img src="images/1star.png" alt="1 star" />
             } else return <img src="images/0star.png" alt="0 star" />
         }
 
         let arr = [];         
-        for (let i = this.state.pageNumber * 3; i < (this.state.pageNumber * 3) + 3 && i < this.state.dogWalkers.length; i += 1) {
-            let dogWalker = this.state.dogWalkers[i];
+        for (let i = this.state.pageNumber * 3; i < (this.state.pageNumber * 3) + 3 && i < this.state.babysitters.length; i += 1) {
+            let babysitter = this.state.babysitters[i];
             arr.push (
                 <div className="link" key={i} onClick={()=>this.clickCell("/pleaseSignIn")}>
                 {/* // <Link to="/chat" className="link" key={dogWalker.id}>                 */}
-                    <li className="dw_item">
+                    <li className="bs_item">
                         <img src="images/profile_icon.png" alt="Profile" className="profile_icon" />
-                        <p className="dw_name">{dogWalker.name}</p>
-                        <p className="dw_price">{dogWalker.price}</p>
-                        <p className="dw_rating">{dogWalkersRating(dogWalker)}</p>
+                        <p className="bs_name">{babysitter.name}</p>
+                        <p className="bs_price">{babysitter.price}</p>
+                        <p className="bs_rating">{babysittersRating(babysitter)}</p>
                     </li>
                 {/* // </Link>     */}
                 </div>            
@@ -99,7 +96,7 @@ class DogWalkersPage extends React.Component {
         // }
 
         return (
-            <div className="dw_wrapper">
+            <div className="bs_wrapper">
                 <Menu 
                     right 
                     width = { '30%' }
@@ -115,10 +112,10 @@ class DogWalkersPage extends React.Component {
                         <a id="contact" className="menu-item" href="/chooseUserType">SIGN UP</a>
                     </Menu>
                 {/* <img src="images/hamburger_menu.png" alt="Menu" className="dw_hamburger_menu"/> */}
-                <div className="dw_content">
-                    <h2>dog walkers</h2>
-                    <ul className="dw_list">
-                        <div>{this.getDogWalkersList()}</div>
+                <div className="bs_content">
+                    <h2>babysitters</h2>
+                    <ul className="bs_list">
+                        <div>{this.getBabysittersList()}</div>
                     </ul>
                     <div className="pages_numbers">
                         <p className="page_number" style={{opacity: this.state.pageNumber === "0"?'1':'0.8'}} onClick = {() => this.changePageNum(0)}>1</p>
@@ -132,4 +129,4 @@ class DogWalkersPage extends React.Component {
     }
 }
 
-export default compose(withFirebase)(DogWalkersPage);
+export default compose(withFirebase)(BabysittersPage);

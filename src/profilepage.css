@@ -91,4 +91,13 @@ code {
     
 .signout_btn:hover {
     transform: translateY(3px);
-  }
+}
+
+.provider-of {
+  font-family: 'Share', cursive;
+  font-size: 28px;
+  font-weight: 400;
+  color: var(--violet);
+  opacity: .8;
+  margin-bottom: 2%;
+}
