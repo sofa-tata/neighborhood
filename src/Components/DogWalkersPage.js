@@ -6,6 +6,7 @@ import { slide as Menu} from 'react-burger-menu';
 // import Firebase from '../firebase';
 import { withFirebase } from '../firebase';
 import { compose } from 'recompose';
+import sessionstorage from 'sessionstorage';
 
 
 
@@ -20,13 +21,26 @@ class DogWalkersPage extends React.Component {
         }
     }
 
-    componentDidMount = () => {
-        this.getAllDogWalkers1();
+    componentDidMount = async () => {
+        
+        const email = sessionstorage.getItem("user")
+        console.log('email ', email)
+        let user = await this.props.firebase.getUserByEmail(email)
+        console.log('componentDidMount user', user)
+        this.getDWByLocation(user.location);
+        // this.getAllDogWalkers1();
     }
 
-    getAllDogWalkers1 = async() => {
-        const arr = await this.props.firebase.getAllDogWalkers()
-        console.log("arr2",arr);
+    // getAllDogWalkers1 = async() => {
+    //     const arr = await this.props.firebase.getAllDogWalkers()
+    //     console.log("arr2",arr);
+    //     this.setState({ dogWalkers: arr})
+    // }
+
+    getDWByLocation = async location => {
+        console.log('getDWByLocation - location ', location)
+        const arr = await this.props.firebase.getAllDogWalkersByLocation(location)
+        console.log('getDWByLocation - arr2', arr);
         this.setState({ dogWalkers: arr})
     }
         // this.props.firebase.getAllDogWalkers()
@@ -51,33 +65,47 @@ class DogWalkersPage extends React.Component {
     // clickCell=(id) =>{
     //     window.location.href = "/chat/id:"+id
     // }
-    getDogWalkersList = () => {
-        const dogWalkersRating = (walker) => {
-            if (walker.rating === 3) {
-                return <img src="images/3stars.png" alt="3 stars" />
-            } else if (walker.rating === 2) {
-                return <img src="images/2stars.png" alt="2 stars" />
-            } else if (walker.rating === 1) {
-                return <img src="images/1star.png" alt="1 star" />
-            } else return <img src="images/0star.png" alt="0 star" />
-        }
+    dogWalkersRating = (walker) => {
+        let src = ""
+        if (walker.rating === 5) {
+            src="images/5st.png"
+        }else if (walker.rating === 4) {
+            src="images/4st.png"
+        } else if (walker.rating === 3) {
+            src="images/3st.png"
+        } else if (walker.rating === 2) {
+            src="images/2st.png"
+        } else if (walker.rating === 1) {
+            src="images/1st.png"
+        } else src="images/0st.png"
 
-        let arr = [];         
+        return src
+    }
+
+    getDogWalkersList = () => {
+
+        let arr = [];    
+        if(this.state.dogWalkers !== undefined){     
         for (let i = this.state.pageNumber * 3; i < (this.state.pageNumber * 3) + 3 && i < this.state.dogWalkers.length; i += 1) {
             let dogWalker = this.state.dogWalkers[i];
+            let ratingSrc = this.dogWalkersRating(dogWalker)
+            console.log('ratingSrc -', ratingSrc)
             arr.push (
                 <div className="link" key={i} onClick={()=>this.clickCell("/pleaseSignIn")}>
                 {/* // <Link to="/chat" className="link" key={dogWalker.id}>                 */}
                     <li className="dw_item">
                         <img src="images/profile_icon.png" alt="Profile" className="profile_icon" />
-                        <p className="dw_name">{dogWalker.name}</p>
-                        <p className="dw_price">{dogWalker.price}</p>
-                        <p className="dw_rating">{dogWalkersRating(dogWalker)}</p>
+                        <p className="dw_name">name-{dogWalker.displayName}</p>
+                        <p className="dw_price">p - {dogWalker.price}</p>
+                        <img className="dw_rating" src={ratingSrc} alt="star_img" />
+                        {/* <p className="dw_rating">r - {rating}</p> */}
+                        
                     </li>
                 {/* // </Link>     */}
                 </div>            
             );
-        }       
+        }     
+    }  
              
         return arr;
     }     

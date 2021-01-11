@@ -5,6 +5,8 @@ import '../signupfordw.css';
 import { Slider } from '@material-ui/core';
 import { withFirebase } from '../firebase';
 import { compose } from 'recompose';
+import csc from 'country-state-city';
+import sessionstorage from 'sessionstorage';
 
 class SignUpForDW extends React.Component {
     constructor() {
@@ -15,8 +17,8 @@ class SignUpForDW extends React.Component {
             displayName: "",
             error: null,
             service: null,
-            price: 5,
-            location: null,
+            price: 30,
+            location: "",
             rating: 0
         }
     }
@@ -25,44 +27,53 @@ class SignUpForDW extends React.Component {
         console.log('service: ', this.state.service)
     }
 
-    createNewDogwalkerWithEmailAndPasswordHandler = async (event, email, password) => {
+    createNewProviderWithEmailAndPasswordHandler = async (event, email, password) => {
         event.preventDefault();
         try {
             if (this.state.service === null) {
-                this.setState({ error: 'You should choose one of the available services!'})
+                // this.setState({ error: 'You should choose one of the available services'})
                 alert('You should choose one of the available services!')
-            } else if (this.state.service === "dogwalker") {
+            } 
+            if (this.state.location === "") {
+               // this.setState({ error: 'Please, choose your location'})
+                alert('Please, choose your location')
+            } 
+            else if (this.state.service === "dogwalker") {
                 const{user} = await this.props.firebase.doCreateUserWithEmailAndPassword(this.state.email, this.state.password);
-                console.log('createNewDogwalkerWithEmailAndPasswordHandler - user', user)
+                console.log('createNewProviderWithEmailAndPasswordHandler - user', user)
                 const dogwalker = {
                     uid: user.uid,
                     displayName: this.state.displayName,
                     email: this.state.email,
                     price: this.state.price,
                     service: this.state.service,
+                    location: this.state.location,
                     rating: 0
 
                 }
-                console.log('createNewDogwalkerWithEmailAndPasswordHandler - dogwalker', dogwalker)
-                this.props.firebase.generateDogWalkerDocument(dogwalker);
-                this.props.firebase.generateUserDocument(dogwalker)
+                console.log('createNewProviderWithEmailAndPasswordHandler - dogwalker', dogwalker)
+                await this.props.firebase.generateDogWalkerDocument(dogwalker);
+                await this.props.firebase.generateUserDocument(dogwalker)
+                sessionstorage.setItem("user", this.state.email)
                 window.location.href = '/profilePageForDW';
             } else {
                 const {user} = await this.props.firebase.doCreateUserWithEmailAndPassword(this.state.email, this.state.password);
-                console.log('createNewDogwalkerWithEmailAndPasswordHandler - bs-user', user)
+                console.log('createNewProviderWithEmailAndPasswordHandler - bs-user', user)
                 const babysitter = {
                     uid: user.uid,
                     displayName: this.state.displayName,
                     email: this.state.email,
                     price: this.state.price,
                     service: this.state.service,
+                    location: this.state.location,
                     rating: 0
 
                 }
-                console.log('createNewDogwalkerWithEmailAndPasswordHandler - babysitter', babysitter)
-                this.props.firebase.generateBabysitterDocument(babysitter);
-                this.props.firebase.generateUserDocument(babysitter)
-                window.location.href = '/profilePageForDW';
+                console.log('createNewProviderWithEmailAndPasswordHandler - babysitter', babysitter)
+                await this.props.firebase.generateBabysitterDocument(babysitter);
+                await this.props.firebase.generateUserDocument(babysitter)
+                sessionstorage.setItem("user", this.state.email)
+                window.location.href = '/profilePageForBS';
             }
         }
         catch(error) {
@@ -76,8 +87,8 @@ class SignUpForDW extends React.Component {
 
     onChange = event => {
         this.setState({ [event.target.name]: event.target.value });
-        console.log("state name ", event.target.name)
-        console.log("state value ", event.target.value)
+        // console.log("state name ", event.target.name)
+        // console.log("state value ", event.target.value)
       };
     
 
@@ -110,10 +121,11 @@ class SignUpForDW extends React.Component {
         const {email, password, displayName, price, service } = this.state
         const mark = [
             {
-                value: 10,
+                value: 50,
                 label: ''
             }
         ]
+        const cities = csc.getCitiesOfCountry("IL");
         return (
             <div className="signupDW_wrapper">
                 <Menu 
@@ -132,6 +144,19 @@ class SignUpForDW extends React.Component {
                     </Menu>
                 {/* <img src="images/hamburger_menu.png" alt="Menu" className="signup_hamburger_menu"/> */}
                 <div className="signupDW_content">
+
+
+                    <select
+                    name="location"  
+                    id="location" 
+                    className="signupDW_input location" 
+                    onChange={this.onChange}
+                    defaultValue={""}
+                    // onChange = {(event) => this.onChangeHandler(event)}
+                    >
+                        <option value="" disabled >Choose your location</option>
+                        {cities.map((city) => <option id="city" key={city.name} value={city.value}>{city.name}</option>)}
+                    </select>
 
                     <input type="text"
                     name="displayName" 
@@ -177,22 +202,23 @@ class SignUpForDW extends React.Component {
                         </div>
                     </div>
 
-                    <p className="choose-the-price-p">What is your price for 1 hour of work? (in USD)</p>
+                    <p className="choose-the-price-p">What is your price for 1 hour of work?</p>
                     <div className="price-slider">
                         <Slider
-                        min={5}
-                        max={15}
-                        defaultValue={10}
+                        min={30}
+                        max={100}
+                        step={5}
+                        defaultValue={50}
                         value={price}
                         onChange={this.handleChange}
                         marks={mark}
                         valueLabelDisplay="auto"                        
                         />
                     </div>
-                    <p className="your-price">Your price: <span id="yourPrice">{'$'}{price}</span></p>                    
+                    <p className="your-price">Your price: <span id="yourPrice">{'₪'}{price}</span></p>                    
 
                     <button className="signupDW_button" onClick={event => {
-                    this.createNewDogwalkerWithEmailAndPasswordHandler(event, email, password);
+                    this.createNewProviderWithEmailAndPasswordHandler(event, email, password);
                     }}>Sign Up</button>
                     {/* <p>OR</p>
                     <button className="signupDW_button google_icon">Sign in with Google</button> */}

@@ -43,7 +43,7 @@ code {
   background-color: var(--violet);
   border-radius: 30px;
   width: 33%;
-  height: 60%;
+  height: 65%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -140,4 +140,9 @@ p {
 .signup_hamburger_menu:hover {
     cursor: pointer;
     transform: translateY(3px);
+}
+
+
+select#location.signup_input.location {
+  color: rgb(77, 99, 212, .7)
 }

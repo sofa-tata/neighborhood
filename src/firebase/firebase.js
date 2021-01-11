@@ -6,19 +6,29 @@ import 'firebase/database';
 import "firebase/storage";
 
 
+//old
 
+// var firebaseConfig = {
+//     apiKey: "AIzaSyA1-nLFHmNaYbzJXBO_gl636a-iCbZsIEY",
+//     authDomain: "neighborhood-auth.firebaseapp.com",
+//     projectId: "neighborhood-auth",
+//     storageBucket: "neighborhood-auth.appspot.com",
+//     messagingSenderId: "1082706672806",
+//     appId: "1:1082706672806:web:8b511d80cd1a38ddb78867",
+//     measurementId: "G-M0ZPJSD1GP"
+// };
+
+//new
 
 var firebaseConfig = {
-    apiKey: "AIzaSyA1-nLFHmNaYbzJXBO_gl636a-iCbZsIEY",
-    authDomain: "neighborhood-auth.firebaseapp.com",
-    projectId: "neighborhood-auth",
-    storageBucket: "neighborhood-auth.appspot.com",
-    messagingSenderId: "1082706672806",
-    appId: "1:1082706672806:web:8b511d80cd1a38ddb78867",
-    measurementId: "G-M0ZPJSD1GP"
+  apiKey: "AIzaSyBqe9zRv4b98skMUa8MY67Jo9-Xq8zd19c",
+  authDomain: "neighborhood-65ebf.firebaseapp.com",
+  projectId: "neighborhood-65ebf",
+  storageBucket: "neighborhood-65ebf.appspot.com",
+  messagingSenderId: "769925804053",
+  appId: "1:769925804053:web:15d6e63134512a5775de1c",
+  measurementId: "G-RK04JD91EK"
 };
-
-
 
 
 class Firebase {
@@ -32,7 +42,7 @@ class Firebase {
   }
   doCreateUserWithEmailAndPassword = (email, password) =>
   this.auth.createUserWithEmailAndPassword(email, password).catch(error => {
-      // alert(error.message)
+      alert(error.message)
   })
 
   doSignInWithEmailAndPassword = async (email, password) =>{
@@ -86,13 +96,13 @@ class Firebase {
   // }
 
   getUserByEmail = async (email) => {
-    console.log('getUserByEmail goes in')
+    console.log('getUserByEmail goes in - email:', email)
     const user = await this.firestore.collection("users").get().then(snapshot=>{
       let userToReturn = null
       snapshot.forEach(doc=>{
         let u = doc.data()
-        console.log('u', u)
-        console.log(u)
+        // console.log('u', u)
+        // console.log(u)
         if(u.email===email){
           console.log('found email', email)
           userToReturn =  u
@@ -212,18 +222,35 @@ async getAllDogWalkersByLocation(location) {
     if(dw.location===location){
       arr.push(dw)
     }
-    console.log("arr", arr);
-    return arr
   });
   // console.log("arr", arr);
   // return arr
+  
+  console.log("getAllDogWalkersByLocation - arr1", arr);
+  return arr
 }
+
 
 async getAllBabysitters() {
   const snapshot = await this.firestore.collection('babysitters').get()
   let arr = snapshot.docs.map(doc => doc.data());
-  console.log("arr", arr);
+  console.log("getAllBabysitters - arr", arr);
   return arr
+}
+
+async getAllBabysittersByLocation(location) {
+  const snapshot = await this.firestore.collection('babysitters').get()
+  let arr = []
+  snapshot.docs.map(doc => {
+    let bs = doc.data()
+    if(bs.location===location){
+      arr.push(bs)
+    }
+    console.log("getAllBabysittersByLocation - arr", arr);
+    return arr
+  });
+  // console.log("arr", arr);
+  // return arr
 }
 
 // async getAllDogWalkers(){
@@ -293,13 +320,13 @@ getDogWalkerById = async uid => {
   };
 
 getDogwalkerByEmail = async (email) => {
-  console.log('getUserByEmail goes in')
+  console.log('getUserByEmail goes in - email', email)
     const user = await this.firestore.collection("dogwalkers").get().then(snapshot=>{
       let userToReturn = null
       snapshot.forEach(doc=>{
         let u = doc.data()
-        console.log('u', u)
-        console.log(u)
+        // console.log('u', u)
+        // console.log(u)
         if(u.email===email){
           console.log('found email', email)
           userToReturn =  u
@@ -327,10 +354,38 @@ getDogwalkerByEmail = async (email) => {
 }
 
 
-generateBabysitterDocument = babysitter => {
-  let uid = uuidv4();
-  const a = this.db.ref(`babysitters/${uid}`)
-  a.set(babysitter);
+generateBabysitterDocument = async babysitter => {
+  // let uid = uuidv4();
+  // const a = this.db.ref(`babysitters/${uid}`)
+  // a.set(babysitter);
+
+  console.log('babysitter', babysitter)
+  console.log('generateUserDocument')
+    if (!babysitter) {
+      console.log('smth')
+    return;
+    }
+    const userRef = this.firestore.doc(`babysitters/${babysitter.uid}`);
+    const snapshot = await userRef.get();
+    if (!snapshot.exists) {
+      const { email, displayName, service, price, rating, location } = babysitter;
+      try {
+        await userRef.set({
+          displayName,
+          email,
+          service,
+          price,
+          rating,
+          location
+          // photoURL
+        });
+      } catch (error) {
+        console.error("Error creating user document", error);
+      }
+    } else {
+      console.log('snapshot exists')
+    }
+    // return getUserDocument(user.uid);
 }
 
 // generateBabysitterDocument = async (babysitter) => {
@@ -372,24 +427,43 @@ getBabysitterById = async uid => {
       // console.log("promise err:", err)
    });
   };
-
+  
   getBabysitterByEmail = async (email) => {
-    let user1 = null
-    let promise = this.db.ref("babysitters").once('value', (snapshot) => {
-        snapshot.forEach((data) => {
-            var user = data.val();
-            if (user.email === email) {
-                user1 = user
-            }
-        });
-    })
+    console.log('getUserByEmail goes in - email', email)
+      const user = await this.firestore.collection("babysitters").get().then(snapshot=>{
+        let userToReturn = null
+        snapshot.forEach(doc=>{
+          let u = doc.data()
+          // console.log('u', u)
+          // console.log(u)
+          if(u.email===email){
+            console.log('found email', email)
+            userToReturn =  u
+          }
+        })
+        return userToReturn
+      })
+      console.log('user end ', user)
+      return user
+    }
 
-    return promise.then(function(result) {
-        return user1
-     }, err => {
-        // console.log("promise err:", err)
-     });
-}
+//   getBabysitterByEmail = async (email) => {
+//     let user1 = null
+//     let promise = this.db.ref("babysitters").once('value', (snapshot) => {
+//         snapshot.forEach((data) => {
+//             var user = data.val();
+//             if (user.email === email) {
+//                 user1 = user
+//             }
+//         });
+//     })
+
+//     return promise.then(function(result) {
+//         return user1
+//      }, err => {
+//         // console.log("promise err:", err)
+//      });
+// }
 
   // export const getAllDogWalkers = () => {
   //   firestore.ref("dogwalkers").on("value", snapshot => {

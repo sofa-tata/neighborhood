@@ -3,7 +3,8 @@ import '../profilepage.css';
 import sessionstorage from 'sessionstorage';
 import { compose } from 'recompose';
 import { withFirebase } from '../firebase';
-class ProfilePageForDW extends React.Component {
+
+class ProfilePageForBS extends React.Component {
     constructor() {
         super()
         this.state = {
@@ -19,7 +20,7 @@ class ProfilePageForDW extends React.Component {
         console.log('componentDidMount')
         const email = sessionstorage.getItem("user")
         console.log('sessionstorage email ', email)
-        let user = await this.props.firebase.getDogwalkerByEmail(email)
+        let user = await this.props.firebase.getBabysitterByEmail(email)
         console.log('user', user)
         this.setState({ name: user.displayName, email: user.email, service: user.service, location: user.location })
     }
@@ -49,4 +50,4 @@ class ProfilePageForDW extends React.Component {
 }
 
 // export default ProfilePageForDW;
-export default compose(withFirebase)(ProfilePageForDW);
+export default compose(withFirebase)(ProfilePageForBS);
