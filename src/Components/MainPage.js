@@ -12,6 +12,7 @@ import ChooseUserType from './ChooseUserType';
 import SignUpClass from './SignUpClass';
 import ProfilePageForDW from './ProfilePageForDW';
 import BabysittersPage from './BabysittersPage';
+import ProfilePageForBS from './ProfilePageForBS';
 
 
 
@@ -29,6 +30,7 @@ class MainPage extends React.Component {
                     <Route path="/pleaseSignIn" component={PleaseSignIn} />
                     <Route path="/profilePage" component={ProfilePage} />
                     <Route path="/profilePageForDW" component={ProfilePageForDW} />
+                    <Route path="/profilePageForBS" component={ProfilePageForBS} />
                     <Route path="/passwordReset" component={PasswordResetClass} />
                     <Route path="/chooseUserType" component={ChooseUserType} />
                     <Route path="/babysitterspage" component={BabysittersPage} />

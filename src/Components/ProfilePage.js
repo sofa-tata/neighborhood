@@ -11,7 +11,8 @@ class ProfilePage extends React.Component {
         super()
         this.state = {
             name: "",
-            email: ""
+            email: "",
+            location: null
         }
     }
 
@@ -21,7 +22,7 @@ class ProfilePage extends React.Component {
         console.log('email ', email)
         let user = await this.props.firebase.getUserByEmail(email)
         console.log('componentDidMount user', user)
-        this.setState({ name: user.displayName, email: user.email })
+        this.setState({ name: user.displayName, email: user.email, location: user.location })
 
         
         // console.log("from session storage", email)
@@ -64,6 +65,7 @@ class ProfilePage extends React.Component {
                     <img src="images/profile_160px.png" alt="Profile" className="pp_profile_img" />
                     <h3 className="pp_name">{this.state.name}</h3>
                     <h4 className="pp_email">{this.state.email}</h4>
+                    <h4 className="pp_email">{this.state.location}</h4>
                 </div>
             </div>
         )

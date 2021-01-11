@@ -4,6 +4,8 @@ import '../signup.css';
 import { slide as Menu} from 'react-burger-menu';
 import { withFirebase } from '../firebase';
 import { compose } from 'recompose';
+import csc from 'country-state-city';
+import sessionstorage from 'sessionstorage';
 
 
 class SignUpClass extends React.Component {
@@ -14,7 +16,7 @@ class SignUpClass extends React.Component {
             email: "",
             password: "",
             displayName: "",
-            location: null,
+            location: "",
             error: null
         }
     }
@@ -40,8 +42,9 @@ class SignUpClass extends React.Component {
                 uid: user.uid,
                 displayName: this.state.displayName,
                 email: this.state.email,
+                location: this.state.location,
                 service: null,
-                price:null
+                price: null
             }
             this.props.firebase.generateUserDocument(u);
         }
@@ -54,8 +57,8 @@ class SignUpClass extends React.Component {
         // this.setState({email: ""});
         // this.setState({password: ""});
         // this.setState({displayName: ""});
-
-        // window.location.href = '/profilePage'
+        sessionstorage.setItem("user", this.state.email)
+        window.location.href = '/profilePage'
     }
 
     onChangeHandler = (event) => {
@@ -66,15 +69,17 @@ class SignUpClass extends React.Component {
             this.setState({password: value})
         } else if (name === "displayName") {
             this.setState({displayName: value})
+        } else if (name === "location") {
+            this.setState( {location: value })
         }
     }
 
-    clickCell= () => {
+    goToSignInPage = () => {
         window.location.href = "/signIn"
     }
 
     render() {
-
+        const cities = csc.getCitiesOfCountry("IL");
         return (
             <div className="signup_wrapper">
                 <Menu 
@@ -94,7 +99,18 @@ class SignUpClass extends React.Component {
                 {/* <img src="images/hamburger_menu.png" alt="Menu" className="signup_hamburger_menu"/> */}
                 <div className="signup_content">
 
-                <input type="text"
+                    <select
+                    name="location"  
+                    id="location" 
+                    className="signup_input location" 
+                    onChange = {(event) => this.onChangeHandler(event)}
+                    value={this.state.location}
+                    >
+                        <option value="" disabled selected>Choose your location</option>
+                        {cities.map((city) => <option id="city" key={city.name} value={city.value}>{city.name}</option>)}
+                    </select>
+
+                    <input type="text"
                     name="displayName" 
                     value={this.state.displayName} 
                     id="displayName" 
@@ -125,7 +141,7 @@ class SignUpClass extends React.Component {
                     {/* <p>OR</p>
                     <button className="signup_button google_icon">Sign in with Google</button> */}
                     <div className="exist-acc-div">
-                        <p onClick={() => this.clickCell()}>Sign in to an existing account</p>
+                        <p onClick={() => this.goToSignInPage()}>Sign in to an existing account</p>
                     </div>
                 </div>
             </div>

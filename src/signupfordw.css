@@ -44,11 +44,15 @@ code {
   box-shadow: 4px 1px 4px 3px rgba(0, 0, 0, 0.25);
   border-radius: 30px;
   width: 33%;
-  height: 73%;
+  height: 81%;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+}
+
+#location{
+  padding-right: 5%;
 }
 
 .signupDW_input {
@@ -64,6 +68,7 @@ code {
     margin-bottom: 40px;
     width: 90%;
   }
+
   
 ::placeholder {
     color: var(--violet);
@@ -232,4 +237,19 @@ p {
 
 .your-price {
   color: var(--violet);
+}
+
+/* select {
+  background-image:
+    linear-gradient(45deg, white 50%, transparent 50%),
+    linear-gradient(135deg, transparent 50%, white 50%),
+    linear-gradient(to right, gray, gray);
+  background-position:
+    calc(100% - 15px) 1em,
+    calc(100% - 20px) 1em,
+    100% 0;
+} */
+
+select#location.signupDW_input.location{
+  color: rgb(77, 99, 212, .7)
 }

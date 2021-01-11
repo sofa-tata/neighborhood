@@ -18,12 +18,19 @@ class BabysittersPage extends React.Component {
     }
 
     componentDidMount = () => {
-        this.getAllBabysitters1();
+        // this.getAllBabysitters1();
+        this.getBSByLocation();
     }
 
-    getAllBabysitters1 = async() => {
-        const arr = await this.props.firebase.getAllBabysitters()
-        console.log("arr2",arr);
+    // getAllBabysitters1 = async() => {
+    //     const arr = await this.props.firebase.getAllBabysitters()
+    //     console.log("arr2",arr);
+    //     this.setState({ babysitters: arr})
+    // }
+
+    getBSByLocation = async location => {
+        const arr = await this.props.firebase.getAllBabysittersByLocation(location)
+        console.log('arr3', arr);
         this.setState({ babysitters: arr})
     }
         // this.props.firebase.getAllDogWalkers()
@@ -45,23 +52,33 @@ class BabysittersPage extends React.Component {
     clickCell=(address) => {
         window.location.href = address
     }
+
+    babysittersRating = (babysitter) => {
+        let src = ""
+        if (babysitter.rating === 5) {
+            src="images/5st.png"
+        }else if (babysitter.rating === 4) {
+            src="images/4st.png"
+        } else if (babysitter.rating === 3) {
+            src="images/3st.png"
+        } else if (babysitter.rating === 2) {
+            src="images/2st.png"
+        } else if (babysitter.rating === 1) {
+            src="images/1st.png"
+        } else src="images/0st.png"
+
+        return src
+    }
     // clickCell=(id) =>{
     //     window.location.href = "/chat/id:"+id
     // }
     getBabysittersList = () => {
-        const babysittersRating = (babysitter) => {
-            if (babysitter.rating === 3) {
-                return <img src="images/3stars.png" alt="3 stars" />
-            } else if (babysitter.rating === 2) {
-                return <img src="images/2stars.png" alt="2 stars" />
-            } else if (babysitter.rating === 1) {
-                return <img src="images/1star.png" alt="1 star" />
-            } else return <img src="images/0star.png" alt="0 star" />
-        }
+        
 
         let arr = [];         
         for (let i = this.state.pageNumber * 3; i < (this.state.pageNumber * 3) + 3 && i < this.state.babysitters.length; i += 1) {
             let babysitter = this.state.babysitters[i];
+            let ratingSrc = this.babysittersRating(babysitter);
             arr.push (
                 <div className="link" key={i} onClick={()=>this.clickCell("/pleaseSignIn")}>
                 {/* // <Link to="/chat" className="link" key={dogWalker.id}>                 */}
@@ -69,7 +86,8 @@ class BabysittersPage extends React.Component {
                         <img src="images/profile_icon.png" alt="Profile" className="profile_icon" />
                         <p className="bs_name">{babysitter.name}</p>
                         <p className="bs_price">{babysitter.price}</p>
-                        <p className="bs_rating">{babysittersRating(babysitter)}</p>
+                        <img className="bs_rating" src={ratingSrc} alt="star_img" />
+                        {/* <p className="bs_rating">{this.babysittersRating(babysitter)}</p> */}
                     </li>
                 {/* // </Link>     */}
                 </div>            
