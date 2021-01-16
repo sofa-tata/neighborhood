@@ -56,11 +56,11 @@ class SignInClass extends React.Component {
         return (
 
             <div className="signin_wrapper">
-                <Menu 
+                {/* <Menu 
                     right 
                     width = { '30%' }
-                    customBurgerIcon={ <img src="images/hamburger_menu.png" alt="Menu" /> } 
-                    customCrossIcon={ <img src="images/cross_btn.png" alt="Close" /> }
+                    customBurgerIcon={ <img src="/images/hamburger_menu.png" alt="Menu" /> } 
+                    customCrossIcon={ <img src="/images/cross_btn.png" alt="Close" /> }
                     className="react_menu"
                     isOpen={ this.state.menuOpen }
                     // onClose={ this.handleOnClose }
@@ -69,8 +69,8 @@ class SignInClass extends React.Component {
                         <a id="home" className="menu-item home-item" href="/">HOME</a>
                         <a id="about" className="menu-item" href="/signIn">SIGN IN</a>
                         <a id="contact" className="menu-item" href="/chooseUserType">SIGN UP</a>
-                </Menu>
-                {/* <img src="images/hamburger_menu.png" alt="Menu" className="signin_hamburger_menu"/> */}
+                </Menu> */}
+                {/* <img src="/images/hamburger_menu.png" alt="Menu" className="signin_hamburger_menu"/> */}
                 <div className="signin_content">
                     <input type="email"
                     name="userEmail" 

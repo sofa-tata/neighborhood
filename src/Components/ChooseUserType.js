@@ -31,11 +31,11 @@ class ChooseUserType extends React.Component {
     render() {
         return (
             <div className="choose_container">
-                 <Menu 
+                 {/* <Menu 
                     right 
                     width = { '30%' }
-                    customBurgerIcon={ <img src="images/hamburger_menu.png" alt="Menu" /> } 
-                    customCrossIcon={ <img src="images/cross_btn.png" alt="Close" /> }
+                    customBurgerIcon={ <img src="/images/hamburger_menu.png" alt="Menu" /> } 
+                    customCrossIcon={ <img src="/images/cross_btn.png" alt="Close" /> }
                     className="react_menu"
                     isOpen={ this.state.menuOpen }
                     // onClose={ this.handleOnClose }
@@ -44,7 +44,7 @@ class ChooseUserType extends React.Component {
                         <a id="home" className="menu-item home-item" href="/">HOME</a>
                         <a id="about" className="menu-item" href="/signIn">SIGN IN</a>
                         <a id="contact" className="menu-item" href="/chooseUserType">SIGN UP</a>
-                    </Menu>
+                    </Menu> */}
                 <div className="choose_wrapper">
                     <div className="seller_btn" onClick={() => this.clickCell("/signUpForDogWalker")}>
                         <p>I'M A SELLER</p>

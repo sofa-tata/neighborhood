@@ -128,11 +128,11 @@ class SignUpForDW extends React.Component {
         const cities = csc.getCitiesOfCountry("IL");
         return (
             <div className="signupDW_wrapper">
-                <Menu 
+                {/* <Menu 
                     right 
                     width = { '30%' }
-                    customBurgerIcon={ <img src="images/hamburger_menu.png" alt="Menu" /> } 
-                    customCrossIcon={ <img src="images/cross_btn.png" alt="Close" /> }
+                    customBurgerIcon={ <img src="/images/hamburger_menu.png" alt="Menu" /> } 
+                    customCrossIcon={ <img src="/images/cross_btn.png" alt="Close" /> }
                     className="react_menu"
                     isOpen={ this.state.menuOpen }
                     // onClose={ this.handleOnClose }
@@ -141,8 +141,8 @@ class SignUpForDW extends React.Component {
                         <a id="home" className="menu-item home-item" href="/">HOME</a>
                         <a id="about" className="menu-item" href="/signIn">SIGN IN</a>
                         <a id="contact" className="menu-item" href="/chooseUserType">SIGN UP</a>
-                    </Menu>
-                {/* <img src="images/hamburger_menu.png" alt="Menu" className="signup_hamburger_menu"/> */}
+                    </Menu> */}
+                {/* <img src="/images/hamburger_menu.png" alt="Menu" className="signup_hamburger_menu"/> */}
                 <div className="signupDW_content">
 
 
@@ -154,8 +154,8 @@ class SignUpForDW extends React.Component {
                     defaultValue={""}
                     // onChange = {(event) => this.onChangeHandler(event)}
                     >
-                        <option value="" disabled >Choose your location</option>
-                        {cities.map((city) => <option id="city" key={city.name} value={city.value}>{city.name}</option>)}
+                        <option value="">Choose your location</option>
+                        {cities.map((city, i) => <option id="city" key={i} value={city.value}>{city.name}</option>)}
                     </select>
 
                     <input type="text"

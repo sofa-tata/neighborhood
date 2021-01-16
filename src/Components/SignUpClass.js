@@ -36,8 +36,29 @@ class SignUpClass extends React.Component {
     createUserWithEmailAndPasswordHandler = async (event, email, password) => {
         console.log('createUserWithEmailAndPasswordHandler')
         event.preventDefault();
+
+        // let error = await this.props.firebase.doPasswordReset(this.state.email)
+        // console.log('error', error)
+
+        // if (error === null) {
+        //     const {user} = await this.props.firebase.doCreateUserWithEmailAndPassword(email, password);
+
+        //     let u = {
+        //         uid: user.uid,
+        //         displayName: this.state.displayName,
+        //         email: this.state.email,
+        //         location: this.state.location,
+        //         service: null,
+        //         price: null
+        //     }
+        //     await this.props.firebase.generateUserDocument(u);
+        // } else {
+        //     this.setState({ error: error, emailHasBeenSent: false});
+        // }
         try {
             const {user} = await this.props.firebase.doCreateUserWithEmailAndPassword(email, password);
+
+            
             let u = {
                 uid: user.uid,
                 displayName: this.state.displayName,
@@ -46,7 +67,7 @@ class SignUpClass extends React.Component {
                 service: null,
                 price: null
             }
-            this.props.firebase.generateUserDocument(u);
+            await this.props.firebase.generateUserDocument(u);
         }
         catch(error) {
             this.setState({error: 'Error Signing up with email and password'});
@@ -82,11 +103,11 @@ class SignUpClass extends React.Component {
         const cities = csc.getCitiesOfCountry("IL");
         return (
             <div className="signup_wrapper">
-                <Menu 
+                {/* <Menu 
                     right 
                     width = { '30%' }
-                    customBurgerIcon={ <img src="images/hamburger_menu.png" alt="Menu" /> } 
-                    customCrossIcon={ <img src="images/cross_btn.png" alt="Close" /> }
+                    customBurgerIcon={ <img src="/images/hamburger_menu.png" alt="Menu" /> } 
+                    customCrossIcon={ <img src="/images/cross_btn.png" alt="Close" /> }
                     className="react_menu"
                     isOpen={ this.state.menuOpen }
                     // onClose={ this.handleOnClose }
@@ -95,8 +116,8 @@ class SignUpClass extends React.Component {
                         <a id="home" className="menu-item home-item" href="/">HOME</a>
                         <a id="about" className="menu-item" href="/signIn">SIGN IN</a>
                         <a id="contact" className="menu-item" href="/chooseUserType">SIGN UP</a>
-                    </Menu>
-                {/* <img src="images/hamburger_menu.png" alt="Menu" className="signup_hamburger_menu"/> */}
+                    </Menu> */}
+                {/* <img src="/images/hamburger_menu.png" alt="Menu" className="signup_hamburger_menu"/> */}
                 <div className="signup_content">
 
                     <select
@@ -106,8 +127,8 @@ class SignUpClass extends React.Component {
                     onChange = {(event) => this.onChangeHandler(event)}
                     value={this.state.location}
                     >
-                        <option value="" disabled selected>Choose your location</option>
-                        {cities.map((city) => <option id="city" key={city.name} value={city.value}>{city.name}</option>)}
+                        <option value="">Choose your location</option>
+                        {cities.map((city,i) => <option id="city" key={i} value={city.value}>{city.name}</option>)}
                     </select>
 
                     <input type="text"

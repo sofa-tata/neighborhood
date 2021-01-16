@@ -30,11 +30,11 @@ class AskForSignIn extends React.Component {
     render() {
         return (
         <div className="askforsignin_wrapper">
-            <Menu 
+            {/* <Menu 
                 right 
                 width = { '30%' }
-                customBurgerIcon={ <img src="images/hamburger_menu.png" alt="Menu" /> } 
-                customCrossIcon={ <img src="images/cross_btn.png" alt="Close" /> }
+                customBurgerIcon={ <img src="/images/hamburger_menu.png" alt="Menu" /> } 
+                customCrossIcon={ <img src="/images/cross_btn.png" alt="Close" /> }
                 className="react_menu"
                 isOpen={ this.state.menuOpen }
                 // onClose={ this.handleOnClose }
@@ -43,8 +43,8 @@ class AskForSignIn extends React.Component {
                     <a id="home" className="menu-item home-item" href="/">HOME</a>
                     <a id="about" className="menu-item" href="/signIn">SIGN IN</a>
                     <a id="contact" className="menu-item" href="/chooseUserType">SIGN UP</a>
-            </Menu>
-                {/* <img src="images/hamburger_menu.png" alt="menu" className="ask_hamburger_menu"/> */}
+            </Menu> */}
+                {/* <img src="/images/hamburger_menu.png" alt="menu" className="ask_hamburger_menu"/> */}
                 <div className="askforsignin_content">
                     <h1>To leave a message, please <u onClick={()=>{this.clickCell("/signIn")}}>sign in</u>.</h1>
                 </div>         
