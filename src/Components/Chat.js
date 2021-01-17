@@ -58,14 +58,14 @@ class Chat extends React.Component {
         return (
             <div className="chat_wrapper">
                 {/* <button onClick={this.sendMsgToServer}>Click</button> */}
-                <img src="images/hamburger_menu.png" alt="Menu" className="chat_hamburger_menu"/>
+                <img src="/images/hamburger_menu.png" alt="Menu" className="chat_hamburger_menu"/>
                 <div className="chat_content">
                         <div className="chat_header" />
                         <div className="chat_field" />
                         <div className="chat_message">
-                            <image src="images/attachment.png" alt="Attach" className="attach_icon" />
+                            <image src="/images/attachment.png" alt="Attach" className="attach_icon" />
                             <input type="text" placeholder="Type a message" className="typing_field" />
-                            <image src="images/send.png" alt="Send" className="send_icon" />
+                            <image src="/images/send.png" alt="Send" className="send_icon" />
                         </div>
                 </div>         
                             

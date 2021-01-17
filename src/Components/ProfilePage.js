@@ -47,22 +47,22 @@ class ProfilePage extends React.Component {
     render() {
         return (
             <div className="pp_wrapper">
-                <Menu 
+                {/* <Menu 
                     right 
                     width = { '30%' }
-                    customBurgerIcon={ <img src="images/hamburger_menu.png" alt="Menu" /> } 
-                    customCrossIcon={ <img src="images/cross_btn.png" alt="Close" /> }
+                    customBurgerIcon={ <img src="/images/hamburger_menu.png" alt="Menu" /> } 
+                    customCrossIcon={ <img src="/images/cross_btn.png" alt="Close" /> }
                     className="react_menu"
                     isOpen={ this.state.menuOpen }
                     // onClose={ this.handleOnClose }
                     customOnKeyDown={this.toggleMenu}
                     >
                         <a id="home" className="menu-item home-item" href="/">HOME</a>
-                    </Menu>
-                {/* <img src="images/hamburger_menu.png" alt="Menu" className="pp_hamburger_menu"/> */}
+                    </Menu> */}
+                {/* <img src="/images/hamburger_menu.png" alt="Menu" className="pp_hamburger_menu"/> */}
                 <h5 className="signout_btn" onClick={() => this.signOut()}>Sign Out</h5>
                 <div className="pp_content">
-                    <img src="images/profile_160px.png" alt="Profile" className="pp_profile_img" />
+                    <img src="/images/profile_160px.png" alt="Profile" className="pp_profile_img" />
                     <h3 className="pp_name">{this.state.name}</h3>
                     <h4 className="pp_email">{this.state.email}</h4>
                     <h4 className="pp_email">{this.state.location}</h4>

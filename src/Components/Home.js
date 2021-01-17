@@ -44,8 +44,10 @@ class Home extends React.Component {
             <div className="search-div">
                 <p>Which one do you need?</p>
                 <div className="services">
-                <Link to="/dogwalkerspage" className="link_to_list"><div className="service services_dw">Dog Walker</div></Link>
-                <Link to="/babysitterspage" className="link_to_list"><div className="service services_bs">Babysitter</div></Link>
+                <Link to="/listpage/id:dogwalkers" className="link_to_list"><div className="service services_dw">Dog Walker</div></Link>
+                <Link to="/listpage/id:babysitters" className="link_to_list"><div className="service services_bs">Babysitter</div></Link>
+                {/* <Link to="/dogwalkerspage" className="link_to_list"><div className="service services_dw">Dog Walker</div></Link>
+                <Link to="/babysitterspage" className="link_to_list"><div className="service services_bs">Babysitter</div></Link> */}
                 </div>
             </div>
             )
@@ -69,11 +71,11 @@ class Home extends React.Component {
 
         return (
                 <div className="wrapper">
-                    <Menu 
+                    {/* <Menu 
                     right 
                     width = { '30%' }
-                    customBurgerIcon={ <img src="images/hamburger_menu.png" alt="Menu" /> } 
-                    customCrossIcon={ <img src="images/cross_btn.png" alt="Close" /> }
+                    customBurgerIcon={ <img src="/images/hamburger_menu.png" alt="Menu" /> } 
+                    customCrossIcon={ <img src="/images/cross_btn.png" alt="Close" /> }
                     className="react_menu"
                     isOpen={ this.state.menuOpen }
                     // onClose={ this.handleOnClose }
@@ -82,7 +84,7 @@ class Home extends React.Component {
                         <a id="home" className="menu-item home-item" href="/">HOME</a>
                         <a id="about" className="menu-item" href="/signIn">SIGN IN</a>
                         <a id="contact" className="menu-item" href="/chooseUserType">SIGN UP</a>
-                    </Menu>
+                    </Menu> */}
                     
                     <div className="content">
                             <h1>neighborhood</h1>

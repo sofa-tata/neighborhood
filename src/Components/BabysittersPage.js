@@ -3,6 +3,7 @@ import '../babysitters.css';
 import { slide as Menu} from 'react-burger-menu';
 import { withFirebase } from '../firebase';
 import { compose } from 'recompose';
+import sessionstorage from 'sessionstorage';
 
 
 
@@ -17,9 +18,14 @@ class BabysittersPage extends React.Component {
         }
     }
 
-    componentDidMount = () => {
+    componentDidMount = async () => {
         // this.getAllBabysitters1();
-        this.getBSByLocation();
+        const email = sessionstorage.getItem("user")
+        console.log('componentDidMount email bs ', email)
+        let user = await this.props.firebase.getUserByEmail(email)
+        console.log('getUserByEmail user', user)
+        this.getBSByLocation(user.location);
+        // this.getBSByLocation();
     }
 
     // getAllBabysitters1 = async() => {
@@ -29,8 +35,9 @@ class BabysittersPage extends React.Component {
     // }
 
     getBSByLocation = async location => {
+        console.log('getBSByLocation - location ', location)
         const arr = await this.props.firebase.getAllBabysittersByLocation(location)
-        console.log('arr3', arr);
+        console.log('getBSByLocation - arr2', arr);
         this.setState({ babysitters: arr})
     }
         // this.props.firebase.getAllDogWalkers()
@@ -56,16 +63,16 @@ class BabysittersPage extends React.Component {
     babysittersRating = (babysitter) => {
         let src = ""
         if (babysitter.rating === 5) {
-            src="images/5st.png"
+            src="/images/5st.png"
         }else if (babysitter.rating === 4) {
-            src="images/4st.png"
+            src="/images/4st.png"
         } else if (babysitter.rating === 3) {
-            src="images/3st.png"
+            src="/images/3st.png"
         } else if (babysitter.rating === 2) {
-            src="images/2st.png"
+            src="/images/2st.png"
         } else if (babysitter.rating === 1) {
-            src="images/1st.png"
-        } else src="images/0st.png"
+            src="/images/1st.png"
+        } else src="/images/0st.png"
 
         return src
     }
@@ -75,24 +82,27 @@ class BabysittersPage extends React.Component {
     getBabysittersList = () => {
         
 
-        let arr = [];         
+        let arr = [];
+        if (this.state.babysitters !== undefined){         
         for (let i = this.state.pageNumber * 3; i < (this.state.pageNumber * 3) + 3 && i < this.state.babysitters.length; i += 1) {
             let babysitter = this.state.babysitters[i];
             let ratingSrc = this.babysittersRating(babysitter);
+            console.log('ratingSrc -', ratingSrc)
             arr.push (
                 <div className="link" key={i} onClick={()=>this.clickCell("/pleaseSignIn")}>
                 {/* // <Link to="/chat" className="link" key={dogWalker.id}>                 */}
                     <li className="bs_item">
-                        <img src="images/profile_icon.png" alt="Profile" className="profile_icon" />
-                        <p className="bs_name">{babysitter.name}</p>
-                        <p className="bs_price">{babysitter.price}</p>
+                        <img src="/images/profile_icon.png" alt="Profile" className="profile_icon" />
+                        <p className="bs_name">{babysitter.displayName}</p>
+                        <p className="bs_price">{"₪"}{babysitter.price}</p>
                         <img className="bs_rating" src={ratingSrc} alt="star_img" />
                         {/* <p className="bs_rating">{this.babysittersRating(babysitter)}</p> */}
                     </li>
                 {/* // </Link>     */}
                 </div>            
             );
-        }       
+        }
+    }       
              
         return arr;
     }     
@@ -115,11 +125,11 @@ class BabysittersPage extends React.Component {
 
         return (
             <div className="bs_wrapper">
-                <Menu 
+                {/* <Menu 
                     right 
                     width = { '30%' }
-                    customBurgerIcon={ <img src="images/hamburger_menu.png" alt="Menu" /> } 
-                    customCrossIcon={ <img src="images/cross_btn.png" alt="Close" /> }
+                    customBurgerIcon={ <img src="/images/hamburger_menu.png" alt="Menu" /> } 
+                    customCrossIcon={ <img src="/images/cross_btn.png" alt="Close" /> }
                     className="react_menu"
                     isOpen={ this.state.menuOpen }
                     // onClose={ this.handleOnClose }
@@ -128,8 +138,8 @@ class BabysittersPage extends React.Component {
                         <a id="home" className="menu-item home-item" href="/">HOME</a>
                         <a id="about" className="menu-item" href="/signIn">SIGN IN</a>
                         <a id="contact" className="menu-item" href="/chooseUserType">SIGN UP</a>
-                    </Menu>
-                {/* <img src="images/hamburger_menu.png" alt="Menu" className="dw_hamburger_menu"/> */}
+                    </Menu> */}
+                {/* <img src="/images/hamburger_menu.png" alt="Menu" className="dw_hamburger_menu"/> */}
                 <div className="bs_content">
                     <h2>babysitters</h2>
                     <ul className="bs_list">

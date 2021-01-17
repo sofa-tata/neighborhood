@@ -8,26 +8,38 @@ import { withFirebase } from '../firebase';
 import { compose } from 'recompose';
 import sessionstorage from 'sessionstorage';
 
+const NUM_OF_PROVIDERS_ON_PAGE = 3;
 
 
-
-class DogWalkersPage extends React.Component {
+class ListPage extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
+            loading: true,
             pageNumber: 0,
             pageColor: "",
-            dogWalkers: []
+            id: "",
+            list: []
         }
     }
 
     componentDidMount = async () => {
-        
+        const url = window.location.href
+        console.log('url', url)
+        const id = url.substring(url.lastIndexOf(":") + 1, url.length);
+        console.log('id', id);
         const email = sessionstorage.getItem("user")
         console.log('componentDidMount email dw ', email)
         let user = await this.props.firebase.getUserByEmail(email)
         console.log('getUserByEmail user', user)
-        this.getDWByLocation(user.location);
+        if (user !== null && user.location !== undefined && user.location !== null) {
+            this.getProvidersByLocation(user.location, id);
+        } else this.getProviders(id)
+         
+        // 
+        // // if (user.service === "dogwalker") {
+        //     this.getDWByLocation(user.location);
+        // } 
         // this.getAllDogWalkers1();
     }
 
@@ -37,12 +49,30 @@ class DogWalkersPage extends React.Component {
     //     this.setState({ dogWalkers: arr})
     // }
 
-    getDWByLocation = async location => {
-        console.log('getDWByLocation - location ', location)
-        const arr = await this.props.firebase.getAllDogWalkersByLocation(location)
-        console.log('getDWByLocation - arr2', arr);
-        this.setState({ dogWalkers: arr})
+    getProviders = async (id) => {
+        let arr;
+        console.log('getProviders - location, id ', id)
+        if (id === "dogwalkers") {
+            arr = await this.props.firebase.getAllDogWalkers()
+        } else if (id === "babysitters") {
+            arr = await this.props.firebase.getAllBabysitters()
+        }
+            console.log('getProviders - arr', arr);
+        this.setState({ list: arr, id, loading: false})
     }
+
+    getProvidersByLocation = async (location, id) => {
+        let arr;
+        console.log('getProvidersByLocation - location, id ', location, id)
+        if (id === "dogwalkers") {
+            arr = await this.props.firebase.getAllDogWalkersByLocation(location)
+        } else if (id === "babysitters") {
+            arr = await this.props.firebase.getAllBabysittersByLocation(location)
+        }
+            console.log('getProvidersByLocation - arr', arr);
+        this.setState({ list: arr, id, loading: false})
+    }
+
         // this.props.firebase.getAllDogWalkers()
         // const arr = []
         // const response=this.props.firebase.db.collection('dogwalkers');
@@ -65,38 +95,51 @@ class DogWalkersPage extends React.Component {
     // clickCell=(id) =>{
     //     window.location.href = "/chat/id:"+id
     // }
-    dogWalkersRating = (walker) => {
+    getProvidersRating = (provider) => {
         let src = ""
-        if (walker.rating === 5) {
+        if (provider.rating === 5) {
             src="/images/5st.png"
-        }else if (walker.rating === 4) {
+        }else if (provider.rating === 4) {
             src="/images/4st.png"
-        } else if (walker.rating === 3) {
+        } else if (provider.rating === 3) {
             src="/images/3st.png"
-        } else if (walker.rating === 2) {
+        } else if (provider.rating === 2) {
             src="/images/2st.png"
-        } else if (walker.rating === 1) {
+        } else if (provider.rating === 1) {
             src="/images/1st.png"
         } else src="/images/0st.png"
 
         return src
     }
 
-    getDogWalkersList = () => {
+    getPageNumbers = () => {
+        let arr = []
+        for (let i = 0; i < 12 / NUM_OF_PROVIDERS_ON_PAGE; i++) {
+            arr.push(
+                <p key={i} className="page_number" style={{opacity: this.state.pageNumber === (i)?'1':'0.8'}}
+                 onClick = {() => this.changePageNum(i)}>{i+1}</p>
+            )
+        }
+        return arr
+    }
+    getProvidersList = () => {
 
         let arr = [];    
-        if (this.state.dogWalkers !== undefined){     
-        for (let i = this.state.pageNumber * 3; i < (this.state.pageNumber * 3) + 3 && i < this.state.dogWalkers.length; i += 1) {
-            let dogWalker = this.state.dogWalkers[i];
-            let ratingSrc = this.dogWalkersRating(dogWalker)
+        if (this.state.list !== undefined){     
+        for (let i = this.state.pageNumber * NUM_OF_PROVIDERS_ON_PAGE;
+             i < (this.state.pageNumber * NUM_OF_PROVIDERS_ON_PAGE) + NUM_OF_PROVIDERS_ON_PAGE 
+             && i < this.state.list.length;
+             i += 1) {
+            let provider = this.state.list[i];
+            let ratingSrc = this.getProvidersRating(provider)
             console.log('ratingSrc -', ratingSrc)
             arr.push (
                 <div className="link" key={i} onClick={()=>this.clickCell("/pleaseSignIn")}>
                 {/* // <Link to="/chat" className="link" key={dogWalker.id}>                 */}
                     <li className="dw_item">
                         <img src="/images/profile_icon.png" alt="Profile" className="profile_icon" />
-                        <p className="dw_name">{dogWalker.displayName}</p>
-                        <p className="dw_price">{"₪"}{dogWalker.price}</p>
+                        <p className="dw_name">{provider.displayName}</p>
+                        <p className="dw_price">{"₪"}{provider.price}</p>
                         <img className="dw_rating" src={ratingSrc} alt="star_img" />
                         {/* <p className="dw_rating">r - {rating}</p> */}
                         
@@ -127,7 +170,14 @@ class DogWalkersPage extends React.Component {
         // }
 
         return (
-            <div className="dw_wrapper">
+            <div className="dw_wrapper"
+            style={{backgroundImage: this.state.id ==="dogwalkers"?
+                "url(/images/dw_bg.png)"
+            : "url(/images/bs_bg.png)"
+        
+
+}}
+            >
                 {/* <Menu 
                     right 
                     width = { '30%' }
@@ -143,21 +193,27 @@ class DogWalkersPage extends React.Component {
                         <a id="contact" className="menu-item" href="/chooseUserType">SIGN UP</a>
                     </Menu> */}
                 {/* <img src="/images/hamburger_menu.png" alt="Menu" className="dw_hamburger_menu"/> */}
+
+                {this.state.loading===true?
+                <div><h1>Loading...</h1></div>
+            :
+            
                 <div className="dw_content">
-                    <h2>dog walkers</h2>
+                    <h2>{this.state.id}</h2>
                     <ul className="dw_list">
-                        <div>{this.getDogWalkersList()}</div>
+                        <div>{this.getProvidersList()}</div>
                     </ul>
                     <div className="pages_numbers">
-                        <p className="page_number" style={{opacity: this.state.pageNumber === "0"?'1':'0.8'}} onClick = {() => this.changePageNum(0)}>1</p>
+                        {this.getPageNumbers()}
+                        {/* <p className="page_number" style={{opacity: this.state.pageNumber === "0"?'1':'0.8'}} onClick = {() => this.changePageNum(0)}>1</p>
                         <p className="page_number" style={{opacity: this.state.pageNumber === "1"?'1':'0.8'}} onClick = {() => this.changePageNum(1)}>2</p>
-                        <p className="page_number" style={{opacity: this.state.pageNumber === "2"?'1':'0.8'}} onClick = {() => this.changePageNum(2)}>3</p>
+                        <p className="page_number" style={{opacity: this.state.pageNumber === "2"?'1':'0.8'}} onClick = {() => this.changePageNum(2)}>3</p> */}
                     </div>
                 </div>         
-                            
+    }            
             </div>
         )
     }
 }
 
-export default compose(withFirebase)(DogWalkersPage);
+export default compose(withFirebase)(ListPage);
