@@ -1,14 +1,12 @@
 import React from 'react';
-// import Firebase from '../firebase';
-import { slide as Menu} from 'react-burger-menu';
-import '../signupfordw.css';
+import '../signupforprovider.css';
 import { Slider } from '@material-ui/core';
 import { withFirebase } from '../firebase';
 import { compose } from 'recompose';
 import csc from 'country-state-city';
 import sessionstorage from 'sessionstorage';
 
-class SignUpForDW extends React.Component {
+class SignUpForProvider extends React.Component {
     constructor() {
         super()
         this.state = {
@@ -29,7 +27,7 @@ class SignUpForDW extends React.Component {
 
     createNewProviderWithEmailAndPasswordHandler = async (event, email, password) => {
         event.preventDefault();
-        try {
+
             if (this.state.service === null) {
                 // this.setState({ error: 'You should choose one of the available services'})
                 alert('You should choose one of the available services!')
@@ -38,10 +36,12 @@ class SignUpForDW extends React.Component {
                // this.setState({ error: 'Please, choose your location'})
                 alert('Please, choose your location')
             } 
-            else if (this.state.service === "dogwalker") {
+            else{// if (this.state.service === "dogwalker") {
+                let error = await this.props.firebase.doCreateUserWithEmailAndPassword(this.state.email, this.state.password)
+                if (error === null) {
                 const{user} = await this.props.firebase.doCreateUserWithEmailAndPassword(this.state.email, this.state.password);
                 console.log('createNewProviderWithEmailAndPasswordHandler - user', user)
-                const dogwalker = {
+                const provider = {
                     uid: user.uid,
                     displayName: this.state.displayName,
                     email: this.state.email,
@@ -51,34 +51,42 @@ class SignUpForDW extends React.Component {
                     rating: 0
 
                 }
-                console.log('createNewProviderWithEmailAndPasswordHandler - dogwalker', dogwalker)
-                await this.props.firebase.generateDogWalkerDocument(dogwalker);
-                await this.props.firebase.generateUserDocument(dogwalker)
+                console.log('createNewProviderWithEmailAndPasswordHandler - provider', provider)
+                if (this.state.service === "dogwalker") {
+                await this.props.firebase.generateDogWalkerDocument(provider);
+                }else{
+                    await this.props.firebase.generateBabysitterDocument(provider);
+                }
+                await this.props.firebase.generateUserDocument(provider)
                 sessionstorage.setItem("user", this.state.email)
                 window.location.href = '/profilePageForDW';
             } else {
-                const {user} = await this.props.firebase.doCreateUserWithEmailAndPassword(this.state.email, this.state.password);
-                console.log('createNewProviderWithEmailAndPasswordHandler - bs-user', user)
-                const babysitter = {
-                    uid: user.uid,
-                    displayName: this.state.displayName,
-                    email: this.state.email,
-                    price: this.state.price,
-                    service: this.state.service,
-                    location: this.state.location,
-                    rating: 0
-
-                }
-                console.log('createNewProviderWithEmailAndPasswordHandler - babysitter', babysitter)
-                await this.props.firebase.generateBabysitterDocument(babysitter);
-                await this.props.firebase.generateUserDocument(babysitter)
-                sessionstorage.setItem("user", this.state.email)
-                window.location.href = '/profilePageForBS';
+                alert(error)
             }
+            // } else {
+            //     const {user} = await this.props.firebase.doCreateUserWithEmailAndPassword(this.state.email, this.state.password);
+            //     console.log('createNewProviderWithEmailAndPasswordHandler - bs-user', user)
+            //     const babysitter = {
+            //         uid: user.uid,
+            //         displayName: this.state.displayName,
+            //         email: this.state.email,
+            //         price: this.state.price,
+            //         service: this.state.service,
+            //         location: this.state.location,
+            //         rating: 0
+
+            //     }
+            //     console.log('createNewProviderWithEmailAndPasswordHandler - babysitter', babysitter)
+            //     await this.props.firebase.generateBabysitterDocument(babysitter);
+            //     await this.props.firebase.generateUserDocument(babysitter)
+            //     sessionstorage.setItem("user", this.state.email)
+            //     window.location.href = '/profilePageForBS';
+            // }
         }
-        catch(error) {
-            this.setState({ error: 'Error Signing up with email and password'});
-        }
+        // catch(error) {
+        //     alert(error)
+        //     // this.setState({ error: 'Error Signing up with email and password'});
+        // }
 
         // this.setState({ email: ""});
         // this.setState({ password: ""});
@@ -231,5 +239,4 @@ class SignUpForDW extends React.Component {
     }
 }
 
-// export default SignUpForDW;
-export default compose(withFirebase)(SignUpForDW);
+export default compose(withFirebase)(SignUpForProvider);

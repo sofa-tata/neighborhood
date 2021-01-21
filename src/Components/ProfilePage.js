@@ -1,10 +1,8 @@
 import React from 'react';
 import '../profilepage.css';
 import sessionstorage from 'sessionstorage';
-// import Firebase from '../firebase.js';
 import { compose } from 'recompose';
 import { withFirebase } from '../firebase';
-import { slide as Menu} from 'react-burger-menu';
 
 class ProfilePage extends React.Component {
     constructor() {

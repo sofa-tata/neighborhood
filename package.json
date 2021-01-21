@@ -9,18 +9,13 @@
     "@testing-library/user-event": "^12.2.2",
     "country-state-city": "^2.0.0",
     "firebase": "^8.2.0",
-    "rc-slider": "^9.7.1",
     "react": "^17.0.1",
     "react-burger-menu": "^3.0.2",
     "react-dom": "^17.0.1",
-    "react-hamburger-menu": "^1.2.1",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.1",
     "recompose": "^0.30.0",
-    "sessionstorage": "^0.1.0",
-    "socket.io-client": "^2.3.0",
-    "uuidv4": "^6.2.6",
-    "web-vitals": "^0.2.4"
+    "sessionstorage": "^0.1.0"
   },
   "scripts": {
     "start": "react-scripts start",

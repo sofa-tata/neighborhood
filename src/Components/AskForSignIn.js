@@ -1,6 +1,5 @@
 import React from 'react';
 import '../askforsignin.css';
-import { slide as Menu} from 'react-burger-menu';
 
 class AskForSignIn extends React.Component {
     constructor() {

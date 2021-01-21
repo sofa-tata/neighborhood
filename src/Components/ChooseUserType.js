@@ -1,6 +1,5 @@
 import React from 'react';
 import '../chooseUserType.css';
-import { slide as Menu} from 'react-burger-menu';
 
 class ChooseUserType extends React.Component {
     constructor() {
@@ -46,7 +45,7 @@ class ChooseUserType extends React.Component {
                         <a id="contact" className="menu-item" href="/chooseUserType">SIGN UP</a>
                     </Menu> */}
                 <div className="choose_wrapper">
-                    <div className="seller_btn" onClick={() => this.clickCell("/signUpForDogWalker")}>
+                    <div className="seller_btn" onClick={() => this.clickCell("/signUpForProvider")}>
                         <p>I'M A SELLER</p>
                         <p id="description">I want to provide a service</p>
                     </div>
