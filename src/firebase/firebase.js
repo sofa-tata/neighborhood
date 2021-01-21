@@ -1,7 +1,6 @@
 import app from "firebase/app";
 import "firebase/auth";
 import "firebase/firestore";
-import { v4 as uuidv4 } from 'uuid';
 import 'firebase/database';
 import "firebase/storage";
 
@@ -41,19 +40,13 @@ class Firebase {
       this.firestore = app.firestore();
 
   }
-  doCreateUserWithEmailAndPassword = async (email, password) => {
-  let error = null
-    try{
-      this.auth.createUserWithEmailAndPassword(email, password)
-    }
-    catch(er){
-      error = er.message
-    }
-    return error
-  // this.auth.createUserWithEmailAndPassword(email, password).catch(error => {
-  //     alert(error.message)
-  // })
-  }
+  doCreateUserWithEmailAndPassword = (email, password) => 
+      this.auth.createUserWithEmailAndPassword(email, password).catch(error => {
+        alert(error.message)
+    })
+ 
+
+
   doSignInWithEmailAndPassword = async (email, password) =>{
     
   // const snapshot = await this.firestore.collection('dogwalkers').get()

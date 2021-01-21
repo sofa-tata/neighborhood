@@ -1,9 +1,5 @@
 import React from 'react';
-// import dogWalkersList from '../DogWalkersList';
 import '../dogwalkers.css';
-// import { Link } from 'react-router-dom';
-import { slide as Menu} from 'react-burger-menu';
-// import Firebase from '../firebase';
 import { withFirebase } from '../firebase';
 import { compose } from 'recompose';
 import sessionstorage from 'sessionstorage';

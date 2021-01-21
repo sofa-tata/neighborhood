@@ -80,7 +80,7 @@ code {
 .signout_btn {
     float: right;
     margin-top: 65px;
-    margin-right: 100px;
+    margin-right: 15%;
     color: var(--orange);
     font-family: 'Share', cursive;
     font-weight: 400;

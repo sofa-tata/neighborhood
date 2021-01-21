@@ -1,7 +1,6 @@
 import React from 'react';
 import '../passwordreset.css';
 import { Link } from 'react-router-dom';
-// import Firebase from '../firebase';
 import { withFirebase } from '../firebase';
 import { compose } from 'recompose';
 

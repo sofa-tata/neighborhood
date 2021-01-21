@@ -1,7 +1,5 @@
 import React from 'react';
 import '../signup.css';
-// import Firebase from "../firebase";
-import { slide as Menu} from 'react-burger-menu';
 import { withFirebase } from '../firebase';
 import { compose } from 'recompose';
 import csc from 'country-state-city';
@@ -37,12 +35,44 @@ class SignUpClass extends React.Component {
         console.log('createUserWithEmailAndPasswordHandler')
         event.preventDefault();
 
-        // let error = await this.props.firebase.doPasswordReset(this.state.email)
-        // console.log('error', error)
+        //new 
+
+        // let error = await this.props.firebase.doCreateUserWithEmailAndPassword(this.state.email, this.state.password)
+        // console.log('error:', error)
 
         // if (error === null) {
+            this.props.firebase.doCreateUserWithEmailAndPassword(email, password)
+            .then(async user=>{
+                console.log('signup user', user)
+                if (user !== undefined) {
+                sessionstorage.setItem("user", this.state.email)
+                window.location.href = '/profilePage'
+                let u = {
+                    uid: user.uid,
+                    displayName: this.state.displayName,
+                    email: this.state.email,
+                    location: this.state.location,
+                    service: null,
+                    price: null
+                }
+                await this.props.firebase.generateUserDocument(u);
+                } else {
+                    // alert("something went wrong... try again")
+                }
+            })
+            // .catch(err=>{
+            //     console.log('err:', err)
+            // })
+        // } else {
+        //     alert(error);
+        // }
+
+        //old
+
+        // try {
         //     const {user} = await this.props.firebase.doCreateUserWithEmailAndPassword(email, password);
 
+            
         //     let u = {
         //         uid: user.uid,
         //         displayName: this.state.displayName,
@@ -51,35 +81,18 @@ class SignUpClass extends React.Component {
         //         service: null,
         //         price: null
         //     }
-        //     await this.props.firebase.generateUserDocument(u);
-        // } else {
-        //     this.setState({ error: error, emailHasBeenSent: false});
+        //     this.props.firebase.generateUserDocument(u);
         // }
-        try {
-            const {user} = await this.props.firebase.doCreateUserWithEmailAndPassword(email, password);
-
-            
-            let u = {
-                uid: user.uid,
-                displayName: this.state.displayName,
-                email: this.state.email,
-                location: this.state.location,
-                service: null,
-                price: null
-            }
-            await this.props.firebase.generateUserDocument(u);
-        }
-        catch(error) {
-            this.setState({error: 'Error Signing up with email and password'});
-        }
+        // catch(error) {
+        //     this.setState({error: 'Error Signing up with email and password'});
+        // }
 
         
 
         // this.setState({email: ""});
         // this.setState({password: ""});
         // this.setState({displayName: ""});
-        sessionstorage.setItem("user", this.state.email)
-        window.location.href = '/profilePage'
+        
     }
 
     onChangeHandler = (event) => {

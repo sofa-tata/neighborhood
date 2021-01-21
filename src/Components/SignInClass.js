@@ -1,8 +1,6 @@
 import React from 'react';
 import '../signin.css';
-// import Firebase from "../firebase";
 import { withFirebase } from '../firebase';
-import { slide as Menu} from 'react-burger-menu';
 import sessionstorage from 'sessionstorage';
 import { compose } from 'recompose';
 
@@ -24,8 +22,10 @@ class SignInClass extends React.Component {
             console.log('user', user)
             if (user.service === null) {
                 window.location.href = "/profilePage"
+            } else if (user.service === "dogwalker") {
+                window.location.href = "/profilePageForProviders/id:dogwalker"
             } else {
-                window.location.href = "/profilePageForDW"
+                window.location.href = "/profilePageForProviders/id:babysitter"
             }
             
           }).catch(error => {

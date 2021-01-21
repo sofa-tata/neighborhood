@@ -3,6 +3,8 @@ import '../profilepage.css';
 import sessionstorage from 'sessionstorage';
 import { compose } from 'recompose';
 import { withFirebase } from '../firebase';
+
+
 class ProfilePageForDW extends React.Component {
     constructor() {
         super()
@@ -24,7 +26,7 @@ class ProfilePageForDW extends React.Component {
         this.setState({ name: user.displayName, email: user.email, service: user.service, location: user.location })
     }
 
-    signOut=() => {
+    signOut = () => {
         sessionstorage.removeItem("user")
         this.props.firebase.doSignOut()
         window.location.href = "/signIn"
@@ -33,7 +35,7 @@ class ProfilePageForDW extends React.Component {
     render() {
         return (
             <div className="pp_wrapper">
-                <img src="/images/hamburger_menu.png" alt="Menu" className="pp_hamburger_menu"/>
+                {/* <img src="/images/hamburger_menu.png" alt="Menu" className="pp_hamburger_menu"/> */}
                 <h5 className="signout_btn" onClick={() => this.signOut()}>Sign Out</h5>
                 <div className="pp_content">
                     <img src="/images/profile_160px.png" alt="Profile" className="pp_profile_img" />
