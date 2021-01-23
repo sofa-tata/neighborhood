@@ -1,7 +1,7 @@
 import React from 'react';
-import './authentication/SignUpForProvider.css';
+import './SignUpForProvider.css';
 import { Slider } from '@material-ui/core';
-import { withFirebase } from '../firebase';
+import { withFirebase } from '../../firebase';
 import { compose } from 'recompose';
 import csc from 'country-state-city';
 import sessionstorage from 'sessionstorage';
@@ -17,43 +17,42 @@ class SignUpForProvider extends React.Component {
             service: null,
             price: 30,
             location: "",
-            description: "",
+            about: "",
             rating: 0
         }
     }
 
-    componentDidMount = () => {
-        console.log('service: ', this.state.service)
-    }
+    // componentDidMount = () => {
+
+    // }
 
     createNewProviderWithEmailAndPasswordHandler = async (event, email, password) => {
         event.preventDefault();
+        const { displayName, price, service, location } = this.state
 
-            if (this.state.service === null) {
+            if (service === null) {
                 // this.setState({ error: 'You should choose one of the available services'})
                 alert('You should choose one of the available services!')
             } 
-            if (this.state.location === "") {
+            if (location === "") {
                // this.setState({ error: 'Please, choose your location'})
                 alert('Please, choose your location')
             } 
-            else {// if (this.state.service === "dogwalker") {
-                let error = await this.props.firebase.doCreateUserWithEmailAndPassword(this.state.email, this.state.password)
+            else {// if (service === "dogwalker") {
+                let error = await this.props.firebase.doCreateUserWithEmailAndPassword(this.state.email, this.state.password);
                 if (error === null) {
                 const { user } = await this.props.firebase.doCreateUserWithEmailAndPassword(this.state.email, this.state.password);
-                console.log('createNewProviderWithEmailAndPasswordHandler - user', user)
                 const providerData = {
                     uid: user.uid,
-                    displayName: this.state.displayName,
+                    displayName: displayName,
                     email: this.state.email,
-                    price: this.state.price,
-                    service: this.state.service,
-                    location: this.state.location,
+                    price: price,
+                    service: service,
+                    location: location,
                     rating: 0
 
                 }
-                console.log('createNewProviderWithEmailAndPasswordHandler - providerData', providerData)
-                if (this.state.service === "dogwalker") {
+                if (service === "dogwalker") {
                 await this.props.firebase.generateDogWalkerDocument(providerData);
                 } else {
                     await this.props.firebase.generateBabysitterDocument(providerData);
@@ -124,11 +123,10 @@ class SignUpForProvider extends React.Component {
 
     handleChange = (event, newPrice) => {
         this.setState({ price: newPrice })
-        console.log('new price: ', newPrice)
     }
 
     render() {
-        const {email, password, displayName, price, service } = this.state
+        const {email, password, displayName, price, service, about } = this.state
         const sliderMark = [
             {
                 value: 50,
@@ -145,12 +143,13 @@ class SignUpForProvider extends React.Component {
                     <select
                     name="location"  
                     id="location" 
-                    className="signupDW_input location select" 
+                    className="signupDW_input location selectFP" 
                     onChange={this.onChange}
                     defaultValue={""}
                     >
                         <option value="">Choose your location</option>
-                        {cities.map((city, i) => <option id="city" key={i} value={city.value}>{city.name}</option>)}
+                        {cities.map((city, i) => 
+                        <option id="city" key={i} value={city.value}>{city.name}</option>)}
                     </select>
 
                     <input type="text"
@@ -180,19 +179,33 @@ class SignUpForProvider extends React.Component {
                     onChange={this.onChange}
                      />
 
-                    <textarea id="about_provider" name="about_provider" cols="70" rows="5"
-                    placeholder="Tell a little bit about yourself:"/>
+                    <textarea id="about_provider"
+                    name="about" 
+                    value={about}
+                    cols="70"
+                    rows="5"
+                    placeholder="Tell a little bit about yourself:"
+                    onChange={this.onChange}
+                    />
 
                     <p className="choose-the-service-p">Choose the service you will provide with: </p>
 
                     <div className="label-div" onChange={this.onChange} value={service} name="service">
                         <div className="label-dw" style={{opacity: this.state.service === "dogwalker" ? '1':'0.8'}}>
-                            <input type="radio" id="dogwalker" name="service" value="dogwalker" className="input-radio-dw" />
+                            <input type="radio"
+                            id="dogwalker"
+                            name="service"
+                            value="dogwalker"
+                            className="input-radio-dw" />
                             <label htmlFor="dogwalker">Dog Walker</label><br />
                         </div>
 
                         <div className="label-bs" style={{opacity: this.state.service === "babysitter" ? '1' : '0.8'}}>
-                            <input type="radio" id="babysitter" name="service" value="babysitter" className="input-radio-bs"/>
+                            <input type="radio"
+                            id="babysitter"
+                            name="service" 
+                            value="babysitter" 
+                            className="input-radio-bs"/>
                             <label htmlFor="babysitter">Babysitter</label>
                         </div>
                     </div> 

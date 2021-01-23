@@ -1,6 +1,6 @@
 import React from 'react';
-import './common/ListPage.css';
-import { withFirebase } from '../firebase';
+import './ListPage.css';
+import { withFirebase } from '../../firebase';
 import { compose } from 'recompose';
 import sessionstorage from 'sessionstorage';
 
@@ -76,19 +76,20 @@ class ListPage extends React.Component {
     getPageNumbers = () => {
         const { pageNumber, list } = this.state
         let pageNumbers = []
-        for (let i = 0; i < list.length / NUM_OF_PROVIDERS_ON_PAGE; i++) {
-            pageNumbers.push(
-                <p key={i} className="page_number" style={{opacity: pageNumber === (i) ? '1' : '0.8'}}
-                 onClick = {() => this.changePageNum(i)}>{i+1}</p>
-            )
-        }
-        return pageNumbers
+            for (let i = 0; i < list.length / NUM_OF_PROVIDERS_ON_PAGE; i++) {
+                pageNumbers.push(
+                    <p key={i} className="page_number" style={{opacity: pageNumber 
+                    === (i) ? '1' : '0.8'}}
+                    onClick = {() => this.changePageNum(i)}>{i+1}</p>
+                )
+            }
+        return pageNumbers 
     }
 
     getProvidersList = () => {
         const { pageNumber, list } = this.state
         let arrangedProvidersList = [];    
-        if (list !== undefined){     
+        if (list !== undefined) {     
         for (let i = pageNumber * NUM_OF_PROVIDERS_ON_PAGE;
              i < (pageNumber * NUM_OF_PROVIDERS_ON_PAGE) + NUM_OF_PROVIDERS_ON_PAGE 
              && i < list.length;
@@ -108,37 +109,50 @@ class ListPage extends React.Component {
                     </li>
 
                 </div>            
-            );
-        }     
-    }  
+                );
+            } 
+        }
              
         return arrangedProvidersList;
-    }     
-
-    changePageNum = (num) => {
-        this.setState({pageNumber: num});
     }
 
-    render() {
-
-        return (
-            <div className="dw_wrapper"
-            style={{backgroundImage: this.state.id ==="dogwalkers" ?
-            "url(/images/dw_bg.png)"
-            : "url(/images/bs_bg.png)" }}>
-
-                {this.state.loading === true ?
-                <div><h1>Loading...</h1></div>
-                :            
-                <div className="dw_content">
-                    
-                    <h2>{this.state.id}</h2>
+    displayList = () => {
+        const { list, id } = this.state
+        if (list !== undefined) {
+            return (
+                <>
                     <ul className="dw_list">
                         <div>{this.getProvidersList()}</div>
                     </ul>
                     <div className="pages_numbers">
                         {this.getPageNumbers()}                        
                     </div>
+                </>
+            )
+        } else {
+            return <p className="no_sellers">There is no {id} in your city yet :(</p>
+        }
+    }
+
+    changePageNum = (num) => {
+        this.setState({pageNumber: num});
+    }
+
+    render() {
+        const { loading, id } = this.state
+        return (
+            <div className="dw_wrapper"
+            style={{backgroundImage: id ==="dogwalkers" ?
+            "url(/images/dw_bg.png)"
+            : "url(/images/bs_bg.png)" }}>
+
+                {loading === true ?
+                <div><h2 className="list_title loading">Loading...</h2></div>
+                :            
+                <div className="dw_content">
+                    
+                    <h2 className="list_title">{id}</h2>
+                    {this.displayList()}                    
 
                 </div>         
                 }

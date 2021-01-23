@@ -29,7 +29,7 @@ code {
 }
 
 .signup_wrapper {
-    background: url(img/bg.png);
+    background: url(../../img/bg.png);
     background-repeat: no-repeat;
     background-size: 100vw;
     width: 100vw;
@@ -74,9 +74,6 @@ code {
 }
 
 .password {
-    background-image: url('img/show.png');
-    background-position: 92% 50%;
-    background-repeat: no-repeat;
     margin-bottom: 20px;
 }
 
@@ -117,7 +114,7 @@ p {
 
 .google_icon {
   padding: 5px 60px 5px 30px;
-  background-image: url('img/google.png');
+  background-image: url('../../img/google.png');
   background-position: 94% 50%;
   background-repeat: no-repeat;
   margin-bottom: 90px;
@@ -145,4 +142,12 @@ p {
 
 select#location.signup_input.location {
   color: rgb(77, 99, 212, .7)
+}
+
+.select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  padding: 4% 0% 3% 10%;
+  cursor: pointer;
 }

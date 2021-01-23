@@ -1,16 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-// import MainPage from './Components/MainPage';
 // import App from './Components/App.js'
 import Firebase, { FirebaseContext } from './firebase';
-import MainPage from './Components/MainPage.js'
+import MainPage from './Components/common/MainPage.js'
 
 
 ReactDOM.render(
   <FirebaseContext.Provider value={new Firebase()}>
       <MainPage />
-    </FirebaseContext.Provider>,
+  </FirebaseContext.Provider>,
   document.getElementById('root')
 );
 

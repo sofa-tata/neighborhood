@@ -1,5 +1,5 @@
 import React from 'react';
-import './authentication/ChooseUserType.css';
+import './ChooseUserType.css';
 
 class ChooseUserType extends React.Component {
     constructor() {
@@ -12,7 +12,6 @@ class ChooseUserType extends React.Component {
     clickCell = (address) => {
         window.location.href = address
     }
-
 
     render() {
         return (

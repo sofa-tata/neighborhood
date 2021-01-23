@@ -1,19 +1,17 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Home from './Home';
-import Chat from './Chat';
-import SignInClass from './SignInClass';
-import PleaseSignIn from './AskForSignIn';
-import ProfilePage from './ProfilePage';
-import PasswordResetClass from './PasswordResetClass';
-import SignUpForProvider from './SignUpForProvider';
-import ChooseUserType from './ChooseUserType';
-import SignUpClass from './SignUpClass';
-import ProfilePageForDW from './ProfilePageForDW';
-import ProfilePageForBS from './ProfilePageForBS';
+import SignInClass from '../authentication/SignInClass';
+import PleaseSignIn from '../authentication/AskForSignIn';
+import ProfilePage from '../profile/ProfilePage';
+import PasswordResetClass from '../authentication/PasswordResetClass';
+import SignUpForProvider from '../authentication/SignUpForProvider';
+import ChooseUserType from '../authentication/ChooseUserType';
+import SignUpClass from '../authentication/SignUpClass';
 import ListPage from './ListPage';
-import ProfilePageForProviders from './ProfilePageForProviders';
+import ProfilePageForProviders from '../profile/ProfilePageForProviders';
 import { slide as Menu} from 'react-burger-menu';
+import ProviderCard from '../profile/ProviderCard';
 
 
 
@@ -25,10 +23,7 @@ class MainPage extends React.Component {
         }
     }
     toggleMenu = () => {
-        console.log("1. toggleMenu -this.state.menuOpen: ", this.state.menuOpen)
-        this.setState({menuOpen: !this.state.menuOpen}, () => {
-            console.log("2. toggleMenu -this.state.menuOpen: ",this.state.menuOpen)
-        })
+        this.setState({menuOpen: !this.state.menuOpen})
     }
 
     render() {
@@ -39,7 +34,6 @@ class MainPage extends React.Component {
                     width = { '30%' }
                     customBurgerIcon={ <img src="/images/hamburger_menu.png" alt="Menu" /> } 
                     customCrossIcon={ <img src="/images/cross_btn.png" alt="Close" /> }
-                    // className="react_menu"
                     isOpen={ this.state.menuOpen }
                     >
                         <a id="home" className="menu-item home-item" href="/">HOME</a>
@@ -48,18 +42,16 @@ class MainPage extends React.Component {
                     </Menu>
                 <Switch>
                     <Route path="/" exact component={Home} />
-                    <Route path="/chat" component={Chat} />
                     <Route path="/signUp" component={SignUpClass} />
                     <Route path="/signUpForProvider" component={SignUpForProvider} />
                     <Route path="/signIn" component={SignInClass} />
                     <Route path="/pleaseSignIn" component={PleaseSignIn} />
                     <Route path="/profilePage" component={ProfilePage} />
-                    <Route path="/profilePageForDW" component={ProfilePageForDW} />
-                    <Route path="/profilePageForBS" component={ProfilePageForBS} />
                     <Route path="/passwordReset" component={PasswordResetClass} />
                     <Route path="/chooseUserType" component={ChooseUserType} />
                     <Route path="/listPage" component={ListPage} />
                     <Route path="/profilePageForProviders/:id" component={ProfilePageForProviders} />
+                    <Route path="/providerCard" component={ProviderCard} />
                 </Switch>
             </Router>
         );

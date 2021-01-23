@@ -1,7 +1,7 @@
 import React from 'react';
-import './authentication/PasswordReset.css';
+import './PasswordReset.css';
 import { Link } from 'react-router-dom';
-import { withFirebase } from '../firebase';
+import { withFirebase } from '../../firebase';
 import { compose } from 'recompose';
 
 
@@ -24,7 +24,6 @@ class PasswordResetClass extends React.Component {
 
     sendResetEmail = async () => {
         let error = await  this.props.firebase.doPasswordReset(this.state.email)
-        console.log('error', error)
 
         if (error === null) {
             this.setState({ emailHasBeenSent: true })
@@ -33,7 +32,7 @@ class PasswordResetClass extends React.Component {
         }
     }
     render() {
-
+        const { email, emailHasBeenSent, error} = this.state
         return (
             <div className="reset_wrapper">
 
@@ -42,20 +41,19 @@ class PasswordResetClass extends React.Component {
                     <h3>Reset your password:</h3>
                     <div className="reset_form">
 
-                        {this.state.emailHasBeenSent === true ?
-                            <div style={{color: '#4D63D4', fontSize: '30px'}}>
-                            An email has been sent to you! :)</div>
+                        {emailHasBeenSent === true ?
+                            <div className="email_sent">An email has been sent to you! :)</div>
                             :
                             null
                         }
-                        {this.state.error !== null && (
-                            <div style={{color: 'red', fontSize: '30px'}}>{this.state.error}</div>
+                        {error !== null && (
+                            <div className="reset_error">{error}</div>
                         )}
                         <input
                             type="email"
                             name="userEmail"
                             id="userEmail"
-                            value={this.state.email}
+                            value={email}
                             placeholder="Input your email"
                             onChange={this.onChangeHandler}
                             className="reset_input"

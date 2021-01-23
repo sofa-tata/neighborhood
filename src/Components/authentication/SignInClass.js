@@ -1,6 +1,6 @@
 import React from 'react';
-import './authentication/SignIn.css';
-import { withFirebase } from '../firebase';
+import './SignIn.css';
+import { withFirebase } from '../../firebase';
 import sessionstorage from 'sessionstorage';
 import { compose } from 'recompose';
 
@@ -15,10 +15,12 @@ class SignInClass extends React.Component {
         }
     }
 
-    signInWithEmailAndPasswordHandler = (event, email, password) => {
+    signInWithEmailAndPasswordHandler = (event, eMail, passWord) => {
+        const { email, password } = this.state
         event.preventDefault();
-        sessionstorage.setItem("user", this.state.email)
-        this.props.firebase.doSignInWithEmailAndPassword(this.state.email, this.state.password).then((user) => {
+        sessionstorage.setItem("user", email)
+        this.props.firebase.doSignInWithEmailAndPassword(email, password)
+        .then((user) => {
             if (user.service === null) {
                 window.location.href = "/profilePage"
             } else if (user.service === "dogwalker") {
@@ -51,6 +53,8 @@ class SignInClass extends React.Component {
     }
 
     render() {
+        const { email, password } = this.state
+
         return (
 
             <div className="signin_wrapper">
@@ -59,7 +63,7 @@ class SignInClass extends React.Component {
 
                     <input type="email"
                     name="userEmail" 
-                    value={this.state.email} 
+                    value={email} 
                     id="userEmail" 
                     placeholder="Email" 
                     className="signin_input email" 
@@ -67,15 +71,16 @@ class SignInClass extends React.Component {
 
                     <input type="password"
                     name="userPassword"
-                    value={this.state.password}
+                    value={password}
                     id="userPassword"
                     placeholder="Password" 
                     className="signin_input password"
                     onChange = {(event) => this.onChangeHandler(event)} />
 
-                    <p className="forgot_password" onClick={() => this.clickCell("/passwordReset")}>Forgot password?</p>
+                    <p className="forgot_password" onClick={() => 
+                    this.clickCell("/passwordReset")}>Forgot password?</p>
                     <button className="signin_button" onClick = {(event) =>
-                    {this.signInWithEmailAndPasswordHandler(event, this.email, this.password)}}>Sign In</button>
+                    {this.signInWithEmailAndPasswordHandler(event, email, password)}}>Sign In</button>
                     <div className="newacc_div">
                         <p onClick={() => this.clickCell("/chooseUserType")}>Create an account</p>
                     </div>

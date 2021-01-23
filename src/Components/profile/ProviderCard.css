@@ -28,8 +28,8 @@ code {
   monospace;
 }
 
-.pp_wrapper {
-    background: url(img/bg.png);
+.pcard_wrapper {
+    background: url(../../img/bg.png);
     background-repeat: no-repeat;
     background-size: 100vw;
     width: 100vw;
@@ -37,18 +37,32 @@ code {
     position: fixed;
 }
 
-.pp_content {
+.pcard_content {
   background-color: rgb(248, 255, 246, .8);
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
   border-radius: 30px;
   margin: auto;
-  margin-top: 250px;
+  margin-top: 15%;
   width: 40%;
   height: 50%;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   flex-direction: column;
+}
+
+.pcard_location_price {
+    margin-top: 5%;
+    display: flex;
+    flex-direction: column;
+    align-self: flex-end;
+    margin-right: 10%;
+}
+
+.pcard_location_price p {
+    color: var(--violet);
+    float: right;
+    font-size: 24px;
 }
 
 .pp_name {
@@ -74,22 +88,6 @@ code {
       
 .pp_hamburger_menu:hover {
     cursor: pointer;
-    transform: translateY(3px);
-}
-
-.signout_btn {
-    float: right;
-    margin-top: 65px;
-    margin-right: 15%;
-    color: var(--orange);
-    font-family: 'Share', cursive;
-    font-weight: 400;
-    font-size: 36px;
-    transition: 0.2s;
-    cursor: pointer;
-  }
-    
-.signout_btn:hover {
     transform: translateY(3px);
 }
 

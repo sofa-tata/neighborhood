@@ -1,5 +1,5 @@
 import React from 'react';
-import './authentication/AskForSignIn.css';
+import './AskForSignIn.css';
 
 class AskForSignIn extends React.Component {
     constructor() {
@@ -11,6 +11,7 @@ class AskForSignIn extends React.Component {
     clickCell= (address) =>{
         window.location.href = address
     }
+
 
     render() {
         return (

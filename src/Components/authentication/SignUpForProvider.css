@@ -29,7 +29,7 @@ code {
 }
 
 .signupDW_wrapper {
-    background: url(img/bg.png);
+    background: url(../../img/bg.png);
     background-repeat: no-repeat;
     background-size: 100vw;
     width: 100vw;
@@ -39,12 +39,12 @@ code {
 
 .signupDW_content {
   margin: auto;
-  margin-top: 5%;
+  margin-top: 1%;
   background-color: rgba(0, 0, 0, 0.01);
   box-shadow: 4px 1px 4px 3px rgba(0, 0, 0, 0.25);
   border-radius: 30px;
-  width: 33%;
-  height: 81%;
+  width: 40%;
+  height: 95%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -53,10 +53,11 @@ code {
 
 #location{
   padding-right: 5%;
+
 }
 
 .signupDW_input {
-    padding: 4% 0% 3% 10%;
+    padding: 3% 0% 3% 7%;
     font-family: 'Share', cursive;
     color: var(--violet);
     font-size: 36px;
@@ -80,7 +81,6 @@ code {
 }
 
 .DWpassword {
-    background-image: url('img/show.png');
     background-position: 92% 50%;
     background-repeat: no-repeat;
     margin-bottom: 20px;
@@ -123,7 +123,7 @@ p {
 
 .google_icon {
   padding: 5px 60px 5px 30px;
-  background-image: url('img/google.png');
+  background-image: url('../../img/google.png');
   background-position: 94% 50%;
   background-repeat: no-repeat;
   margin-bottom: 90px;
@@ -136,18 +136,6 @@ p {
     cursor: pointer;
 }
 
-/* .signup_hamburger_menu {
-    float: right;
-    margin-top: 60px;
-    margin-right: 100px;
-    transition: 0.2s;
-}
-      
-.signup_hamburger_menu:hover {
-    cursor: pointer;
-    transform: translateY(3px);
-} */
-
 .label-div {
   display: flex;
   justify-content: space-between;
@@ -159,77 +147,41 @@ p {
 }
 
 .label-dw {
-    display: flex;
-    justify-content: space-between;
-    color: var(--violet);
-    align-items: center;
-    cursor: pointer;
-    opacity: 0.8;
-    width: 50%;
+  display: flex;
+  justify-content: space-around;
+  color: var(--violet);
+  align-items: center;
+  cursor: pointer;
+  opacity: 0.8;
+  width: 50%;
 }
-
-/* .label-dw:hover {
-    cursor: pointer;
-    opacity: 1;
-} */
 
 .label-bs {
-    display: flex;
-    justify-content: space-between;
-    color: var(--violet);
-    align-items: center;
-    cursor: pointer;
-    opacity: 0.8;
-    width: 41%;
+  display: flex;
+  justify-content: space-around;
+  color: var(--violet);
+  align-items: center;
+  cursor: pointer;
+  opacity: 0.8;
+  width: 41%;
 }
 
-/* .label-bs:hover {
-    cursor: pointer;
-    opacity: 1;
-} */
-
 .choose-the-service-p {
-    font-size: 28px;
-    font-weight: 400;
-    margin-bottom: 2%;
-    margin-top: 2%;
-    color: var(--violet);
+  font-size: 28px;
+  font-weight: 400;
+  margin-bottom: 2%;
+  margin-top: 2%;
+  color: var(--violet);
 }
 
 
 .choose-the-price-p {
-    font-size: 28px;
-    font-weight: 400;
-    margin-bottom: 2%;
-    margin-top: 4%;
-    color: var(--orange);
+  font-size: 28px;
+  font-weight: 400;
+  margin-bottom: 2%;
+  margin-top: 4%;
+  color: var(--orange);
 }
-
-/* .price-slider {
-  -webkit-appearance: none;
-  width: 50%;
-  height: 20px;
-  border-radius: 10px;
-  background: var(--light-green);
-  outline: none;
-  opacity: .7;
-  -webkit-transition: .2s;
-  transition: .2s;
-}
-
-.price-slider:hover {
-  opacity: 1;
-}
-
-.price-slider::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 20px;
-  height: 35px;
-  border-radius: 50%;
-  background: var(--orange);
-  cursor: pointer;
-} */
 
 .price-slider {
   width: 50%;
@@ -237,19 +189,38 @@ p {
 
 .your-price {
   color: var(--violet);
+  font-size: 24px;
 }
-
-/* select {
-  background-image:
-    linear-gradient(45deg, white 50%, transparent 50%),
-    linear-gradient(135deg, transparent 50%, white 50%),
-    linear-gradient(to right, gray, gray);
-  background-position:
-    calc(100% - 15px) 1em,
-    calc(100% - 20px) 1em,
-    100% 0;
-} */
 
 select#location.signupDW_input.location{
   color: rgb(77, 99, 212, .7)
+}
+
+.selectFP {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  padding: 3% 0% 3% 7%;
+  cursor: pointer;
+}
+
+textarea {
+  font-family: 'Share', cursive;
+  font-size: 24px;
+  color: var(--orange);
+  background-color: var(--light-green);
+  opacity: 1;
+  padding: 2% 0% 0% 2%;
+  outline: none;
+  min-width: 90%;
+  max-width: 90%;
+  min-height: 7%;
+  max-height: 10%;
+  border-radius: 10px;
+  border: 1px solid var(--violet);
+}
+
+textarea::placeholder {
+  font-size: 24px;
+  color: var(--orange);
 }

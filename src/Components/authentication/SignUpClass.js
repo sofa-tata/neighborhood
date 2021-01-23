@@ -1,6 +1,6 @@
 import React from 'react';
-import '../SignUp.css';
-import { withFirebase } from '../firebase';
+import './SignUp.css';
+import { withFirebase } from '../../firebase';
 import { compose } from 'recompose';
 import csc from 'country-state-city';
 import sessionstorage from 'sessionstorage';
@@ -32,26 +32,24 @@ class SignUpClass extends React.Component {
     // }
 
     createUserWithEmailAndPasswordHandler = async (event, email, password) => {
-        console.log('createUserWithEmailAndPasswordHandler')
+        const { displayName, location } = this.state
         event.preventDefault();
 
         //new 
 
         // let error = await this.props.firebase.doCreateUserWithEmailAndPassword(this.state.email, this.state.password)
-        // console.log('error:', error)
 
         // if (error === null) {
             this.props.firebase.doCreateUserWithEmailAndPassword(email, password)
-            .then(async user=>{
-                console.log('signup user', user)
+            .then(async user => {
                 if (user !== undefined) {
                 sessionstorage.setItem("user", this.state.email)
                 window.location.href = '/profilePage'
                 let userData = {
                     uid: user.uid,
-                    displayName: this.state.displayName,
+                    displayName: displayName,
                     email: this.state.email,
-                    location: this.state.location,
+                    location: location,
                     service: null,
                     price: null
                 }
@@ -61,7 +59,6 @@ class SignUpClass extends React.Component {
                 }
             })
             // .catch(err=>{
-            //     console.log('err:', err)
             // })
         // } else {
         //     alert(error);
@@ -108,6 +105,7 @@ class SignUpClass extends React.Component {
     }
 
     render() {
+        const { email, location, displayName, password } = this.state
         const cities = csc.getCitiesOfCountry("IL");
         return (
             <div className="signup_wrapper">
@@ -118,15 +116,16 @@ class SignUpClass extends React.Component {
                     id="location" 
                     className="signup_input location select" 
                     onChange = {(event) => this.onChangeHandler(event)}
-                    value={this.state.location}
+                    value={location}
                     >
                         <option value="">Choose your location</option>
-                        {cities.map((city,i) => <option id="city" key={i} value={city.value}>{city.name}</option>)}
+                        {cities.map((city,i) => 
+                        <option id="city" key={i} value={city.value}>{city.name}</option>)}
                     </select>
 
                     <input type="text"
                     name="displayName" 
-                    value={this.state.displayName} 
+                    value={displayName} 
                     id="displayName" 
                     placeholder="Name" 
                     className="signup_input name" 
@@ -134,7 +133,7 @@ class SignUpClass extends React.Component {
 
                     <input type="email"
                     name="userEmail" 
-                    value={this.state.email} 
+                    value={email} 
                     id="userEmail" 
                     placeholder="Email" 
                     className="signup_input email" 
@@ -142,7 +141,7 @@ class SignUpClass extends React.Component {
 
                     <input type="password"
                     name="userPassword"
-                    value={this.state.password}
+                    value={password}
                     id="userPassword"
                     placeholder="Password" 
                     className="signup_input password"
@@ -150,7 +149,7 @@ class SignUpClass extends React.Component {
 
 
                     <button className="signup_button" onClick={event => {
-                    this.createUserWithEmailAndPasswordHandler(event, this.state.email, this.state.password);
+                    this.createUserWithEmailAndPasswordHandler(event, email, password);
                     }}>Sign Up</button>
                     <div className="exist-acc-div">
                         <p onClick={() => this.goToSignInPage()}>Sign in to an existing account</p>
