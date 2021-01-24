@@ -25,7 +25,7 @@ class Home extends React.Component {
         } else {
             return (
             <div className="search-div">
-                <p>Which one do you need?</p>
+                <p className="description">Which one do you need?</p>
                 <div className="services">
 
                 <Link to="/listpage/id:dogwalkers" className="link_to_list">

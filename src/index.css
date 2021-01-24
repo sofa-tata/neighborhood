@@ -33,7 +33,7 @@ button {
 }
 
 .wrapper {
-  background: url(img/bg.png);
+  background: url('./img/bg.png');
   background-repeat: no-repeat;
   background-size: 100vw;
   width: 100vw;
@@ -60,7 +60,6 @@ h1 {
   line-height: 180px;
   color: var(--violet);
 }
-
 
 .description {
   font-family: 'Share', cursive;
@@ -136,39 +135,6 @@ h1 {
   text-decoration: none;
 }
 
-/* .search {
-  font-size: 22px;
-  padding-top: 20px;
-  padding-bottom: 16px;
-  padding-left: 50px;
-  padding-right: 400px;
-  background-color: rgba(77, 99, 212, 0.1);
-  border: 1px solid var(--violet);
-  border-radius: 30px;
-  outline: none;
-  cursor: text;
-} */
-
-/* .arrow_forth {
-  cursor: pointer;
-  transition: 0.2s;
-  margin-left: 15px;
-}
-
-.arrow_forth:hover {
-  transform: translateX(3px);
-} */
-
-
-/* ::placeholder {
-  color: var(--violet);
-  font-family: 'Share', cursive;
-  font-weight: 400;
-  font-size: 22px;
-  opacity: 0.7;
-  overflow: visible;
-} */
-
 /* SLIDER MENU */
 
 .bm-burger-button {
@@ -222,5 +188,93 @@ h1 {
 .bm-menu {
   background: var(--violet);
   padding: 9em 4em 0;
+}
 
+@media screen and (max-width: 600px) {
+
+  h1 {
+    margin: 0;
+    font-size: 56px;
+    line-height: 120px;
+  }
+
+  .wrapper {
+    background: url('./img/bg.png');
+    background-size: 1000px;
+    background-position: 20% 20%;
+    background-repeat: no-repeat;
+    height: 100vh;
+    position: fixed;
+  }
+
+  .content {
+    margin: auto;
+    margin-top: 60%;
+    width: 70%;
+    height: 35%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  .description {
+    font-size: 20px;
+    line-height: 20px;
+    text-align: center;
+    opacity: .8;
+  }
+
+  .findnow_button {
+    margin-top: 7%;
+    padding: 5px 30px;
+    border-radius: 30px;
+    font-weight: 400;
+    font-size: 22px;
+    opacity: 1;
+  }
+
+  .bm-burger-button {
+    width: 10px;
+    height: 10px;
+    margin-top: 2%;
+    margin-right: 5%;
+    transition: 0.2s;
+    position: relative;
+  }
+
+  .bm-menu {
+    padding: 15% 15% 0;
+  }
+
+  .menu-item {
+    font-size: 20px;
+    margin-bottom: 25%;
+    transition: .2s;
+    font-weight: 100;
+  }
+
+  .service {
+    font-size: 22px;
+    padding: 10px 50px;
+    text-align: center;
+    opacity: .8;
+    transition: .2s;
+  }
+
+  .services_dw {
+    margin-bottom: 5%;
+  }
+
+  .search-div {
+    margin-top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .search-div p {
+    margin-bottom: 10%;
+  }
 }

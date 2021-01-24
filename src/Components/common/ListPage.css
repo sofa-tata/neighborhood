@@ -48,10 +48,8 @@ code {
 
 .list_title {
   margin: 0;
-  margin-top: 10%;
-  margin-bottom: 7%;
-  float: left;
-  clear: both;
+  margin-top: 1%;
+  margin-bottom: 5%;
   font-family: 'Sedgwick Ave Display', cursive;
   font-weight: 400;
   font-size: 72px;
@@ -159,4 +157,97 @@ code {
 .loading {
   margin-left: 45%;
   margin-top: 20%;
+}
+
+.switch_btn {
+  margin-top: 3%;
+  margin-left: 3%;
+  font-size: 36px;
+  padding: 1% 2%;
+  text-align: center;
+  background-color: rgba(77, 99, 212, 0.1);
+  border: 1px solid var(--violet);
+  border-radius: 50px;
+  font-family: 'Share', cursive;
+  color: var(--violet);
+  opacity: .9;
+  transition: .2s;
+  cursor: pointer;
+}
+
+.switch_btn:hover {
+  transform: translateY(3px);
+}
+
+@media screen and (max-width: 600px) {
+
+  .dw_wrapper {
+    background-position: 90% 0%;
+    background-repeat: no-repeat;
+    background-size: 1000px;
+    height: 100vh;
+    position: fixed;
+  }
+  
+  .dw_content {
+    margin: auto;
+    width: 50%;
+    height: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  .list_title {
+    margin: 0;
+    margin-top: 25%;
+    margin-bottom: 15%;
+    font-size: 36px;
+  } 
+
+  .dw_list {
+    padding: 0;
+    list-style-type: none;
+    width: 130%;
+    margin-bottom: 5%;
+    border-bottom: none;
+  }
+
+  .dw_name {
+    flex: 1;
+    margin-left: 5%;
+    font-weight: 100;
+    font-size: 22px;
+    line-height: 1.7;
+  }
+  
+  .dw_price {
+    flex: 1;
+    font-weight: 100;
+    font-size: 18px;
+  }
+  
+  .dw_distance {
+    flex: 1;
+    font-weight: 100;
+    font-size: 18px;
+  }
+  
+  .pages_numbers {
+    margin: auto;
+    margin-top: 20%;
+    width: 20%;
+    padding: 2% 3%;
+  }
+  
+  .page_number {
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 18px;
+  }
+
+  .loading {
+    margin: 50% 35%;
+  }
 }

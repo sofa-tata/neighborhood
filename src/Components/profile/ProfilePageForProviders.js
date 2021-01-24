@@ -18,19 +18,23 @@ class ProfilePageForProviders extends React.Component {
     }
 
 
-    componentDidMount = () => {
-        const url = window.location.href
-        let id = url.substring(url.lastIndexOf(":") + 1, url.length);
-        const email = sessionstorage.getItem("user")
-        this.getProvider(id, email)
+    componentDidMount = async () => {
+        // const url = window.location.href
+        // let id = url.substring(url.lastIndexOf(":") + 1, url.length);
+        const email = sessionstorage.getItem("email")
+        console.log('sessionstorage.getItem', email)
+        console.log("session get:", sessionstorage.getItem("email"))
+        let service = await this.getProviderService(email)
+        this.getProvider(service, email)
     }
 
-    getProvider = async (id, email) => {
-        let user;        
-        if (id.includes("dogwalker")) {
+    getProvider = async (service, email) => {
+        let user;
+        console.log('email, service', service, email)   
+        if (service.includes("dogwalker")) {
             console.log('if dogwalker')
             user = await this.props.firebase.getDogwalkerByEmail(email)
-        } else if (id.includes("babysitter")) {
+        } else if (service.includes("babysitter")) {
             console.log('if babysitter')
             user = await this.props.firebase.getBabysitterByEmail(email)
         }
@@ -39,6 +43,12 @@ class ProfilePageForProviders extends React.Component {
             this.setState({ name: user.displayName, email: user.email,
             location: user.location, service: user.service })
         }
+    }
+
+    getProviderService = async (email) => {
+        let user = await this.props.firebase.getUserByEmail(email)
+        console.log('getProvider2 user', user)
+        return user.service
     }
 
     signOut=() => {

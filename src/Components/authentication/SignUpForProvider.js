@@ -26,29 +26,28 @@ class SignUpForProvider extends React.Component {
 
     // }
 
-    createNewProviderWithEmailAndPasswordHandler = async (event, email, password) => {
-        event.preventDefault();
-        const { displayName, price, service, location } = this.state
+    createNewProviderWithEmailAndPasswordHandler = async () => {
+        const { displayName, price, service, location, about, email, password } = this.state
 
             if (service === null) {
-                // this.setState({ error: 'You should choose one of the available services'})
+
                 alert('You should choose one of the available services!')
             } 
             if (location === "") {
-               // this.setState({ error: 'Please, choose your location'})
                 alert('Please, choose your location')
             } 
             else {// if (service === "dogwalker") {
-                let error = await this.props.firebase.doCreateUserWithEmailAndPassword(this.state.email, this.state.password);
-                if (error === null) {
-                const { user } = await this.props.firebase.doCreateUserWithEmailAndPassword(this.state.email, this.state.password);
+                // let error = await this.props.firebase.doCreateUserWithEmailAndPassword(this.state.email, this.state.password);
+                // if (error === null) {
+                const { user } = await this.props.firebase.doCreateUserWithEmailAndPassword(email, password);
                 const providerData = {
                     uid: user.uid,
                     displayName: displayName,
-                    email: this.state.email,
+                    email: email,
                     price: price,
                     service: service,
                     location: location,
+                    about: about,
                     rating: 0
 
                 }
@@ -58,12 +57,16 @@ class SignUpForProvider extends React.Component {
                     await this.props.firebase.generateBabysitterDocument(providerData);
                 }
                 await this.props.firebase.generateUserDocument(providerData)
-                sessionstorage.setItem("user", this.state.email)
-                window.location.href = '/profilePageForDW';
-            } else {
-                console.log('sign up for provider error', error)
-                alert(error)
-            }
+                sessionstorage.setItem("email", this.state.email)
+                console.log('sessionstorage.setItem', email)
+                console.log("session get:", sessionstorage.getItem("email"))
+                console.log('this.state.email', this.state.email)
+                window.location.href = '/profilePageForProviders';
+            // }
+            //  else {
+            //     console.log('sign up for provider error', error)
+            //     // alert(error)
+            // }
             // } else {
             //     const {user} = await this.props.firebase.doCreateUserWithEmailAndPassword(this.state.email, this.state.password);
             //     console.log('createNewProviderWithEmailAndPasswordHandler - bs-user', user)
@@ -226,9 +229,8 @@ class SignUpForProvider extends React.Component {
                     <p className="your-price">Your price: <span id="yourPrice">{'₪'}{price}</span></p>
          
 
-                    <button className="signupDW_button" onClick={event => {
-                    this.createNewProviderWithEmailAndPasswordHandler(event, email, password);
-                    }}>Sign Up</button>
+                    <button className="signupDW_button" onClick={
+                    this.createNewProviderWithEmailAndPasswordHandler}>Sign Up</button>
                     <div className="exist-acc-divDW">
                         <p onClick={() => this.clickCell("/signIn")}>Sign in to an existing account</p>
                     </div>

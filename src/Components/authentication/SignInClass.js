@@ -15,7 +15,7 @@ class SignInClass extends React.Component {
         }
     }
 
-    signInWithEmailAndPasswordHandler = (event, eMail, passWord) => {
+    signInWithEmailAndPasswordHandler = (event) => {
         const { email, password } = this.state
         event.preventDefault();
         sessionstorage.setItem("user", email)
@@ -79,8 +79,7 @@ class SignInClass extends React.Component {
 
                     <p className="forgot_password" onClick={() => 
                     this.clickCell("/passwordReset")}>Forgot password?</p>
-                    <button className="signin_button" onClick = {(event) =>
-                    {this.signInWithEmailAndPasswordHandler(event, email, password)}}>Sign In</button>
+                    <button className="signin_button" onClick = {this.signInWithEmailAndPasswordHandler}>Sign In</button>
                     <div className="newacc_div">
                         <p onClick={() => this.clickCell("/chooseUserType")}>Create an account</p>
                     </div>

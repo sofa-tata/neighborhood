@@ -29,7 +29,7 @@ code {
 }
 
 .pcard_wrapper {
-    background: url(../../img/bg.png);
+    background: url('../../img/bg.png');
     background-repeat: no-repeat;
     background-size: 100vw;
     width: 100vw;

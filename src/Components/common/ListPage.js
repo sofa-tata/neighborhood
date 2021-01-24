@@ -3,6 +3,8 @@ import './ListPage.css';
 import { withFirebase } from '../../firebase';
 import { compose } from 'recompose';
 import sessionstorage from 'sessionstorage';
+import { OnOff } from 'react-on-off';
+// import img0st from '../../img/0st.png';
 
 const NUM_OF_PROVIDERS_ON_PAGE = 3;
 
@@ -11,6 +13,8 @@ class ListPage extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
+            // userConditions: false,
+            // userLocation: null,
             loading: true,
             pageNumber: 0,
             pageColor: "",
@@ -26,9 +30,27 @@ class ListPage extends React.Component {
         let user = await this.props.firebase.getUserByEmail(email)
         if (user !== null && user.location !== undefined && user.location !== null) {
             this.getProvidersByLocation(user.location, id);
+            console.log('user.location', user.location)
+            // this.setState({ userConditions: true, userLocation: user.location })
         } else this.getProviders(id)
 
     }
+
+    // switchListIndependentByLocation = () => {
+    //     const { userConditions, userLocation, id } = this.state
+    //     if ( userConditions === true ) {
+    //         return (
+    //             <OnOff>
+    //                 {({ on, toggle }) => (
+    //                     <>
+    //                         {on ? this.getProvidersByLocation(userLocation, id) : this.getProviders(id)}
+    //                         <button className="switch_btn" onClick={toggle}>Switch</button>
+    //                     </>
+    //                 )} 
+    //             </OnOff>
+    //         ) 
+    //     } else return null
+    // } 
 
 
     getProviders = async (id) => {
@@ -52,8 +74,8 @@ class ListPage extends React.Component {
     }
 
     
-    clickCell=(address) => {
-        window.location.href = address
+    clickCell = (address, email) => {
+        window.location.href = address + email
     }
 
     getProvidersRating = (provider) => {
@@ -68,7 +90,7 @@ class ListPage extends React.Component {
             src="/images/2st.png"
         } else if (provider.rating === 1) {
             src="/images/1st.png"
-        } else src="/images/0st.png"
+        } else src='/images/0st.png'
 
         return src
     }
@@ -96,8 +118,9 @@ class ListPage extends React.Component {
              i += 1) {
             let provider = list[i];
             let ratingSrc = this.getProvidersRating(provider)
+            console.log('provider email', provider.email)
             arrangedProvidersList.push (
-                <div className="link" key={i} onClick={()=> this.clickCell("/providerCard")}>
+                <div className="link" key={i} onClick={()=> this.clickCell("/providerCard/email:", provider.email)}>
 
                     <li className="dw_item">
 
@@ -145,6 +168,7 @@ class ListPage extends React.Component {
             style={{backgroundImage: id ==="dogwalkers" ?
             "url(/images/dw_bg.png)"
             : "url(/images/bs_bg.png)" }}>
+                {/* {this.switchListIndependentByLocation()} */}
 
                 {loading === true ?
                 <div><h2 className="list_title loading">Loading...</h2></div>

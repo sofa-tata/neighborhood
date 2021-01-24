@@ -5,41 +5,64 @@ import { compose } from 'recompose';
 import sessionstorage from 'sessionstorage';
 
 class ProviderCard extends React.Component {
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
         this.state = {
-            providersName: "",
-            providersPrice: "",
-            providersLocation: "",
-            providersService: null,
-            providersDescription: ""
+            providerName: "",
+            providerPrice: "",
+            providerLocation: "",
+            providerService: null,
+            providerDescription: ""
         }
     }
 
-    getChosenProvider () {
-        const { currentProvider } = this.props.firebase.getDogWalkerById
+    componentDidMount = () => {
+        console.log('this.props.match.params', this.props.match.params)
+        this.getChosenProvider()
+
+    }
+
+    getChosenProvider = async () => {
+        const url = window.location.href
+        console.log('url', url)
+        const providerEmail = url.substring(url.lastIndexOf(":") + 1, url.length);
+        console.log('providerEmail', providerEmail)
+        let currentProvider = await this.props.firebase.getUserByEmail(providerEmail);
+        if (currentProvider.service === "dogwalker") {
+            currentProvider = await this.props.firebase.getDogwalkerByEmail(providerEmail)
+        } else {
+            currentProvider = await this.props.firebase.getBabysitterByEmail(providerEmail)
+        }
+
+        console.log('currentProvider', currentProvider)
+        this.setState({providerName: currentProvider.displayName,
+        providerPrice: currentProvider.price,
+        providerLocation: currentProvider.location,
+        providerService: currentProvider.service,
+        providerDescription: currentProvider.about })
     }
 
     render () {
+        const { providerLocation, providerPrice, providerName, providerService, providerDescription } = this.state
         return (
             <div className="pcard_wrapper">
 
                 <div className="pcard_content">
 
                     <div className="pcard_location_price">
-                        <p>location: </p>
-                        <p>price: ₪</p>
+                        <p>location: {providerLocation}</p>
+                        <p>price: ₪{providerPrice}</p>
                     </div>
                     
                     <img src="/images/profile_160px.png"
                     alt="Profile" 
                     className="pcard_profile_img" />
-                    {/* 
-                    <h3 className="pcard_name">{this.state.service} {this.state.name}</h3>
-                    <h4 className="pcard_email">{this.state.rating}</h4>                    
-                    <h4 className="pcard_email">{this.state.description}</h4>
+ 
+                    <p style={{color: 'orange'}}>{providerService} {providerName}</p>
+                    <p>{providerDescription}</p>
+                    {/* <h4 className="pcard_email">{this.state.rating}</h4>                     */}
+
                     
-                     */}
                      
                 </div>
 

@@ -29,7 +29,7 @@ code {
 }
 
 .signupDW_wrapper {
-    background: url(../../img/bg.png);
+    background: url('../../img/bg.png');
     background-repeat: no-repeat;
     background-size: 100vw;
     width: 100vw;
@@ -119,14 +119,6 @@ p {
   
 .signupDW_button:focus {
     box-shadow: none;
-}
-
-.google_icon {
-  padding: 5px 60px 5px 30px;
-  background-image: url('../../img/google.png');
-  background-position: 94% 50%;
-  background-repeat: no-repeat;
-  margin-bottom: 90px;
 }
 
 .exist-acc-divDW p {

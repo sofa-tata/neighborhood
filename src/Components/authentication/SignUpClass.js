@@ -31,9 +31,8 @@ class SignUpClass extends React.Component {
     //     })        
     // }
 
-    createUserWithEmailAndPasswordHandler = async (event, email, password) => {
-        const { displayName, location } = this.state
-        event.preventDefault();
+    createUserWithEmailAndPasswordHandler = async () => {
+        const { displayName, location, email, password } = this.state
 
         //new 
 
@@ -43,12 +42,12 @@ class SignUpClass extends React.Component {
             this.props.firebase.doCreateUserWithEmailAndPassword(email, password)
             .then(async user => {
                 if (user !== undefined) {
-                sessionstorage.setItem("user", this.state.email)
+                sessionstorage.setItem("user", email)
                 window.location.href = '/profilePage'
                 let userData = {
                     uid: user.uid,
                     displayName: displayName,
-                    email: this.state.email,
+                    email: email,
                     location: location,
                     service: null,
                     price: null

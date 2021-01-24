@@ -50,7 +50,7 @@ class MainPage extends React.Component {
                     <Route path="/passwordReset" component={PasswordResetClass} />
                     <Route path="/chooseUserType" component={ChooseUserType} />
                     <Route path="/listPage" component={ListPage} />
-                    <Route path="/profilePageForProviders/:id" component={ProfilePageForProviders} />
+                    <Route path="/profilePageForProviders" component={ProfilePageForProviders} />
                     <Route path="/providerCard" component={ProviderCard} />
                 </Switch>
             </Router>
