@@ -107,6 +107,13 @@ code {
   font-size: 18px;
 }
 
+.dw_location {
+  flex: 1;
+  font-size: 22px;
+  color: var(--violet);
+  opacity: .8;
+}
+
 .pages_numbers {
   margin: auto;
   margin-top: 200px;
@@ -177,6 +184,35 @@ code {
 
 .switch_btn:hover {
   transform: translateY(3px);
+}
+
+#searchLocation {
+  margin-top: 2%;
+  margin-left: 2%;
+  width: 25%;
+  font-size: 36px;
+  padding: 1% 2%;
+  text-align: center;
+  background-color: rgba(77, 99, 212, 0.1);
+  border: 1px solid var(--violet);
+  border-radius: 50px;
+  font-family: 'Share', cursive;
+  color: var(--violet);
+  opacity: .9;
+  transition: .2s;
+  cursor: pointer;
+}
+
+select#location.signup_input.location {
+  color: rgb(77, 99, 212, .7)
+}
+
+.select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  padding: 1% 0% 1% 2%;
+  cursor: pointer;
 }
 
 @media screen and (max-width: 600px) {

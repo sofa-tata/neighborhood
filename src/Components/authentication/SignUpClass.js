@@ -39,24 +39,55 @@ class SignUpClass extends React.Component {
         // let error = await this.props.firebase.doCreateUserWithEmailAndPassword(this.state.email, this.state.password)
 
         // if (error === null) {
-            this.props.firebase.doCreateUserWithEmailAndPassword(email, password)
-            .then(async user => {
-                if (user !== undefined) {
-                sessionstorage.setItem("user", email)
-                window.location.href = '/profilePage'
-                let userData = {
-                    uid: user.uid,
-                    displayName: displayName,
-                    email: email,
-                    location: location,
-                    service: null,
-                    price: null
-                }
-                await this.props.firebase.generateUserDocument(userData);
-                } else {
-                    // alert("something went wrong... try again")
-                }
-            })
+
+//////////////////////////////////////////////////////////////////////////////
+
+            const { user } = await this.props.firebase.doCreateUserWithEmailAndPassword(email, password);
+            console.log('then user', user)
+            const providerData = {
+                uid: user.uid,
+                displayName: displayName,
+                email: email,
+                location: location,
+                service: null
+
+            }
+            
+            await this.props.firebase.generateUserDocument(providerData)
+            sessionstorage.setItem("email", email)
+            console.log('sessionstorage.setItem', email)
+            console.log("session get:", sessionstorage.getItem("email"))
+            console.log('this.state.email', email)
+            window.location.href = '/profilePage';
+////////////////////////////////////////////////////////////////////////////
+
+            // this.props.firebase.doCreateUserWithEmailAndPassword(email, password)
+            // .then(async user => {
+            //     console.log('then user', user)
+            //     if (user !== undefined) {
+            //         sessionstorage.setItem("email", email)
+            //     let userData = {
+            //         uid: user.uid,
+            //         displayName: displayName,
+            //         email: email,
+            //         location: location,
+            //         service: null,
+            //         price: null
+            //     }
+            //     await this.props.firebase.generateUserDocument(userData);
+            //     window.location.href = '/profilePage'
+            //     } else {
+            //         // alert("something went wrong... try again")
+            //     }
+            // })
+            
+
+///////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
             // .catch(err=>{
             // })
         // } else {
@@ -147,9 +178,8 @@ class SignUpClass extends React.Component {
                     onChange = {(event) => this.onChangeHandler(event)} />
 
 
-                    <button className="signup_button" onClick={event => {
-                    this.createUserWithEmailAndPasswordHandler(event, email, password);
-                    }}>Sign Up</button>
+                    <button className="signup_button" onClick={ 
+                    this.createUserWithEmailAndPasswordHandler}>Sign Up</button>
                     <div className="exist-acc-div">
                         <p onClick={() => this.goToSignInPage()}>Sign in to an existing account</p>
                     </div>

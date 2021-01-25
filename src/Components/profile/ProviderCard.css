@@ -42,7 +42,7 @@ code {
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
   border-radius: 30px;
   margin: auto;
-  margin-top: 15%;
+  margin-top: 10%;
   width: 40%;
   height: 50%;
   display: flex;
@@ -53,8 +53,10 @@ code {
 
 .pcard_location_price {
     margin-top: 5%;
+    height: 10%;
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     align-self: flex-end;
     margin-right: 10%;
 }
@@ -65,7 +67,11 @@ code {
     font-size: 24px;
 }
 
-.pp_name {
+.pcard_location_price .loc_price {
+  color: var(--orange);
+}
+
+/* .pp_name {
     margin: 35px auto 15px auto;
     font-family: 'Sedgwick Ave Display', cursive;
     font-size: 36px;
@@ -89,7 +95,7 @@ code {
 .pp_hamburger_menu:hover {
     cursor: pointer;
     transform: translateY(3px);
-}
+} */
 
 .provider-of {
   font-family: 'Share', cursive;
@@ -98,4 +104,32 @@ code {
   color: var(--violet);
   opacity: .8;
   margin-bottom: 2%;
+}
+
+.provider_info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 65%;
+  width: 70%;
+}
+
+.pcard_about {
+  color: var(--orange);
+  margin-top: 6%;
+  font-size: 30px;
+  text-align: center;
+}
+
+.pcard_service_name {
+  font-family: 'Sedgwick Ave Display', cursive;
+  font-size: 36px;
+  color: var(--violet);
+  letter-spacing: 1px;
+  margin-top: 2%;
+}
+
+.rating_img {
+  margin-top: 2%;
 }

@@ -138,8 +138,7 @@ h1 {
 /* SLIDER MENU */
 
 .bm-burger-button {
-  width: 84px;
-  height: 50px;
+
   float: right;
   margin-top: 60px;
   margin-right: 100px;
@@ -150,6 +149,12 @@ h1 {
 .bm-burger-button:hover {
   cursor: pointer;
   transform: translateY(3px);
+}
+
+.burger-icon-img {
+  width: 100px;
+  height: 100px;
+  background-color: red;
 }
 
 .bm-cross-button {
@@ -233,14 +238,22 @@ h1 {
     font-size: 22px;
     opacity: 1;
   }
+  
+  .burger-icon-img {
+    background-color: yellow;
+    width: 10px;
+    height: 10px;
+
+  }
 
   .bm-burger-button {
     width: 10px;
     height: 10px;
-    margin-top: 2%;
-    margin-right: 5%;
-    transition: 0.2s;
-    position: relative;
+    /* margin-top: 2%; */
+    /* margin-right: 5%; */
+    /* transition: 0.2s; */
+    /* position: relative; */
+    /* background-color: red; */
   }
 
   .bm-menu {

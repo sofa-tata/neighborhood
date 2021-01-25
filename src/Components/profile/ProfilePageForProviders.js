@@ -52,7 +52,7 @@ class ProfilePageForProviders extends React.Component {
     }
 
     signOut=() => {
-        sessionstorage.removeItem("user")
+        sessionstorage.removeItem("email")
         this.props.firebase.doSignOut()
         window.location.href = "/signIn"
     }
@@ -61,10 +61,11 @@ class ProfilePageForProviders extends React.Component {
         const { name, service, email, location } = this.state
         return (
             <div className="pp_wrapper">
-
+                
                 <h5 className="signout_btn" onClick={() => this.signOut()}>Sign Out</h5>
+                {/* <h3 className="your_profile">Your profile: </h3> */}
                 <div className="pp_content">
-
+                    
                     <img src="/images/profile_160px.png" alt="Profile" className="pp_profile_img" />
                     <h3 className="pp_name">{name}</h3>
                     <h5 className="provider-of">{service}</h5>

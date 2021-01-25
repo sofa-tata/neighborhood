@@ -99,6 +99,8 @@ class Firebase {
       let userByEmail = null
       snapshot.forEach(doc=>{
         let u = doc.data()
+        console.log('u', u.email)
+        console.log('equals', u.email === email)
         if(u.email===email){
           console.log('found email', email)
           userByEmail =  u

@@ -3,8 +3,7 @@ import './ListPage.css';
 import { withFirebase } from '../../firebase';
 import { compose } from 'recompose';
 import sessionstorage from 'sessionstorage';
-import { OnOff } from 'react-on-off';
-// import img0st from '../../img/0st.png';
+import csc from 'country-state-city';
 
 const NUM_OF_PROVIDERS_ON_PAGE = 3;
 
@@ -13,64 +12,53 @@ class ListPage extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            // userConditions: false,
-            // userLocation: null,
             loading: true,
             pageNumber: 0,
             pageColor: "",
-            id: "",
+            providerType: "",
+            searchLocation: "",
             list: []
         }
     }
 
     componentDidMount = async () => {
         const url = window.location.href
-        const id = url.substring(url.lastIndexOf(":") + 1, url.length);
-        const email = sessionstorage.getItem("user")
+        const providerType = url.substring(url.lastIndexOf("/") + 1, url.length);
+        const email = sessionstorage.getItem("email")
         let user = await this.props.firebase.getUserByEmail(email)
-        if (user !== null && user.location !== undefined && user.location !== null) {
-            this.getProvidersByLocation(user.location, id);
-            console.log('user.location', user.location)
-            // this.setState({ userConditions: true, userLocation: user.location })
-        } else this.getProviders(id)
+        if (user.service !== null){
+            this.getProviders(user.service)
+        }else{
+        this.setState({
+            searchLocation: user.location,
+        },()=>{
 
+            if (user !== null && user.location !== undefined && user.location !== null) {
+                this.getProvidersByLocation(user.location, providerType);
+                console.log('user.location', user.location)
+            } else this.getProviders(providerType)
+        })
+    }
     }
 
-    // switchListIndependentByLocation = () => {
-    //     const { userConditions, userLocation, id } = this.state
-    //     if ( userConditions === true ) {
-    //         return (
-    //             <OnOff>
-    //                 {({ on, toggle }) => (
-    //                     <>
-    //                         {on ? this.getProvidersByLocation(userLocation, id) : this.getProviders(id)}
-    //                         <button className="switch_btn" onClick={toggle}>Switch</button>
-    //                     </>
-    //                 )} 
-    //             </OnOff>
-    //         ) 
-    //     } else return null
-    // } 
-
-
-    getProviders = async (id) => {
+    getProviders = async (providerType) => {
         let providersList;
-        if (id === "dogwalkers") {
+        if (providerType === "dogwalkers") {
             providersList = await this.props.firebase.getAllDogWalkers()
-        } else if (id === "babysitters") {
+        } else if (providerType === "babysitters") {
             providersList = await this.props.firebase.getAllBabysitters()
         }
-        this.setState({ list: providersList, id, loading: false})
+        this.setState({ list: providersList, providerType, loading: false})
     }
 
-    getProvidersByLocation = async (location, id) => {
+    getProvidersByLocation = async (location, providerType) => {
         let providersListByLocation;
-        if (id === "dogwalkers") {
+        if (providerType === "dogwalkers") {
             providersListByLocation = await this.props.firebase.getAllDogWalkersByLocation(location)
-        } else if (id === "babysitters") {
+        } else if (providerType === "babysitters") {
             providersListByLocation = await this.props.firebase.getAllBabysittersByLocation(location)
         }
-        this.setState({ list: providersListByLocation, id, loading: false})
+        this.setState({ list: providersListByLocation, providerType, loading: false})
     }
 
     
@@ -110,23 +98,22 @@ class ListPage extends React.Component {
 
     getProvidersList = () => {
         const { pageNumber, list } = this.state
-        let arrangedProvidersList = [];    
-        if (list !== undefined) {     
+        let arrangedProvidersList = [];        
         for (let i = pageNumber * NUM_OF_PROVIDERS_ON_PAGE;
              i < (pageNumber * NUM_OF_PROVIDERS_ON_PAGE) + NUM_OF_PROVIDERS_ON_PAGE 
              && i < list.length;
              i += 1) {
             let provider = list[i];
             let ratingSrc = this.getProvidersRating(provider)
-            console.log('provider email', provider.email)
             arrangedProvidersList.push (
-                <div className="link" key={i} onClick={()=> this.clickCell("/providerCard/email:", provider.email)}>
+                <div className="link" key={i} onClick={()=> this.clickCell("/providerCard/", provider.email)}>
 
                     <li className="dw_item">
 
                         <img src="/images/profile_icon.png" alt="Profile" className="profile_icon" />
                         <p className="dw_name">{provider.displayName}</p>
                         <p className="dw_price">{"₪"}{provider.price}</p>
+                        <p className="dw_location">{provider.location}</p>
                         <img className="dw_rating" src={ratingSrc} alt="star_img" />
                         
                     </li>
@@ -134,14 +121,14 @@ class ListPage extends React.Component {
                 </div>            
                 );
             } 
-        }
-             
+    
         return arrangedProvidersList;
     }
 
     displayList = () => {
-        const { list, id } = this.state
-        if (list !== undefined) {
+        const { list, providerType } = this.state
+        console.log('list', list)
+        if (list !== undefined && list.length !== 0) {
             return (
                 <>
                     <ul className="dw_list">
@@ -153,7 +140,7 @@ class ListPage extends React.Component {
                 </>
             )
         } else {
-            return <p className="no_sellers">There is no {id} in your city yet :(</p>
+            return <p className="no_sellers">There are no {providerType} in this city yet :(</p>
         }
     }
 
@@ -161,26 +148,53 @@ class ListPage extends React.Component {
         this.setState({pageNumber: num});
     }
 
+    onChangeLocation = event => {
+        let location = event.target.value
+        console.log('location--'+location+'--')
+        this.setState({ searchLocation: location },()=>{
+            if(location === ""){
+                this.getProviders(this.state.providerType)
+            } else {
+                this.getProvidersByLocation(location, this.state.providerType)
+            }
+        });
+    };
+
     render() {
-        const { loading, id } = this.state
+        const { loading, providerType, searchLocation } = this.state
+        const cities = csc.getCitiesOfCountry("IL");
         return (
             <div className="dw_wrapper"
-            style={{backgroundImage: id ==="dogwalkers" ?
+            style={{backgroundImage: providerType ==="dogwalkers" ?
             "url(/images/dw_bg.png)"
-            : "url(/images/bs_bg.png)" }}>
-                {/* {this.switchListIndependentByLocation()} */}
+            : "url(/images/bs_bg.png)" }}>                
 
-                {loading === true ?
-                <div><h2 className="list_title loading">Loading...</h2></div>
-                :            
-                <div className="dw_content">
-                    
-                    <h2 className="list_title">{id}</h2>
-                    {this.displayList()}                    
+                    {loading === true ?
+                    <div><h2 className="list_title loading">Loading...</h2></div>
+                    :    
+                    <div className="smaller_wrapper">
 
-                </div>         
-                }
+                        <select
+                        name="searchLocation"  
+                        id="searchLocation" 
+                        className="signup_input location select listpage_select" 
+                        onChange = {this.onChangeLocation}
+                        value={searchLocation}
+                        >
+                            <option value="">Choose location</option>
+                            {cities.map((city,i) => 
+                            <option id="city" key={i} value={city.value}>{city.name}</option>)}
+                        </select>        
+                        <div className="dw_content">
+                            
+                            <h2 className="list_title">{providerType}</h2>
+                            {this.displayList()}                    
 
+                        </div>
+
+                    </div>         
+                    }
+                
             </div>
         )
     }

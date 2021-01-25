@@ -12,18 +12,32 @@ import ListPage from './ListPage';
 import ProfilePageForProviders from '../profile/ProfilePageForProviders';
 import { slide as Menu} from 'react-burger-menu';
 import ProviderCard from '../profile/ProviderCard';
+import sessionstorage from 'sessionstorage';
+import { compose } from 'recompose';
+import { withFirebase } from '../../firebase';
 
 
 
 class MainPage extends React.Component {
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
         this.state = {
             menuOpen: false
         }
     }
+
+    componentDidMount = () => {
+        console.log('sessionstorage.getItem', sessionstorage.getItem('email'))
+    }
+
     toggleMenu = () => {
         this.setState({menuOpen: !this.state.menuOpen})
+    }
+
+    signOut=() =>{
+        sessionstorage.removeItem("email")
+        this.props.firebase.doSignOut()
+        window.location.href = "/signIn"
     }
 
     render() {
@@ -31,17 +45,24 @@ class MainPage extends React.Component {
             <Router>
                 <Menu 
                     right 
-                    width = { '30%' }
-                    customBurgerIcon={ <img src="/images/hamburger_menu.png" alt="Menu" /> } 
+                    // width = { window.innerWidth > 600 ?'30%' : '10%'}
+                    width = {'30%'}
+                    customBurgerIcon={ <img className="burger-icon-img" src="/images/hamburger_menu.png" alt="Menu" /> } 
                     customCrossIcon={ <img src="/images/cross_btn.png" alt="Close" /> }
                     isOpen={ this.state.menuOpen }
                     >
-                        <a id="home" className="menu-item home-item" href="/">HOME</a>
-                        <a id="about" className="menu-item" href="/signIn">SIGN IN</a>
+                        <a id="home" className="menu-item home-item" href="/open">HOME</a>
+                        
                         <a id="contact" className="menu-item" href="/chooseUserType">SIGN UP</a>
+                        {sessionstorage.getItem('email') === null ?
+                        <a id="about" className="menu-item" href="/signIn">SIGN IN</a>
+                        :
+                        <button className="menu-item" onClick={this.signOut}>SIGN OUT</button>
+                        }
                     </Menu>
                 <Switch>
                     <Route path="/" exact component={Home} />
+                    <Route path="/open" exact component={Home} />
                     <Route path="/signUp" component={SignUpClass} />
                     <Route path="/signUpForProvider" component={SignUpForProvider} />
                     <Route path="/signIn" component={SignInClass} />
@@ -58,4 +79,4 @@ class MainPage extends React.Component {
     }
 }
 
-export default MainPage;
+export default compose(withFirebase)(MainPage);

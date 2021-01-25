@@ -18,15 +18,15 @@ class SignInClass extends React.Component {
     signInWithEmailAndPasswordHandler = (event) => {
         const { email, password } = this.state
         event.preventDefault();
-        sessionstorage.setItem("user", email)
+        sessionstorage.setItem("email", email)
         this.props.firebase.doSignInWithEmailAndPassword(email, password)
         .then((user) => {
             if (user.service === null) {
                 window.location.href = "/profilePage"
             } else if (user.service === "dogwalker") {
-                window.location.href = "/profilePageForProviders/id:dogwalker"
+                window.location.href = "/profilePageForProviders/dogwalker"
             } else {
-                window.location.href = "/profilePageForProviders/id:babysitter"
+                window.location.href = "/profilePageForProviders/babysitter"
             }
             
           }).catch(error => {

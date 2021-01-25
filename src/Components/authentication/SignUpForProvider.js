@@ -52,7 +52,7 @@ class SignUpForProvider extends React.Component {
 
                 }
                 if (service === "dogwalker") {
-                await this.props.firebase.generateDogWalkerDocument(providerData);
+                    await this.props.firebase.generateDogWalkerDocument(providerData);
                 } else {
                     await this.props.firebase.generateBabysitterDocument(providerData);
                 }

@@ -12,7 +12,8 @@ class ProviderCard extends React.Component {
             providerPrice: "",
             providerLocation: "",
             providerService: null,
-            providerDescription: ""
+            providerDescription: "",
+            providerRating: 0
         }
     }
 
@@ -22,10 +23,27 @@ class ProviderCard extends React.Component {
 
     }
 
+    getProviderRatingSrc = (rating) => {
+        let src = ""
+        if (rating === 5) {
+            src="/images/5st.png"
+        }else if (rating === 4) {
+            src="/images/4st.png"
+        } else if (rating === 3) {
+            src="/images/3st.png"
+        } else if (rating === 2) {
+            src="/images/2st.png"
+        } else if (rating === 1) {
+            src="/images/1st.png"
+        } else src='/images/0st.png'
+
+        return src
+    }
+
     getChosenProvider = async () => {
         const url = window.location.href
         console.log('url', url)
-        const providerEmail = url.substring(url.lastIndexOf(":") + 1, url.length);
+        const providerEmail = url.substring(url.lastIndexOf("/") + 1, url.length);
         console.log('providerEmail', providerEmail)
         let currentProvider = await this.props.firebase.getUserByEmail(providerEmail);
         if (currentProvider.service === "dogwalker") {
@@ -35,34 +53,38 @@ class ProviderCard extends React.Component {
         }
 
         console.log('currentProvider', currentProvider)
-        this.setState({providerName: currentProvider.displayName,
-        providerPrice: currentProvider.price,
-        providerLocation: currentProvider.location,
-        providerService: currentProvider.service,
-        providerDescription: currentProvider.about })
+        this.setState({
+            providerName: currentProvider.displayName,
+            providerPrice: currentProvider.price,
+            providerLocation: currentProvider.location,
+            providerService: currentProvider.service,
+            providerDescription: currentProvider.about,
+            providerRating: currentProvider.rating
+        })
     }
 
     render () {
-        const { providerLocation, providerPrice, providerName, providerService, providerDescription } = this.state
+        const { providerLocation, providerPrice, providerName, providerService, providerDescription, providerRating } = this.state
+        let ratingSrc = this.getProviderRatingSrc(providerRating)
         return (
             <div className="pcard_wrapper">
 
                 <div className="pcard_content">
 
                     <div className="pcard_location_price">
-                        <p>location: {providerLocation}</p>
-                        <p>price: ₪{providerPrice}</p>
+                        <p><span className="loc_price">location:</span> {providerLocation}</p>
+                        <p><span className="loc_price">price:</span> ₪{providerPrice}</p>
                     </div>
-                    
-                    <img src="/images/profile_160px.png"
-                    alt="Profile" 
-                    className="pcard_profile_img" />
- 
-                    <p style={{color: 'orange'}}>{providerService} {providerName}</p>
-                    <p>{providerDescription}</p>
-                    {/* <h4 className="pcard_email">{this.state.rating}</h4>                     */}
 
-                    
+                    <div className="provider_info">
+                        <img src="/images/profile_160px.png"
+                        alt="Profile" 
+                        className="pcard_profile_img" />
+    
+                        <p className="pcard_service_name">{providerService} {providerName}</p>
+                        <img src={ratingSrc} alt="star_img" className="rating_img"/>   
+                        <p className="pcard_about">{providerDescription}</p>
+                    </div>                 
                      
                 </div>
 
