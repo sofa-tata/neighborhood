@@ -13,7 +13,8 @@ class ProviderCard extends React.Component {
             providerLocation: "",
             providerService: null,
             providerDescription: "",
-            providerRating: 0
+            providerRating: 0,
+            providerEmail: ""
         }
     }
 
@@ -59,12 +60,13 @@ class ProviderCard extends React.Component {
             providerLocation: currentProvider.location,
             providerService: currentProvider.service,
             providerDescription: currentProvider.about,
-            providerRating: currentProvider.rating
+            providerRating: currentProvider.rating,
+            providerEmail: currentProvider.email
         })
     }
 
     render () {
-        const { providerLocation, providerPrice, providerName, providerService, providerDescription, providerRating } = this.state
+        const { providerLocation, providerPrice, providerName, providerService, providerDescription, providerRating, providerEmail } = this.state
         let ratingSrc = this.getProviderRatingSrc(providerRating)
         return (
             <div className="pcard_wrapper">
@@ -73,7 +75,7 @@ class ProviderCard extends React.Component {
 
                     <div className="pcard_location_price">
                         <p><span className="loc_price">location:</span> {providerLocation}</p>
-                        <p><span className="loc_price">price:</span> ₪{providerPrice}</p>
+                        <p><span className="loc_price">price:</span> ₪{providerPrice}/h</p>
                     </div>
 
                     <div className="provider_info">
@@ -82,7 +84,8 @@ class ProviderCard extends React.Component {
                         className="pcard_profile_img" />
     
                         <p className="pcard_service_name">{providerService} {providerName}</p>
-                        <img src={ratingSrc} alt="star_img" className="rating_img"/>   
+                        <img src={ratingSrc} alt="star_img" className="rating_img"/>
+                        <p className="pcard_about"><span style={{color: "#4D63D4"}}>Write me a message to:</span> {providerEmail}</p> 
                         <p className="pcard_about">{providerDescription}</p>
                     </div>                 
                      

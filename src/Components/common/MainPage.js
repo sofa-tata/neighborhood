@@ -51,13 +51,13 @@ class MainPage extends React.Component {
                     customCrossIcon={ <img src="/images/cross_btn.png" alt="Close" /> }
                     isOpen={ this.state.menuOpen }
                     >
-                        <a id="home" className="menu-item home-item" href="/open">HOME</a>
+                        <a id="home" className="menu-item home-item" href="/open">SEARCH</a>
                         
                         <a id="contact" className="menu-item" href="/chooseUserType">SIGN UP</a>
                         {sessionstorage.getItem('email') === null ?
                         <a id="about" className="menu-item" href="/signIn">SIGN IN</a>
                         :
-                        <button className="menu-item" onClick={this.signOut}>SIGN OUT</button>
+                        <p className="menu-item" onClick={this.signOut}>SIGN OUT</p>
                         }
                     </Menu>
                 <Switch>

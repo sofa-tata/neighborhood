@@ -26,19 +26,19 @@ class ListPage extends React.Component {
         const providerType = url.substring(url.lastIndexOf("/") + 1, url.length);
         const email = sessionstorage.getItem("email")
         let user = await this.props.firebase.getUserByEmail(email)
-        if (user.service !== null){
-            this.getProviders(user.service)
-        }else{
+        if (user === null || user.service !== null){
+            this.getProviders(providerType)
+        } else {
         this.setState({
             searchLocation: user.location,
-        },()=>{
-
-            if (user !== null && user.location !== undefined && user.location !== null) {
+        }, () => {
+            // if (user !== null && user.location !== undefined && user.location !== null) {
                 this.getProvidersByLocation(user.location, providerType);
                 console.log('user.location', user.location)
-            } else this.getProviders(providerType)
+            // } 
+            // else this.getProviders(providerType)
         })
-    }
+        }
     }
 
     getProviders = async (providerType) => {
@@ -52,13 +52,17 @@ class ListPage extends React.Component {
     }
 
     getProvidersByLocation = async (location, providerType) => {
-        let providersListByLocation;
+        console.log('getProvidersByLocation - location:', location)
+        // let providersListByLocation;
         if (providerType === "dogwalkers") {
-            providersListByLocation = await this.props.firebase.getAllDogWalkersByLocation(location)
+           let providersListByLocation = await this.props.firebase.getAllDogWalkersByLocation(location)
+           this.setState({ list: providersListByLocation, providerType, loading: false})
         } else if (providerType === "babysitters") {
-            providersListByLocation = await this.props.firebase.getAllBabysittersByLocation(location)
+            let providersListByLocation2 = await this.props.firebase.getAllBabysittersByLocation(location)
+            console.log('providersListByLocation2', providersListByLocation2)
+            this.setState({ list: providersListByLocation2, providerType, loading: false})
         }
-        this.setState({ list: providersListByLocation, providerType, loading: false})
+        // this.setState({ list: providersListByLocation, providerType, loading: false})
     }
 
     
@@ -98,6 +102,7 @@ class ListPage extends React.Component {
 
     getProvidersList = () => {
         const { pageNumber, list } = this.state
+        console.log('getProvidersList list', list)
         let arrangedProvidersList = [];        
         for (let i = pageNumber * NUM_OF_PROVIDERS_ON_PAGE;
              i < (pageNumber * NUM_OF_PROVIDERS_ON_PAGE) + NUM_OF_PROVIDERS_ON_PAGE 

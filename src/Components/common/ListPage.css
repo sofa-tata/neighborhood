@@ -207,7 +207,7 @@ select#location.signup_input.location {
   color: rgb(77, 99, 212, .7)
 }
 
-.select {
+select .listpage_select{
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;

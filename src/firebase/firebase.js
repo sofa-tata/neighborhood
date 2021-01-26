@@ -268,16 +268,20 @@ async getAllBabysitters() {
 }
 
 async getAllBabysittersByLocation(location) {
+  console.log('getAllBabysittersByLocation(location)', location)
   const snapshot = await this.firestore.collection('babysitters').get()
   let allBabySittersByLocation = []
   snapshot.docs.map(doc => {
     let bs = doc.data()
+    console.log('bs.loc', bs.location)
+    console.log('bs.location === location', bs.location === location)
     if (bs.location === location){
       allBabySittersByLocation.push(bs)
     }
-    console.log("getAllBabysittersByLocation - allBabySittersByLocation", allBabySittersByLocation);
-    return allBabySittersByLocation
   });
+
+  console.log("getAllBabysittersByLocation - allBabySittersByLocation", allBabySittersByLocation);
+    return allBabySittersByLocation
 }
 
 // async getAllDogWalkers(){
