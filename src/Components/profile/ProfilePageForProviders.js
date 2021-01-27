@@ -13,14 +13,13 @@ class ProfilePageForProviders extends React.Component {
             email: "",
             location: null,
             service: null,
+            about: "",
             id: ""
         }
     }
 
 
     componentDidMount = async () => {
-        // const url = window.location.href
-        // let id = url.substring(url.lastIndexOf(":") + 1, url.length);
         const email = sessionstorage.getItem("email")
         console.log('sessionstorage.getItem', email)
         console.log("session get:", sessionstorage.getItem("email"))
@@ -41,7 +40,7 @@ class ProfilePageForProviders extends React.Component {
         console.log('getProvider user', user)
         if (user !== undefined){
             this.setState({ name: user.displayName, email: user.email,
-            location: user.location, service: user.service })
+            location: user.location, service: user.service, about: user.about })
         }
     }
 
@@ -58,12 +57,11 @@ class ProfilePageForProviders extends React.Component {
     }
 
     render() {
-        const { name, service, email, location } = this.state
+        const { name, service, email, location, about } = this.state
         return (
             <div className="pp_wrapper">
                 
                 <h5 className="signout_btn" onClick={() => this.signOut()}>Sign Out</h5>
-                {/* <h3 className="your_profile">Your profile: </h3> */}
                 <div className="pp_content">
                     
                     <img src="/images/profile_160px.png" alt="Profile" className="pp_profile_img" />
@@ -71,6 +69,7 @@ class ProfilePageForProviders extends React.Component {
                     <h5 className="provider-of">{service}</h5>
                     <h4 className="pp_email">{email}</h4>
                     <h4 className="pp_email">{location}</h4>
+                    <h4 className="pp_about">{about}</h4>
 
                 </div>
 

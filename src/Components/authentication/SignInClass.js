@@ -18,7 +18,7 @@ class SignInClass extends React.Component {
     signInWithEmailAndPasswordHandler = (event) => {
         const { email, password } = this.state
         event.preventDefault();
-        sessionstorage.setItem("email", email)
+        sessionstorage.setItem("email", email) /////////////////////////////////////////
         this.props.firebase.doSignInWithEmailAndPassword(email, password)
         .then((user) => {
             if (user.service === null) {

@@ -22,9 +22,6 @@ class SignUpForProvider extends React.Component {
         }
     }
 
-    // componentDidMount = () => {
-
-    // }
 
     createNewProviderWithEmailAndPasswordHandler = async () => {
         const { displayName, price, service, location, about, email, password } = this.state
@@ -36,9 +33,7 @@ class SignUpForProvider extends React.Component {
             if (location === "") {
                 alert('Please, choose your location')
             } 
-            else {// if (service === "dogwalker") {
-                // let error = await this.props.firebase.doCreateUserWithEmailAndPassword(this.state.email, this.state.password);
-                // if (error === null) {
+            else {
                 const { user } = await this.props.firebase.doCreateUserWithEmailAndPassword(email, password);
                 const providerData = {
                     uid: user.uid,
@@ -62,64 +57,15 @@ class SignUpForProvider extends React.Component {
                 console.log("session get:", sessionstorage.getItem("email"))
                 console.log('this.state.email', this.state.email)
                 window.location.href = '/profilePageForProviders';
-            // }
-            //  else {
-            //     console.log('sign up for provider error', error)
-            //     // alert(error)
-            // }
-            // } else {
-            //     const {user} = await this.props.firebase.doCreateUserWithEmailAndPassword(this.state.email, this.state.password);
-            //     console.log('createNewProviderWithEmailAndPasswordHandler - bs-user', user)
-            //     const babysitter = {
-            //         uid: user.uid,
-            //         displayName: this.state.displayName,
-            //         email: this.state.email,
-            //         price: this.state.price,
-            //         service: this.state.service,
-            //         location: this.state.location,
-            //         rating: 0
-
-            //     }
-            //     console.log('createNewProviderWithEmailAndPasswordHandler - babysitter', babysitter)
-            //     await this.props.firebase.generateBabysitterDocument(babysitter);
-            //     await this.props.firebase.generateUserDocument(babysitter)
-            //     sessionstorage.setItem("user", this.state.email)
-            //     window.location.href = '/profilePageForBS';
-            // }
+        
+           
         }
-        // catch(error) {
-        //     alert(error)
-        //     // this.setState({ error: 'Error Signing up with email and password'});
-        // }
-
-        // this.setState({ email: ""});
-        // this.setState({ password: ""});
-        // this.setState({ displayName: ""});
     }
 
     onChange = event => {
         this.setState({ [event.target.name]: event.target.value });
-        // console.log("state name ", event.target.name)
-        // console.log("state value ", event.target.value)
       };
     
-
-    // onChangeHandler = (event) => {
-    //     const { name, value } = event.currentTarget;
-    //     if (name === "userEmail") {
-    //         this.setState({
-    //             email: value
-    //         })
-    //     } else if (name === "userPassword") {
-    //         this.setState({
-    //             password: value
-    //         })
-    //     } else if (name === "displayName") {
-    //         this.setState({
-    //             displayName: value
-    //         })
-    //     }
-    // }
     clickCell= (address) => {
         window.location.href = address
     }

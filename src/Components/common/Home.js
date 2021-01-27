@@ -22,9 +22,10 @@ class Home extends React.Component {
         if (!this.state.isOpen) {
             return (  
             <div className="btn-div">
+
                 <p className="description">the best way to find the best service</p>
                 <button className="findnow_button" type="button" onClick={() => window.location.href="/open"}>FIND NOW</button>
-                {/* <button className="findnow_button" type="button" onClick={() => this.setState({isOpen: true})}>FIND NOW</button> */}
+                
             </div>
             )
             

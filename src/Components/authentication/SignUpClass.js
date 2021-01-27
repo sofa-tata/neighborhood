@@ -19,28 +19,9 @@ class SignUpClass extends React.Component {
         }
     }
 
-    // TRYING THEN AND CATCH:
-
-    // createUserWithEmailAndPasswordHandler = async (event, email, password) => {
-    //     event.preventDefault();
-    //     const {user} = await auth.createUserWithEmailAndPassword(email, password)
-    //     generateUserDocument(user, this.state.displayName)
-    //     .then(() => window.location.href = '/profilePage')
-    //     .catch(error => {
-    //         this.setState({error: 'Error Signing up with email and password'})
-    //     })        
-    // }
 
     createUserWithEmailAndPasswordHandler = async () => {
         const { displayName, location, email, password } = this.state
-
-        //new 
-
-        // let error = await this.props.firebase.doCreateUserWithEmailAndPassword(this.state.email, this.state.password)
-
-        // if (error === null) {
-
-//////////////////////////////////////////////////////////////////////////////
 
             const { user } = await this.props.firebase.doCreateUserWithEmailAndPassword(email, password);
             console.log('then user', user)
@@ -58,61 +39,8 @@ class SignUpClass extends React.Component {
             console.log('sessionstorage.setItem', email)
             console.log("session get:", sessionstorage.getItem("email"))
             console.log('this.state.email', email)
-            window.location.href = '/profilePage';
-////////////////////////////////////////////////////////////////////////////
+            window.location.href = '/profilePage';          
 
-            // this.props.firebase.doCreateUserWithEmailAndPassword(email, password)
-            // .then(async user => {
-            //     console.log('then user', user)
-            //     if (user !== undefined) {
-            //         sessionstorage.setItem("email", email)
-            //     let userData = {
-            //         uid: user.uid,
-            //         displayName: displayName,
-            //         email: email,
-            //         location: location,
-            //         service: null,
-            //         price: null
-            //     }
-            //     await this.props.firebase.generateUserDocument(userData);
-            //     window.location.href = '/profilePage'
-            //     } else {
-            //         // alert("something went wrong... try again")
-            //     }
-            // })
-            
-
-///////////////////////////////////////////////////////////////////////////////
-
-
-
-
-
-            // .catch(err=>{
-            // })
-        // } else {
-        //     alert(error);
-        // }
-
-        //old
-
-        // try {
-        //     const {user} = await this.props.firebase.doCreateUserWithEmailAndPassword(email, password);
-
-            
-        //     let u = {
-        //         uid: user.uid,
-        //         displayName: this.state.displayName,
-        //         email: this.state.email,
-        //         location: this.state.location,
-        //         service: null,
-        //         price: null
-        //     }
-        //     this.props.firebase.generateUserDocument(u);
-        // }
-        // catch(error) {
-        //     this.setState({error: 'Error Signing up with email and password'});
-        // }
 
         
     }

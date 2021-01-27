@@ -71,32 +71,6 @@ code {
   color: var(--orange);
 }
 
-/* .pp_name {
-    margin: 35px auto 15px auto;
-    font-family: 'Sedgwick Ave Display', cursive;
-    font-size: 36px;
-    color: var(--orange);
-    letter-spacing: 1px;
-}
-
-.pp_email {
-    font-family: 'Share', cursive;
-    font-size: 24px;
-    color: var(--yellow);
-}
-
-.pp_hamburger_menu {
-    float: right;
-    margin-top: 60px;
-    margin-right: 100px;
-    transition: 0.2s;
-}
-      
-.pp_hamburger_menu:hover {
-    cursor: pointer;
-    transform: translateY(3px);
-} */
-
 .provider-of {
   font-family: 'Share', cursive;
   font-size: 28px;

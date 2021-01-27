@@ -102,7 +102,10 @@ code {
   margin-bottom: 2%;
 }
 
-/* .your_profile {
-  padding: 10% 0% 0% 30%;
-  width: 20%;
-} */
+.pp_about {
+  margin-top: 2%;
+  color: var(--orange);
+  font-family: 'Share', cursive;
+  font-size: 22px;
+  font-weight: 100;
+}

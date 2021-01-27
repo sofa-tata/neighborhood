@@ -24,7 +24,7 @@ class ListPage extends React.Component {
     componentDidMount = async () => {
         const url = window.location.href
         const providerType = url.substring(url.lastIndexOf("/") + 1, url.length);
-        const email = sessionstorage.getItem("email")
+        const email = sessionstorage.getItem("email") //////////////////////////////////////////////////
         let user = await this.props.firebase.getUserByEmail(email)
         if (user === null || user.service !== null){
             this.getProviders(providerType)
@@ -32,11 +32,8 @@ class ListPage extends React.Component {
         this.setState({
             searchLocation: user.location,
         }, () => {
-            // if (user !== null && user.location !== undefined && user.location !== null) {
                 this.getProvidersByLocation(user.location, providerType);
                 console.log('user.location', user.location)
-            // } 
-            // else this.getProviders(providerType)
         })
         }
     }
@@ -53,16 +50,14 @@ class ListPage extends React.Component {
 
     getProvidersByLocation = async (location, providerType) => {
         console.log('getProvidersByLocation - location:', location)
-        // let providersListByLocation;
+        let providersListByLocation;
         if (providerType === "dogwalkers") {
-           let providersListByLocation = await this.props.firebase.getAllDogWalkersByLocation(location)
-           this.setState({ list: providersListByLocation, providerType, loading: false})
+            providersListByLocation = await this.props.firebase.getAllDogWalkersByLocation(location)
         } else if (providerType === "babysitters") {
-            let providersListByLocation2 = await this.props.firebase.getAllBabysittersByLocation(location)
-            console.log('providersListByLocation2', providersListByLocation2)
-            this.setState({ list: providersListByLocation2, providerType, loading: false})
+            providersListByLocation = await this.props.firebase.getAllBabysittersByLocation(location)
+            console.log('providersListByLocation', providersListByLocation)
         }
-        // this.setState({ list: providersListByLocation, providerType, loading: false})
+        this.setState({ list: providersListByLocation, providerType, loading: false})
     }
 
     

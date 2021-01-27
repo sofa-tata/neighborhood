@@ -2,7 +2,6 @@ import React from 'react';
 import './ProviderCard.css'
 import { withFirebase } from '../../firebase';
 import { compose } from 'recompose';
-import sessionstorage from 'sessionstorage';
 
 class ProviderCard extends React.Component {
     constructor(props) {

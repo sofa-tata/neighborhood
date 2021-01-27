@@ -26,16 +26,12 @@ class MainPage extends React.Component {
         }
     }
 
-    componentDidMount = () => {
-        console.log('sessionstorage.getItem', sessionstorage.getItem('email'))
-    }
-
     toggleMenu = () => {
         this.setState({menuOpen: !this.state.menuOpen})
     }
 
     signOut=() =>{
-        sessionstorage.removeItem("email")
+        sessionstorage.removeItem("email") ///////////////////////////////////////////////
         this.props.firebase.doSignOut()
         window.location.href = "/signIn"
     }
@@ -45,7 +41,6 @@ class MainPage extends React.Component {
             <Router>
                 <Menu 
                     right 
-                    // width = { window.innerWidth > 600 ?'30%' : '10%'}
                     width = {'30%'}
                     customBurgerIcon={ <img className="burger-icon-img" src="/images/hamburger_menu.png" alt="Menu" /> } 
                     customCrossIcon={ <img src="/images/cross_btn.png" alt="Close" /> }
