@@ -1,0 +1,145 @@
+@import url('https://fonts.googleapis.com/css2?family=Sedgwick+Ave+Display&family=Share&display=swap');
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+:root {
+  --violet: #4D63D4;
+  --yellow: #F2D851;
+  --orange: #F4821A;
+  --light-green: #F8FFF6;
+
+
+}
+
+body {
+  background-color: var(--light-green);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  monospace;
+}
+
+.signup_wrapper {
+    background: url('../../img/bg.png');
+    background-repeat: no-repeat;
+    background-size: 100vw;
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+}
+
+.signup_content {
+  margin: auto;
+  margin-top: 6%;
+  background-color: var(--violet);
+  border-radius: 30px;
+  width: 33%;
+  height: 65%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.signup_input {
+    padding: 4% 0% 3% 10%;
+    font-family: 'Share', cursive;
+    color: var(--violet);
+    font-size: 36px;
+    width: 90%;
+    background-color: var(--light-green);
+    border: none;
+    border-radius: 50px;
+    outline: none;
+    cursor: text;
+    margin-bottom: 40px;
+  }
+  
+::placeholder {
+    color: var(--violet);
+    font-family: 'Share', cursive;
+    font-weight: 400;
+    font-size: 36px;
+    opacity: 0.7;
+    overflow: visible;
+}
+
+.password {
+    margin-bottom: 20px;
+}
+
+p {
+    color: var(--light-green);
+    font-family: 'Share', cursive;
+    font-size: 36px;
+    font-weight: 400;
+}
+
+.forgot_password {
+    text-decoration: underline;
+    font-size: 24px;
+    opacity: .7;
+    cursor: pointer;
+}
+
+.signup_button {
+    margin-top: 40px;
+    margin-bottom: 30px;
+    padding: 5px 60px;
+    border-radius: 30px;
+    border: none;
+    outline: none;
+    background-color: var(--light-green);
+    color: var(--violet);
+    font-family: 'Share', cursive;
+    font-weight: 400;
+    font-size: 36px;
+    cursor: pointer;
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25);
+    transition: 0.2s;
+}
+  
+.signup_button:focus {
+    box-shadow: none;
+}
+
+.exist-acc-div p {
+    opacity: .7;
+    text-decoration: underline;
+    cursor: pointer;
+    color: var(--light-green);
+}
+
+.signup_hamburger_menu {
+    float: right;
+    margin-top: 60px;
+    margin-right: 100px;
+    transition: 0.2s;
+}
+      
+.signup_hamburger_menu:hover {
+    cursor: pointer;
+    transform: translateY(3px);
+}
+
+
+select#location.signup_input.location {
+  color: rgb(77, 99, 212, .7)
+}
+
+.select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  padding: 4% 0% 3% 10%;
+  cursor: pointer;
+}

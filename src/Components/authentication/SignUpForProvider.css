@@ -1,0 +1,224 @@
+@import url('https://fonts.googleapis.com/css2?family=Sedgwick+Ave+Display&family=Share&display=swap');
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+:root {
+  --violet: #4D63D4;
+  --yellow: #F2D851;
+  --orange: #F4821A;
+  --light-green: #F8FFF6;
+
+
+}
+
+body {
+  background-color: var(--light-green);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  monospace;
+}
+
+.signupDW_wrapper {
+  background: url('../../img/bg.png');
+  background-repeat: no-repeat;
+  background-size: 100vw;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+}
+
+.signupDW_content {
+  margin: auto;
+  margin-top: 1%;
+  background-color: rgba(0, 0, 0, 0.01);
+  box-shadow: 4px 1px 4px 3px rgba(0, 0, 0, 0.25);
+  border-radius: 30px;
+  width: 40%;
+  height: 95%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+#location{
+  padding-right: 5%;
+
+}
+
+.signupDW_input {
+  padding: 3% 0% 3% 7%;
+  font-family: 'Share', cursive;
+  color: var(--violet);
+  font-size: 36px;
+  background-color: var(--light-green);
+  border: 1px solid var(--violet);
+  border-radius: 50px;
+  outline: none;
+  cursor: text;
+  margin-bottom: 40px;
+  width: 90%;
+  opacity: .9;
+}
+
+.signupDW_input::placeholder {
+  opacity: .9;
+}
+
+  
+::placeholder {
+  color: var(--violet);
+  font-family: 'Share', cursive;
+  font-weight: 400;
+  font-size: 36px;
+  opacity: 0.9;
+  overflow: visible;
+}
+
+.DWpassword {
+  background-position: 92% 50%;
+  background-repeat: no-repeat;
+  margin-bottom: 20px;
+}
+
+p {
+  color: var(--light-green);
+  font-family: 'Share', cursive;
+  font-size: 36px;
+  font-weight: 400;
+}
+
+.DWforgot_password {
+  text-decoration: underline;
+  font-size: 24px;
+  opacity: .7;
+  cursor: pointer;
+}
+
+.signupDW_button {
+  margin-top: 40px;
+  margin-bottom: 30px;
+  padding: 5px 60px;
+  border-radius: 30px;
+  border: none;
+  outline: none;
+  background-color: var(--light-green);
+  color: var(--violet);
+  font-family: 'Share', cursive;
+  font-weight: 400;
+  font-size: 36px;
+  cursor: pointer;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25);
+  transition: 0.2s;
+}
+  
+.signupDW_button:focus {
+  box-shadow: none;
+}
+
+.exist-acc-divDW p {
+  opacity: .7;
+  color: var(--violet);
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.label-div {
+  display: flex;
+  justify-content: space-between;
+  color: var(--light-green);
+  font-family: 'Share', cursive;
+  font-size: 22px;
+  font-weight: 400;
+  width: 35%;
+}
+
+.label-dw {
+  display: flex;
+  justify-content: space-around;
+  color: var(--violet);
+  align-items: center;
+  cursor: pointer;
+  opacity: 0.8;
+  width: 50%;
+}
+
+.label-bs {
+  display: flex;
+  justify-content: space-around;
+  color: var(--violet);
+  align-items: center;
+  cursor: pointer;
+  opacity: 0.8;
+  width: 41%;
+}
+
+.choose-the-service-p {
+  font-size: 28px;
+  font-weight: 400;
+  margin-bottom: 2%;
+  margin-top: 2%;
+  color: var(--violet);
+}
+
+
+.choose-the-price-p {
+  font-size: 28px;
+  font-weight: 400;
+  margin-bottom: 2%;
+  margin-top: 4%;
+  color: var(--orange);
+}
+
+.price-slider {
+  width: 50%;
+}
+
+.your-price {
+  color: var(--violet);
+  font-size: 24px;
+}
+
+select#location.signupDW_input.location {
+  color: var(--violet);
+  opacity: .9;
+}
+
+.selectFP {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  padding: 3% 0% 3% 7%;
+  cursor: pointer;
+}
+
+textarea {
+  font-family: 'Share', cursive;
+  font-size: 24px;
+  color: var(--orange);
+  background-color: var(--light-green);
+  opacity: 1;
+  padding: 2% 0% 0% 2%;
+  outline: none;
+  min-width: 90%;
+  max-width: 90%;
+  min-height: 7%;
+  max-height: 10%;
+  border-radius: 10px;
+  border: 1px solid var(--violet);
+}
+
+textarea::placeholder {
+  font-size: 24px;
+  color: var(--orange);
+}

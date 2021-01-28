@@ -1,0 +1,109 @@
+@import url('https://fonts.googleapis.com/css2?family=Sedgwick+Ave+Display&family=Share&display=swap');
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+:root {
+  --violet: #4D63D4;
+  --yellow: #F2D851;
+  --orange: #F4821A;
+  --light-green: #F8FFF6;
+
+
+}
+
+body {
+  background-color: var(--light-green);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  monospace;
+}
+
+.pcard_wrapper {
+  background: url('../../img/bg.png');
+  background-repeat: no-repeat;
+  background-size: 100vw;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+}
+
+.pcard_content {
+  background-color: rgb(248, 255, 246, .8);
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 30px;
+  margin: auto;
+  margin-top: 10%;
+  width: 40%;
+  height: 50%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+}
+
+.pcard_location_price {
+  margin-top: 5%;
+  height: 10%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-self: flex-end;
+  margin-right: 10%;
+}
+
+.pcard_location_price p {
+  color: var(--violet);
+  float: right;
+  font-size: 24px;
+}
+
+.pcard_location_price .loc_price {
+  color: var(--orange);
+}
+
+.provider-of {
+  font-family: 'Share', cursive;
+  font-size: 28px;
+  font-weight: 400;
+  color: var(--violet);
+  opacity: .8;
+  margin-bottom: 2%;
+}
+
+.provider_info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 65%;
+  width: 70%;
+}
+
+.pcard_about {
+  color: var(--orange);
+  margin-top: 6%;
+  font-size: 30px;
+  text-align: center;
+}
+
+.pcard_service_name {
+  font-family: 'Sedgwick Ave Display', cursive;
+  font-size: 36px;
+  color: var(--violet);
+  letter-spacing: 1px;
+  margin-top: 2%;
+}
+
+.rating_img {
+  margin-top: 2%;
+}
