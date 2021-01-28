@@ -1,70 +1,40 @@
-# Getting Started with Create React App
+# Neighborhood App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This website was created as a Final Project at 'she codes;' (Israel).
 
-## Available Scripts
+The idea behind the project was to create a platform for people living in small localities and looking for different services providers (currently available babysitters and dogwalkers).
 
-In the project directory, you can run:
+![screenshot](public/images/search.png)
 
-### `npm start`
+## Main features
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Neighborhood implies two types of users: buyers and sellers. Buyers come to the platform in the purpose of finding the needed service, while sellers provide with those services.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+![screenshot](public/images/user_types.png)
 
-### `npm test`
+There are opportunities to sign up, sign in and out for both types.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+![screenshot](public/images/signin.png)
+![screenshot](public/images/signupforprovider.png)
+![screenshot](public/images/signup.png)
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Also the list of providers depends on the location of the user who is currently signed in: if there is one, he/she will initially see all the providers of chosen type in his/her location. Otherwise the unsigned user will see all the providers (either dogwalkers or babysitters) in Israel.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+![screenshot](public/images/dogwalkers.png)
+## Tools used
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+React.js is the main tool for creating the Neighborhood project.
+I also used firebase to be able to store and reuse users' data.
 
-### `npm run eject`
+The UI/UX and drawings were created on Figma by me.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### Thank you for your attention!
+I'm always glad to receive feedback! :)
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
 
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
