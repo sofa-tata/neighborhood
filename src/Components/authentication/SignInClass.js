@@ -6,8 +6,8 @@ import { compose } from 'recompose';
 
 
 class SignInClass extends React.Component {
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
         this.state = {
             email: "",
             password: "",
@@ -15,34 +15,43 @@ class SignInClass extends React.Component {
         }
     }
 
-    signInWithEmailAndPasswordHandler = (event) => {
+    signInWithEmailAndPasswordHandler = async event => {
         const { email, password } = this.state
         event.preventDefault();
-        sessionstorage.setItem("email", email) /////////////////////////////////////////
+        sessionstorage.setItem("email", email) 
         this.props.firebase.doSignInWithEmailAndPassword(email, password)
-        .then((user) => {
-            if (user.service === null) {
-                window.location.href = "/profilePage"
-            } else if (user.service === "dogwalker") {
-                window.location.href = "/profilePageForProviders/dogwalker"
-            } else {
-                window.location.href = "/profilePageForProviders/babysitter"
+        .then(async ans => {
+            if(ans !== undefined) {
+                if(ans.message === undefined) {
+                    if(ans.user !== undefined) {
+                        if(ans.user.email !== undefined) {
+                            const user = await this.props.firebase.getUserByEmail(ans.user.email)
+                            if (user.service === null) {
+                                window.location.href = "/profilePage"
+                            } else if (user.service === "dogwalker") {
+                                window.location.href = "/profilePageForProviders/dogwalker"
+                            } else {
+                                window.location.href = "/profilePageForProviders/babysitter"
+                            }
+                        }
+                    }
+                } else {
+                    alert(ans.message)
+                }
             }
             
-          }).catch(error => {
+        }).catch(error => {
             this.setState({error: "Error signing in with password and email!"});
-            console.error("Error signing in with password and email", error);
-          })
+            alert(error)
+        })
     }
 
 
     onChangeHandler = (event) => {
         const { name, value } = event.currentTarget;
-
         if (name === "userEmail") {
             this.setState({email: value})
         }
-
         else if (name === "userPassword") {
             this.setState({password: value})
         }
@@ -54,9 +63,7 @@ class SignInClass extends React.Component {
 
     render() {
         const { email, password } = this.state
-
         return (
-
             <div className="signin_wrapper">
 
                 <div className="signin_content">

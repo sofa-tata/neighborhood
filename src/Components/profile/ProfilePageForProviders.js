@@ -21,39 +21,40 @@ class ProfilePageForProviders extends React.Component {
 
     componentDidMount = async () => {
         const email = sessionstorage.getItem("email")
-        console.log('sessionstorage.getItem', email)
-        console.log("session get:", sessionstorage.getItem("email"))
         let service = await this.getProviderService(email)
         this.getProvider(service, email)
     }
 
     getProvider = async (service, email) => {
         let user;
-        console.log('email, service', service, email)   
-        if (service.includes("dogwalker")) {
-            console.log('if dogwalker')
-            user = await this.props.firebase.getDogwalkerByEmail(email)
-        } else if (service.includes("babysitter")) {
-            console.log('if babysitter')
-            user = await this.props.firebase.getBabysitterByEmail(email)
-        }
-        console.log('getProvider user', user)
-        if (user !== undefined){
-            this.setState({ name: user.displayName, email: user.email,
-            location: user.location, service: user.service, about: user.about })
+        if (service !== null) {
+            if (service.includes("dogwalker")) {
+                user = await this.props.firebase.getDogwalkerByEmail(email)
+            } else if (service.includes("babysitter")) {
+                user = await this.props.firebase.getBabysitterByEmail(email)
+            }
+            if (user !== undefined){
+                this.setState({ name: user.displayName, email: user.email,
+                location: user.location, service: user.service, about: user.about })
+            }
+        } else {
+            alert('Error!')
         }
     }
 
     getProviderService = async (email) => {
         let user = await this.props.firebase.getUserByEmail(email)
-        console.log('getProvider2 user', user)
         return user.service
     }
 
-    signOut=() => {
+    signOut= async() =>{
         sessionstorage.removeItem("email")
-        this.props.firebase.doSignOut()
-        window.location.href = "/signIn"
+        let error = await this.props.firebase.doSignOut()
+        if (error === null) {
+            window.location.href = "/signIn"
+        } else {
+            alert(error)
+        }    
     }
 
     render() {

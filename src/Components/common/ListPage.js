@@ -23,18 +23,17 @@ class ListPage extends React.Component {
 
     componentDidMount = async () => {
         const url = window.location.href
-        const providerType = url.substring(url.lastIndexOf("/") + 1, url.length);
+        const providerType = url.substring(url.lastIndexOf("/") + 1, url.length)
         const email = sessionstorage.getItem("email") //////////////////////////////////////////////////
         let user = await this.props.firebase.getUserByEmail(email)
         if (user === null || user.service !== null){
             this.getProviders(providerType)
         } else {
-        this.setState({
-            searchLocation: user.location,
-        }, () => {
-                this.getProvidersByLocation(user.location, providerType);
-                console.log('user.location', user.location)
-        })
+            this.setState({
+                searchLocation: user.location,
+            }, () => {
+                    this.getProvidersByLocation(user.location, providerType)
+            })
         }
     }
 
@@ -49,13 +48,11 @@ class ListPage extends React.Component {
     }
 
     getProvidersByLocation = async (location, providerType) => {
-        console.log('getProvidersByLocation - location:', location)
         let providersListByLocation;
         if (providerType === "dogwalkers") {
             providersListByLocation = await this.props.firebase.getAllDogWalkersByLocation(location)
         } else if (providerType === "babysitters") {
             providersListByLocation = await this.props.firebase.getAllBabysittersByLocation(location)
-            console.log('providersListByLocation', providersListByLocation)
         }
         this.setState({ list: providersListByLocation, providerType, loading: false})
     }
@@ -69,7 +66,7 @@ class ListPage extends React.Component {
         let src = ""
         if (provider.rating === 5) {
             src="/images/5st.png"
-        }else if (provider.rating === 4) {
+        } else if (provider.rating === 4) {
             src="/images/4st.png"
         } else if (provider.rating === 3) {
             src="/images/3st.png"
@@ -86,7 +83,7 @@ class ListPage extends React.Component {
         const { pageNumber, list } = this.state
         let pageNumbers = []
             for (let i = 0; i < list.length / NUM_OF_PROVIDERS_ON_PAGE; i++) {
-                pageNumbers.push(
+                pageNumbers.push (
                     <p key={i} className="page_number" style={{opacity: pageNumber 
                     === (i) ? '1' : '0.8'}}
                     onClick = {() => this.changePageNum(i)}>{i+1}</p>
@@ -97,7 +94,6 @@ class ListPage extends React.Component {
 
     getProvidersList = () => {
         const { pageNumber, list } = this.state
-        console.log('getProvidersList list', list)
         let arrangedProvidersList = [];        
         for (let i = pageNumber * NUM_OF_PROVIDERS_ON_PAGE;
              i < (pageNumber * NUM_OF_PROVIDERS_ON_PAGE) + NUM_OF_PROVIDERS_ON_PAGE 
@@ -119,15 +115,14 @@ class ListPage extends React.Component {
                     </li>
 
                 </div>            
-                );
-            } 
+            );
+        } 
     
         return arrangedProvidersList;
     }
 
     displayList = () => {
         const { list, providerType } = this.state
-        console.log('list', list)
         if (list !== undefined && list.length !== 0) {
             return (
                 <>
@@ -150,15 +145,14 @@ class ListPage extends React.Component {
 
     onChangeLocation = event => {
         let location = event.target.value
-        console.log('location--'+location+'--')
-        this.setState({ searchLocation: location },()=>{
-            if(location === ""){
+        this.setState({ searchLocation: location }, () => {
+            if (location === ""){
                 this.getProviders(this.state.providerType)
             } else {
                 this.getProvidersByLocation(location, this.state.providerType)
             }
         });
-    };
+    }
 
     render() {
         const { loading, providerType, searchLocation } = this.state
@@ -184,7 +178,8 @@ class ListPage extends React.Component {
                             <option value="">Choose location</option>
                             {cities.map((city,i) => 
                             <option id="city" key={i} value={city.value}>{city.name}</option>)}
-                        </select>        
+                        </select>
+                              
                         <div className="dw_content">
                             
                             <h2 className="list_title">{providerType}</h2>

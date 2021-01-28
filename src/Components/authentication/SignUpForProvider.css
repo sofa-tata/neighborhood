@@ -29,12 +29,12 @@ code {
 }
 
 .signupDW_wrapper {
-    background: url('../../img/bg.png');
-    background-repeat: no-repeat;
-    background-size: 100vw;
-    width: 100vw;
-    height: 100vh;
-    position: fixed;
+  background: url('../../img/bg.png');
+  background-repeat: no-repeat;
+  background-size: 100vw;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
 }
 
 .signupDW_content {
@@ -57,18 +57,18 @@ code {
 }
 
 .signupDW_input {
-    padding: 3% 0% 3% 7%;
-    font-family: 'Share', cursive;
-    color: var(--violet);
-    font-size: 36px;
-    background-color: var(--light-green);
-    border: 1px solid var(--violet);
-    border-radius: 50px;
-    outline: none;
-    cursor: text;
-    margin-bottom: 40px;
-    width: 90%;
-    opacity: .9;
+  padding: 3% 0% 3% 7%;
+  font-family: 'Share', cursive;
+  color: var(--violet);
+  font-size: 36px;
+  background-color: var(--light-green);
+  border: 1px solid var(--violet);
+  border-radius: 50px;
+  outline: none;
+  cursor: text;
+  margin-bottom: 40px;
+  width: 90%;
+  opacity: .9;
 }
 
 .signupDW_input::placeholder {
@@ -77,60 +77,60 @@ code {
 
   
 ::placeholder {
-    color: var(--violet);
-    font-family: 'Share', cursive;
-    font-weight: 400;
-    font-size: 36px;
-    opacity: 0.9;
-    overflow: visible;
+  color: var(--violet);
+  font-family: 'Share', cursive;
+  font-weight: 400;
+  font-size: 36px;
+  opacity: 0.9;
+  overflow: visible;
 }
 
 .DWpassword {
-    background-position: 92% 50%;
-    background-repeat: no-repeat;
-    margin-bottom: 20px;
+  background-position: 92% 50%;
+  background-repeat: no-repeat;
+  margin-bottom: 20px;
 }
 
 p {
-    color: var(--light-green);
-    font-family: 'Share', cursive;
-    font-size: 36px;
-    font-weight: 400;
+  color: var(--light-green);
+  font-family: 'Share', cursive;
+  font-size: 36px;
+  font-weight: 400;
 }
 
 .DWforgot_password {
-    text-decoration: underline;
-    font-size: 24px;
-    opacity: .7;
-    cursor: pointer;
+  text-decoration: underline;
+  font-size: 24px;
+  opacity: .7;
+  cursor: pointer;
 }
 
 .signupDW_button {
-    margin-top: 40px;
-    margin-bottom: 30px;
-    padding: 5px 60px;
-    border-radius: 30px;
-    border: none;
-    outline: none;
-    background-color: var(--light-green);
-    color: var(--violet);
-    font-family: 'Share', cursive;
-    font-weight: 400;
-    font-size: 36px;
-    cursor: pointer;
-    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25);
-    transition: 0.2s;
+  margin-top: 40px;
+  margin-bottom: 30px;
+  padding: 5px 60px;
+  border-radius: 30px;
+  border: none;
+  outline: none;
+  background-color: var(--light-green);
+  color: var(--violet);
+  font-family: 'Share', cursive;
+  font-weight: 400;
+  font-size: 36px;
+  cursor: pointer;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25);
+  transition: 0.2s;
 }
   
 .signupDW_button:focus {
-    box-shadow: none;
+  box-shadow: none;
 }
 
 .exist-acc-divDW p {
-    opacity: .7;
-    color: var(--violet);
-    text-decoration: underline;
-    cursor: pointer;
+  opacity: .7;
+  color: var(--violet);
+  text-decoration: underline;
+  cursor: pointer;
 }
 
 .label-div {
@@ -189,8 +189,7 @@ p {
   font-size: 24px;
 }
 
-select#location.signupDW_input.location{
-  /* color: rgb(77, 99, 212, .7) */
+select#location.signupDW_input.location {
   color: var(--violet);
   opacity: .9;
 }

@@ -25,15 +25,12 @@ class SignUpForProvider extends React.Component {
 
     createNewProviderWithEmailAndPasswordHandler = async () => {
         const { displayName, price, service, location, about, email, password } = this.state
-
             if (service === null) {
-
                 alert('You should choose one of the available services!')
             } 
             if (location === "") {
                 alert('Please, choose your location')
-            } 
-            else {
+            } else {
                 const { user } = await this.props.firebase.doCreateUserWithEmailAndPassword(email, password);
                 const providerData = {
                     uid: user.uid,
@@ -47,24 +44,19 @@ class SignUpForProvider extends React.Component {
 
                 }
                 if (service === "dogwalker") {
-                    await this.props.firebase.generateDogWalkerDocument(providerData);
+                    await this.props.firebase.generateDogWalkerDocument(providerData)
                 } else {
-                    await this.props.firebase.generateBabysitterDocument(providerData);
+                    await this.props.firebase.generateBabysitterDocument(providerData)
                 }
                 await this.props.firebase.generateUserDocument(providerData)
                 sessionstorage.setItem("email", this.state.email)
-                console.log('sessionstorage.setItem', email)
-                console.log("session get:", sessionstorage.getItem("email"))
-                console.log('this.state.email', this.state.email)
-                window.location.href = '/profilePageForProviders';
-        
-           
-        }
+                window.location.href = '/profilePageForProviders'          
+            }
     }
 
     onChange = event => {
-        this.setState({ [event.target.name]: event.target.value });
-      };
+        this.setState({ [event.target.name]: event.target.value })
+    }
     
     clickCell= (address) => {
         window.location.href = address
@@ -87,7 +79,6 @@ class SignUpForProvider extends React.Component {
             <div className="signupDW_wrapper">
 
                 <div className="signupDW_content">
-
 
                     <select
                     name="location"  
@@ -140,6 +131,7 @@ class SignUpForProvider extends React.Component {
                     <p className="choose-the-service-p">Choose the service you will provide with: </p>
 
                     <div className="label-div" onChange={this.onChange} value={service} name="service">
+
                         <div className="label-dw" style={{opacity: this.state.service === "dogwalker" ? '1':'0.8'}}>
                             <input type="radio"
                             id="dogwalker"
@@ -157,6 +149,7 @@ class SignUpForProvider extends React.Component {
                             className="input-radio-bs"/>
                             <label htmlFor="babysitter">Babysitter</label>
                         </div>
+                        
                     </div> 
 
                     <p className="choose-the-price-p">What is your price for 1 hour of work?</p>

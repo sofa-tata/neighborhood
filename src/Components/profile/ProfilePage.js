@@ -18,16 +18,19 @@ class ProfilePage extends React.Component {
         const email = sessionstorage.getItem("email")
         let user = await this.props.firebase.getUserByEmail(email)
         if (user !== null) {
-            console.log('componentDidMount user', user)
-            console.log('ProfilePage email ', email)
             this.setState({ name: user.displayName, email: user.email, location: user.location })
         }
     }
 
-    signOut=() =>{
+    signOut= async() => {
         sessionstorage.removeItem("email")
-        this.props.firebase.doSignOut()
-        window.location.href = "/signIn"
+        let error = await this.props.firebase.doSignOut()
+        if (error === null) {
+            window.location.href = "/signIn"
+        } else {
+            alert(error)
+        }
+        
     }
     
     render() {

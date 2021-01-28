@@ -7,9 +7,8 @@ import sessionstorage from 'sessionstorage';
 
 
 class SignUpClass extends React.Component {
-
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
         this.state = {
             email: "",
             password: "",
@@ -22,28 +21,22 @@ class SignUpClass extends React.Component {
 
     createUserWithEmailAndPasswordHandler = async () => {
         const { displayName, location, email, password } = this.state
-
-            const { user } = await this.props.firebase.doCreateUserWithEmailAndPassword(email, password);
-            console.log('then user', user)
-            const providerData = {
-                uid: user.uid,
-                displayName: displayName,
-                email: email,
-                location: location,
-                service: null
-
-            }
+        const { user } = await this.props.firebase.doCreateUserWithEmailAndPassword(email, password);
+        const providerData = {
+            uid: user.uid,
+            displayName: displayName,
+            email: email,
+            location: location,
+            service: null
+        }
             
-            await this.props.firebase.generateUserDocument(providerData)
-            sessionstorage.setItem("email", email)
-            console.log('sessionstorage.setItem', email)
-            console.log("session get:", sessionstorage.getItem("email"))
-            console.log('this.state.email', email)
-            window.location.href = '/profilePage';          
-
-
-        
+        await this.props.firebase.generateUserDocument(providerData)
+        sessionstorage.setItem("email", email)
+        window.location.href = '/profilePage'; 
     }
+
+                         
+    
 
     onChangeHandler = (event) => {
         const { name, value } = event.currentTarget;

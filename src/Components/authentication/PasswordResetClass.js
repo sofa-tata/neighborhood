@@ -24,13 +24,13 @@ class PasswordResetClass extends React.Component {
 
     sendResetEmail = async () => {
         let error = await  this.props.firebase.doPasswordReset(this.state.email)
-
         if (error === null) {
             this.setState({ emailHasBeenSent: true })
         } else {
             this.setState({ error: error, emailHasBeenSent: false});
         }
     }
+    
     render() {
         const { email, emailHasBeenSent, error} = this.state
         return (

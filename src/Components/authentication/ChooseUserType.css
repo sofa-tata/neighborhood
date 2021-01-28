@@ -35,60 +35,60 @@ code {
 }
 
 .choose_wrapper {
-    display: flex;
-    justify-content: center;
-    margin-top: 3%;
+  display: flex;
+  justify-content: center;
+  margin-top: 3%;
 } 
 
 .seller_btn {
-    background: radial-gradient(78.42% 62.07% at 66.9% 33.79%, rgba(242, 216, 81, 0.5) 7.57%, #F2D851 100%);
-    width: 290px;
-    height: 290px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    border-radius: 50%;
-    margin-top: 4%;
-    margin-left: 7%;
-    transition: .2s;
+  background: radial-gradient(78.42% 62.07% at 66.9% 33.79%, rgba(242, 216, 81, 0.5) 7.57%, #F2D851 100%);
+  width: 290px;
+  height: 290px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  margin-top: 4%;
+  margin-left: 7%;
+  transition: .2s;
 }
 
 .seller_btn:hover {
-    transform: translateY(3px);
-    cursor: pointer;
+  transform: translateY(3px);
+  cursor: pointer;
 }
 
 .seller_btn p {
-    font-size: 36px;
-    color: var(--violet);
-    font-weight: 400;
+  font-size: 36px;
+  color: var(--violet);
+  font-weight: 400;
 }
 
 .buyer_btn {
-    background: radial-gradient(158.45% 76.97% at 71.35% 14.04%, rgba(244, 130, 26, 0.5) 0%, #F4821A 100%);
-    width: 356px;
-    height: 356px;
-    border-radius: 50%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin-top: 15%;
-    margin-left: 25%;
-    transition: .2s;
+  background: radial-gradient(158.45% 76.97% at 71.35% 14.04%, rgba(244, 130, 26, 0.5) 0%, #F4821A 100%);
+  width: 356px;
+  height: 356px;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 15%;
+  margin-left: 25%;
+  transition: .2s;
 }
 
 .buyer_btn:hover {
-    transform: translateY(5px);
-    cursor: pointer;
+  transform: translateY(5px);
+  cursor: pointer;
 }
 
 
 .buyer_btn p {
-    font-size: 36px;
-    color: var(--light-green);
-    font-weight: 400;
+  font-size: 36px;
+  color: var(--light-green);
+  font-weight: 400;
 }
 
 

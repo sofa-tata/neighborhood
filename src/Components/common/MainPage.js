@@ -2,7 +2,6 @@ import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Home from './Home';
 import SignInClass from '../authentication/SignInClass';
-import PleaseSignIn from '../authentication/AskForSignIn';
 import ProfilePage from '../profile/ProfilePage';
 import PasswordResetClass from '../authentication/PasswordResetClass';
 import SignUpForProvider from '../authentication/SignUpForProvider';
@@ -30,10 +29,14 @@ class MainPage extends React.Component {
         this.setState({menuOpen: !this.state.menuOpen})
     }
 
-    signOut=() =>{
+    signOut= async() =>{
         sessionstorage.removeItem("email") ///////////////////////////////////////////////
-        this.props.firebase.doSignOut()
-        window.location.href = "/signIn"
+        let error = await this.props.firebase.doSignOut()
+        if (error === null) {
+            window.location.href = "/signIn"
+        } else {
+            alert(error)
+        }  
     }
 
     render() {
@@ -55,13 +58,13 @@ class MainPage extends React.Component {
                         <p className="menu-item" onClick={this.signOut}>SIGN OUT</p>
                         }
                     </Menu>
+                    
                 <Switch>
                     <Route path="/" exact component={Home} />
                     <Route path="/open" exact component={Home} />
                     <Route path="/signUp" component={SignUpClass} />
                     <Route path="/signUpForProvider" component={SignUpForProvider} />
                     <Route path="/signIn" component={SignInClass} />
-                    <Route path="/pleaseSignIn" component={PleaseSignIn} />
                     <Route path="/profilePage" component={ProfilePage} />
                     <Route path="/passwordReset" component={PasswordResetClass} />
                     <Route path="/chooseUserType" component={ChooseUserType} />

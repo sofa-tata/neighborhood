@@ -18,16 +18,14 @@ class ProviderCard extends React.Component {
     }
 
     componentDidMount = () => {
-        console.log('this.props.match.params', this.props.match.params)
         this.getChosenProvider()
-
     }
 
     getProviderRatingSrc = (rating) => {
         let src = ""
         if (rating === 5) {
             src="/images/5st.png"
-        }else if (rating === 4) {
+        } else if (rating === 4) {
             src="/images/4st.png"
         } else if (rating === 3) {
             src="/images/3st.png"
@@ -42,17 +40,13 @@ class ProviderCard extends React.Component {
 
     getChosenProvider = async () => {
         const url = window.location.href
-        console.log('url', url)
         const providerEmail = url.substring(url.lastIndexOf("/") + 1, url.length);
-        console.log('providerEmail', providerEmail)
         let currentProvider = await this.props.firebase.getUserByEmail(providerEmail);
         if (currentProvider.service === "dogwalker") {
             currentProvider = await this.props.firebase.getDogwalkerByEmail(providerEmail)
         } else {
             currentProvider = await this.props.firebase.getBabysitterByEmail(providerEmail)
         }
-
-        console.log('currentProvider', currentProvider)
         this.setState({
             providerName: currentProvider.displayName,
             providerPrice: currentProvider.price,
