@@ -24,7 +24,7 @@ class ListPage extends React.Component {
     componentDidMount = async () => {
         const url = window.location.href
         const providerType = url.substring(url.lastIndexOf("/") + 1, url.length)
-        const email = sessionstorage.getItem("email") //////////////////////////////////////////////////
+        const email = sessionstorage.getItem("email")
         let user = await this.props.firebase.getUserByEmail(email)
         if (user === null || user.service !== null){
             this.getProviders(providerType)

@@ -30,7 +30,7 @@ class MainPage extends React.Component {
     }
 
     signOut= async() =>{
-        sessionstorage.removeItem("email") ///////////////////////////////////////////////
+        sessionstorage.removeItem("email")
         let error = await this.props.firebase.doSignOut()
         if (error === null) {
             window.location.href = "/signIn"
