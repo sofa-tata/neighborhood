@@ -2,6 +2,8 @@
 
 This website was created as a Final Project at 'she codes;' (Israel).
 
+Here is a link to the website: https://neighborhood-app-ce587.web.app/
+
 The idea behind the project was to create a platform for people living in small localities and looking for different services providers (currently available babysitters and dogwalkers).
 
 ![screenshot](public/images/search.png)
