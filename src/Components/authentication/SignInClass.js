@@ -6,8 +6,8 @@ import { compose } from 'recompose';
 
 
 class SignInClass extends React.Component {
-    constructor(props) {
-        super(props)
+    constructor() {
+        super()
         this.state = {
             email: "",
             password: "",
@@ -40,9 +40,6 @@ class SignInClass extends React.Component {
                 }
             }
             
-        }).catch(error => {
-            this.setState({error: "Error signing in with password and email!"});
-            alert(error)
         })
     }
 

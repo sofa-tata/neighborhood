@@ -7,8 +7,8 @@ import sessionstorage from 'sessionstorage';
 
 
 class SignUpClass extends React.Component {
-    constructor(props) {
-        super(props)
+    constructor() {
+        super()
         this.state = {
             email: "",
             password: "",
@@ -21,21 +21,32 @@ class SignUpClass extends React.Component {
 
     createUserWithEmailAndPasswordHandler = async () => {
         const { displayName, location, email, password } = this.state
-        const { user } = await this.props.firebase.doCreateUserWithEmailAndPassword(email, password);
-        const providerData = {
-            uid: user.uid,
-            displayName: displayName,
-            email: email,
-            location: location,
-            service: null
-        }
-            
-        await this.props.firebase.generateUserDocument(providerData)
-        sessionstorage.setItem("email", email)
-        window.location.href = '/profilePage'; 
-    }
+        this.props.firebase.doCreateUserWithEmailAndPassword(email, password)
+        .then(async answer => {
+            console.log('then answer', answer)
+            if(answer !== undefined) {
+                if(answer.message === undefined) {
+                    if(answer.user !== undefined) {
+                        if(answer.user.uid !== undefined) {
+                            const providerData = {
+                                uid: answer.user.uid,
+                                displayName: displayName,
+                                email: email,
+                                location: location,
+                                service: null
+                            }
+                            await this.props.firebase.generateUserDocument(providerData)
+                            sessionstorage.setItem("email", email)
+                            window.location.href = '/profilePage'
+                        }
+                    }
+                } else {
+                    alert(answer.message)
+                }
+            }
+        })
 
-                         
+    }                   
     
 
     onChangeHandler = (event) => {
