@@ -46,21 +46,6 @@ class SignUpClass extends React.Component {
             }
         })
 
-
-        //////////////////////////////////////////////////////////
-        // const { displayName, location, email, password } = this.state
-        // const { user } = await this.props.firebase.doCreateUserWithEmailAndPassword(email, password);
-        // const providerData = {
-        //     uid: user.uid,
-        //     displayName: displayName,
-        //     email: email,
-        //     location: location,
-        //     service: null
-        // }
-            
-        // await this.props.firebase.generateUserDocument(providerData)
-        // sessionstorage.setItem("email", email)
-        // window.location.href = '/profilePage'; 
     }                   
     
 

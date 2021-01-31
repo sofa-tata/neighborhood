@@ -40,9 +40,6 @@ class SignInClass extends React.Component {
                 }
             }
             
-        }).catch(error => {
-            this.setState({error: "Error signing in with password and email!"});
-            alert(error)
         })
     }
 
