@@ -28,10 +28,20 @@ class Firebase {
 
   }
 
-  doCreateUserWithEmailAndPassword = (email, password) =>   
-      this.auth.createUserWithEmailAndPassword(email, password).catch(error => {
-        alert(error.message)
-    })
+  doCreateUserWithEmailAndPassword = async (email, password) =>  {
+    let answer = await this.auth.createUserWithEmailAndPassword(email, password)
+      .catch(error => {
+        console.log('doCreateUserWithEmailAndPassword error', error.message)
+          return error   
+      })
+      console.log('answer', answer)
+      return answer
+  
+  //////////////////////////////////////////////////////////////
+    //   this.auth.createUserWithEmailAndPassword(email, password).catch(error => {
+    //     alert(error.message)
+    // })
+  }
     
 
   doSignInWithEmailAndPassword = async (email, password) => {    

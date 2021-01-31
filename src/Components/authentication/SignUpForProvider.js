@@ -25,33 +25,80 @@ class SignUpForProvider extends React.Component {
 
     createNewProviderWithEmailAndPasswordHandler = async () => {
         const { displayName, price, service, location, about, email, password } = this.state
-            if (service === null) {
+        if (service === null) {
                 alert('You should choose one of the available services!')
             } 
             if (location === "") {
                 alert('Please, choose your location')
             } else {
-                const { user } = await this.props.firebase.doCreateUserWithEmailAndPassword(email, password);
-                const providerData = {
-                    uid: user.uid,
-                    displayName: displayName,
-                    email: email,
-                    price: price,
-                    service: service,
-                    location: location,
-                    about: about,
-                    rating: 0
-
-                }
-                if (service === "dogwalker") {
-                    await this.props.firebase.generateDogWalkerDocument(providerData)
+        this.props.firebase.doCreateUserWithEmailAndPassword(email, password)
+        .then(async answer => {
+            console.log('then answer', answer)
+            if(answer !== undefined) {
+                if(answer.message === undefined) {
+                    if(answer.user !== undefined) {
+                        if(answer.user.uid !== undefined) {
+                            const providerData = {
+                                uid: answer.user.uid,
+                                displayName: displayName,
+                                email: email,
+                                price: price,
+                                service: service,
+                                location: location,
+                                about: about,
+                                rating: 0
+                            }
+                            if (service === "dogwalker") {
+                                    await this.props.firebase.generateDogWalkerDocument(providerData)
+                                } else {
+                                    await this.props.firebase.generateBabysitterDocument(providerData)
+                                }
+                                await this.props.firebase.generateUserDocument(providerData)
+                                sessionstorage.setItem("email", this.state.email)
+                                window.location.href = '/profilePageForProviders' 
+                            
+                        }
+                    }
                 } else {
-                    await this.props.firebase.generateBabysitterDocument(providerData)
+                    alert(answer.message)
                 }
-                await this.props.firebase.generateUserDocument(providerData)
-                sessionstorage.setItem("email", this.state.email)
-                window.location.href = '/profilePageForProviders'          
             }
+        })
+    }
+
+
+
+
+
+
+            // if (service === null) {
+            //     alert('You should choose one of the available services!')
+            // } 
+            // if (location === "") {
+            //     alert('Please, choose your location')
+            // } else {
+            //     const { user } = await this.props.firebase.doCreateUserWithEmailAndPassword(email, password);
+
+            //     const providerData = {
+            //         uid: user.uid,
+            //         displayName: displayName,
+            //         email: email,
+            //         price: price,
+            //         service: service,
+            //         location: location,
+            //         about: about,
+            //         rating: 0
+
+            //     }
+            //     if (service === "dogwalker") {
+            //         await this.props.firebase.generateDogWalkerDocument(providerData)
+            //     } else {
+            //         await this.props.firebase.generateBabysitterDocument(providerData)
+            //     }
+            //     await this.props.firebase.generateUserDocument(providerData)
+            //     sessionstorage.setItem("email", this.state.email)
+            //     window.location.href = '/profilePageForProviders'          
+            // }
     }
 
     onChange = event => {

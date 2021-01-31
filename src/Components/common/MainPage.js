@@ -25,10 +25,6 @@ class MainPage extends React.Component {
         }
     }
 
-    toggleMenu = () => {
-        this.setState({menuOpen: !this.state.menuOpen})
-    }
-
     signOut= async() =>{
         sessionstorage.removeItem("email")
         let error = await this.props.firebase.doSignOut()
@@ -57,7 +53,7 @@ class MainPage extends React.Component {
                         :
                         <p className="menu-item" onClick={this.signOut}>SIGN OUT</p>
                         }
-                    </Menu>
+                </Menu>
                     
                 <Switch>
                     <Route path="/" exact component={Home} />

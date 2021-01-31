@@ -6,8 +6,8 @@ import { compose } from 'recompose';
 
 
 class SignInClass extends React.Component {
-    constructor(props) {
-        super(props)
+    constructor() {
+        super()
         this.state = {
             email: "",
             password: "",
